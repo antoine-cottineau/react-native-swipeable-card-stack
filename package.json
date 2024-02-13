@@ -5,5 +5,8 @@
   "main": "index.js",
   "repository": "https://github.com/antoine-cottineau/react-native-swipeable-card-stack",
   "author": "Antoine Cottineau",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
 }
