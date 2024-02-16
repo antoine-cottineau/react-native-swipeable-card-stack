@@ -1,10 +1,14 @@
+import { TestComponent } from './TestComponent'
+
 console.log('here')
+
+export { TestComponent }
 
 export type A = {
   b: string
 }
 
-const a = (): A => {
+export const a = (): A => {
   return {
     b: 'fzejioze',
   }
