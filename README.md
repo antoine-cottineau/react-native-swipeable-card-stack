@@ -10,6 +10,7 @@ TODO: screenshots/gifs
 
 - ✅ Supports swipes to the left, right, top, and bottom
 - ⏳ Supports unswipes
+- ⏳ Supports locking card translation along the x or y axis
 - ✅ Supports customizing the swipe animations
 - ✅ Allows performing your own animations based on the swipe/unswipe progression
 
@@ -36,3 +37,5 @@ TODO: complete instructions
 ## Documentation
 
 ## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
