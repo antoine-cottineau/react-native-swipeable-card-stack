@@ -12,10 +12,12 @@
   "devDependencies": {
     "@types/react": "^18.2.55",
     "prettier": "^3.2.5",
+    "react": "18.2.0",
     "react-native": "^0.73.4",
     "react-native-reanimated": "~3.6.2"
   },
   "peerDependencies": {
+    "react": "*",
     "react-native": "*",
     "react-native-reanimated": "*"
   }
