@@ -5,5 +5,9 @@
       "example-app",
       "library"
     ]
+  },
+  "scripts": {
+    "serve": "yarn workspace react-native-swipeable-card-stack tsc -w",
+    "start": "yarn workspace example-app start"
   }
 }
