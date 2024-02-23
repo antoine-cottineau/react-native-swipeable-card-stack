@@ -6,6 +6,10 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
+import {
+  AnimatedComponent,
+  TestComponent,
+} from 'react-native-swipeable-card-stack'
 
 export const App = () => {
   const animation = useSharedValue(0)
@@ -33,6 +37,8 @@ export const App = () => {
           animation.value = withTiming(0)
         }}
       />
+      <TestComponent />
+      <AnimatedComponent />
     </Animated.View>
   )
 }
