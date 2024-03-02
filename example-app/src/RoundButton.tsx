@@ -9,6 +9,6 @@ export const RoundButton = () => {
 const Container = styled.TouchableOpacity({
   width: SIZE,
   aspectRatio: 1,
-  backgroundColor: 'red',
+  backgroundColor: 'white',
   borderRadius: SIZE / 2,
 })
