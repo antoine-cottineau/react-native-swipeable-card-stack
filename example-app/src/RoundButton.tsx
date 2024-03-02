@@ -7,9 +7,10 @@ const SIZE = 80
 type Props = {
   onPress: () => void
   Icon: IconType
+  color: string
 }
 
-export const RoundButton = ({ onPress, Icon }: Props) => (
+export const RoundButton = ({ onPress, Icon, color }: Props) => (
   <Pressable
     onPress={onPress}
     style={({ pressed }) =>
@@ -19,7 +20,9 @@ export const RoundButton = ({ onPress, Icon }: Props) => (
         borderRadius: SIZE / 2,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: pressed ? '#0056b3' : '#007bff',
+        backgroundColor: pressed ? color : undefined,
+        borderWidth: 1,
+        borderColor: color,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.3,
@@ -28,6 +31,8 @@ export const RoundButton = ({ onPress, Icon }: Props) => (
       })
     }
   >
-    <Icon size={SIZE / 2.5} color="white" />
+    {({ pressed }) => (
+      <Icon size={SIZE / 2} color={pressed ? 'white' : color} />
+    )}
   </Pressable>
 )

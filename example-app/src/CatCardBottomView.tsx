@@ -41,9 +41,17 @@ export const CatCardBottomView = ({ name, age }: Props) => {
           style={{ fontSize: 32, fontWeight: '600', color: 'white' }}
         >{`${name} - ${age}`}</Text>
         <ButtonsContainer>
-          <RoundButton Icon={CloseIcon} onPress={() => null} />
-          <RoundButton Icon={UndoIcon} onPress={() => null} />
-          <RoundButton Icon={HeartIcon} onPress={() => null} />
+          <RoundButton
+            Icon={CloseIcon}
+            onPress={() => null}
+            color={'#F44336'}
+          />
+          <RoundButton Icon={UndoIcon} onPress={() => null} color={'#81D4FA'} />
+          <RoundButton
+            Icon={HeartIcon}
+            onPress={() => null}
+            color={'#43A047'}
+          />
         </ButtonsContainer>
       </ContentContainer>
     </Container>
