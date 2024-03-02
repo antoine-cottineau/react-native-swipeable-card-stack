@@ -1,57 +1,55 @@
-import { StatusBar } from 'expo-status-bar'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import styled from '@emotion/native'
+import { Image } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import Animated, {
-  interpolateColor,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated'
 import {
-  AnimatedComponent,
-  GestureComponent,
-  TestComponent,
+  RenderCardProps,
+  SwipeableCardStack,
 } from 'react-native-swipeable-card-stack'
 
-export const App = () => {
-  const animation = useSharedValue(0)
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(
-      animation.value,
-      [0, 1],
-      ['white', 'green'],
-    ),
-  }))
-
-  return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Animated.View style={[styles.container, animatedStyle]}>
-        <StatusBar style="auto" />
-        <Button
-          title="Animate"
-          onPress={() => {
-            animation.value = withTiming(1)
-          }}
-        />
-        <Button
-          title="Reset"
-          onPress={() => {
-            animation.value = withTiming(0)
-          }}
-        />
-        <TestComponent />
-        <AnimatedComponent />
-        <GestureComponent />
-      </Animated.View>
-    </GestureHandlerRootView>
-  )
+type CatDataItem = {
+  name: string
+  age: number
+  imageUrl: string
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+const data: CatDataItem[] = [
+  {
+    name: 'Felix',
+    age: 6,
+    imageUrl:
+      'https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=3024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
+  {
+    name: 'Diego',
+    age: 2,
+    imageUrl:
+      'https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  },
+  {
+    name: 'Arnold',
+    age: 10,
+    imageUrl:
+      'https://plus.unsplash.com/premium_photo-1667030474693-6d0632f97029?q=80&w=3774&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  },
+]
+
+export const App = () => (
+  <GestureHandlerRootView style={{ flex: 1 }}>
+    <SwipeableCardStack data={data} renderCard={CatCard} />
+  </GestureHandlerRootView>
+)
+
+const CatCard = ({ imageUrl }: RenderCardProps<CatDataItem>) => (
+  <CardContainer>
+    <CardImage source={{ uri: imageUrl }} />
+  </CardContainer>
+)
+
+const CardContainer = styled.View({
+  flex: 1,
+})
+
+const CardImage = styled(Image)({
+  width: '100%',
+  height: '100%',
 })
