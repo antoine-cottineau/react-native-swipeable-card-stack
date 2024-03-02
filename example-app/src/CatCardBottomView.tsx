@@ -45,12 +45,19 @@ export const CatCardBottomView = ({ name, age }: Props) => {
             Icon={CloseIcon}
             onPress={() => null}
             color={'#F44336'}
+            size="large"
           />
-          <RoundButton Icon={UndoIcon} onPress={() => null} color={'#81D4FA'} />
+          <RoundButton
+            Icon={UndoIcon}
+            onPress={() => null}
+            color={'#81D4FA'}
+            size="small"
+          />
           <RoundButton
             Icon={HeartIcon}
             onPress={() => null}
             color={'#43A047'}
+            size="large"
           />
         </ButtonsContainer>
       </ContentContainer>
@@ -75,4 +82,5 @@ const ContentContainer = styled.View({
 const ButtonsContainer = styled.View({
   flexDirection: 'row',
   justifyContent: 'space-between',
+  alignItems: 'center',
 })
