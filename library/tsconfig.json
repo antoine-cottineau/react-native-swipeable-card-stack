@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "typeRoots": ["./src/types"],
     "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
