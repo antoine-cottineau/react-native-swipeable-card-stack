@@ -3,6 +3,9 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { Text } from 'react-native'
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
 import { RoundButton } from './RoundButton'
+import { CloseIcon } from './icons/CloseIcon'
+import { HeartIcon } from './icons/HeartIcon'
+import { UndoIcon } from './icons/UndoIcon'
 
 type Props = {
   name: string
@@ -38,9 +41,9 @@ export const CatCardBottomView = ({ name, age }: Props) => {
           style={{ fontSize: 32, fontWeight: '600', color: 'white' }}
         >{`${name} - ${age}`}</Text>
         <ButtonsContainer>
-          <RoundButton />
-          <RoundButton />
-          <RoundButton />
+          <RoundButton Icon={CloseIcon} onPress={() => null} />
+          <RoundButton Icon={UndoIcon} onPress={() => null} />
+          <RoundButton Icon={HeartIcon} onPress={() => null} />
         </ButtonsContainer>
       </ContentContainer>
     </Container>
