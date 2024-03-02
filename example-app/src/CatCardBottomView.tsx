@@ -2,14 +2,19 @@ import styled from '@emotion/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Text } from 'react-native'
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
+import { Action } from './Action'
 import { RoundButton } from './RoundButton'
+import { CloseIcon } from './icons/CloseIcon'
+import { HeartIcon } from './icons/HeartIcon'
+import { UndoIcon } from './icons/UndoIcon'
 
 type Props = {
   name: string
   age: number
+  onAction: (action: Action) => void
 }
 
-export const CatCardBottomView = ({ name, age }: Props) => {
+export const CatCardBottomView = ({ name, age, onAction }: Props) => {
   const { height } = useSafeAreaFrame()
   return (
     <Container>
@@ -38,9 +43,30 @@ export const CatCardBottomView = ({ name, age }: Props) => {
           style={{ fontSize: 32, fontWeight: '600', color: 'white' }}
         >{`${name} - ${age}`}</Text>
         <ButtonsContainer>
-          <RoundButton />
-          <RoundButton />
-          <RoundButton />
+          <RoundButton
+            Icon={CloseIcon}
+            onPress={() => {
+              onAction('swipe-left')
+            }}
+            color={'#F44336'}
+            size="large"
+          />
+          <RoundButton
+            Icon={UndoIcon}
+            onPress={() => {
+              onAction('undo')
+            }}
+            color={'#81D4FA'}
+            size="small"
+          />
+          <RoundButton
+            Icon={HeartIcon}
+            onPress={() => {
+              onAction('swipe-right')
+            }}
+            color={'#43A047'}
+            size="large"
+          />
         </ButtonsContainer>
       </ContentContainer>
     </Container>
@@ -64,4 +90,5 @@ const ContentContainer = styled.View({
 const ButtonsContainer = styled.View({
   flexDirection: 'row',
   justifyContent: 'space-between',
+  alignItems: 'center',
 })

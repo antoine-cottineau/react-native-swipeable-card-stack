@@ -1,14 +1,39 @@
-import styled from '@emotion/native'
+import { css } from '@emotion/native'
+import { Pressable } from 'react-native'
+import { IconType } from './icons/Icon'
 
-const SIZE = 80
+type Size = 'small' | 'large'
 
-export const RoundButton = () => {
-  return <Container></Container>
+type Props = {
+  onPress: () => void
+  Icon: IconType
+  color: string
+  size: Size
 }
 
-const Container = styled.TouchableOpacity({
-  width: SIZE,
-  aspectRatio: 1,
-  backgroundColor: 'white',
-  borderRadius: SIZE / 2,
-})
+const sizeMapping: Record<Size, number> = {
+  small: 70,
+  large: 80,
+}
+
+export const RoundButton = ({ onPress, Icon, color, size }: Props) => (
+  <Pressable
+    onPress={onPress}
+    style={({ pressed }) =>
+      css({
+        width: sizeMapping[size],
+        aspectRatio: 1,
+        borderRadius: sizeMapping[size] / 2,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: pressed ? color : undefined,
+        borderWidth: 1.5,
+        borderColor: color,
+      })
+    }
+  >
+    {({ pressed }) => (
+      <Icon size={sizeMapping[size] / 2} color={pressed ? 'white' : color} />
+    )}
+  </Pressable>
+)
