@@ -1,6 +1,6 @@
 import styled from '@emotion/native'
 import { Image } from 'expo-image'
-import sadCatImage from './images/sad-cat.webp'
+import sadCatImage from '../../images/sad-cat.webp'
 
 export const EndOfStackView = () => (
   <Container>
