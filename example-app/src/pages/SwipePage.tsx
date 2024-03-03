@@ -35,11 +35,15 @@ export const SwipePage = () => {
           />
         )}
         ref={ref}
-        onActiveCardUpdate={({ phase, currentDataItem }) => {
+        onActiveCardUpdate={({ phase, direction, currentDataItem }) => {
           if (phase === 'below-threshold' || phase === 'above-threshold') {
             impactAsync(ImpactFeedbackStyle.Light).catch(console.error)
           }
-          if (phase === 'validated') {
+          if (
+            phase === 'validated' &&
+            direction === 'right' &&
+            currentDataItem.hasLikedMyProfile
+          ) {
             navigate('Match', { catName: currentDataItem.name })
           }
         }}
