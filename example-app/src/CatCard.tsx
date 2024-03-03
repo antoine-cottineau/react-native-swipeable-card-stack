@@ -1,6 +1,8 @@
 import styled from '@emotion/native'
 import Animated, {
+  Extrapolation,
   interpolate,
+  interpolateColor,
   useAnimatedStyle,
 } from 'react-native-reanimated'
 import { RenderCardProps } from 'react-native-swipeable-card-stack'
@@ -21,7 +23,7 @@ export const CatCard = ({
   index,
   currentIndex,
 }: Props) => {
-  const animatedStyle = useAnimatedStyle(() => {
+  const containerStyle = useAnimatedStyle(() => {
     if (index !== currentIndex) {
       return {}
     }
@@ -35,9 +37,29 @@ export const CatCard = ({
     }
   })
 
+  const overlayStyle = useAnimatedStyle(() => {
+    if (index !== currentIndex) {
+      return {}
+    }
+    return {
+      backgroundColor: interpolateColor(
+        animationPosition.value,
+        [-1, 0, 1],
+        ['#F44336', 'transparent', '#43A047'],
+      ),
+      opacity: interpolate(
+        Math.abs(animationPosition.value),
+        [0, 0.3],
+        [0, 0.8],
+        Extrapolation.CLAMP,
+      ),
+    }
+  })
+
   return (
-    <Container style={animatedStyle}>
+    <Container style={containerStyle}>
       <FullScreenImage source={{ uri: imageUrl }} />
+      <Overlay style={overlayStyle} />
       <CatCardBottomView name={name} age={age} onAction={onAction} />
     </Container>
   )
@@ -51,4 +73,12 @@ const Container = styled(Animated.View)({
 const FullScreenImage = styled.Image({
   width: '100%',
   height: '100%',
+})
+
+const Overlay = styled(Animated.View)({
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  left: 0,
+  right: 0,
 })
