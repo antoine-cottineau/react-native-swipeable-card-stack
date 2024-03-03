@@ -4,7 +4,7 @@ import sadCatImage from './images/sad-cat.webp'
 
 export const EndOfStackView = () => (
   <Container>
-    <FullScreenImage source={sadCatImage} resizeMode="contain" />
+    <FullScreenImage source={sadCatImage} contentFit="contain" />
     <Label>No more cats to match</Label>
     <Label>Come back later!</Label>
   </Container>
