@@ -9,7 +9,7 @@ import {
 import { type StyleProp, type ViewStyle } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 import { type RenderCardProps } from './RenderCardProps'
-import { type SwipeStatus } from './SwipeStatus'
+import { type SwipeUpdate } from './SwipeUpdate'
 import {
   swipeableCardStackDefaultOptions,
   type SwipeableCardStackOptions,
@@ -21,7 +21,7 @@ export type SwipeableCardStackProps<T> = {
   data: T[]
   renderCard: (params: RenderCardProps<T>) => ReactNode
   cardWrapperStyle?: StyleProp<ViewStyle>
-  onActiveCardUpdate?: (swipeStatus: SwipeStatus) => void
+  onActiveCardUpdate?: (swipeUpdate: SwipeUpdate) => void
   options?: Partial<SwipeableCardStackOptions>
 }
 
