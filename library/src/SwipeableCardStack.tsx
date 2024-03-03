@@ -21,7 +21,7 @@ export type SwipeableCardStackProps<T> = {
   data: T[]
   renderCard: (params: RenderCardProps<T>) => ReactNode
   cardWrapperStyle?: StyleProp<ViewStyle>
-  onActiveCardUpdate?: (swipeUpdate: SwipeUpdate) => void
+  onActiveCardUpdate?: (swipeUpdate: SwipeUpdate<T>) => void
   options?: Partial<SwipeableCardStackOptions>
 }
 
@@ -96,7 +96,17 @@ export const SwipeableCardStack = forwardRef(
                   animationPosition.value = 0
                 }
                 if (index === currentIndex) {
-                  onActiveCardUpdate?.(swipeStatus)
+                  const currentDataItem = data[currentIndex]
+                  if (currentDataItem === undefined) {
+                    throw new Error(
+                      `Attempted to access data item at index ${currentIndex} while data has size ${data.length}.`,
+                    )
+                  }
+                  onActiveCardUpdate?.({
+                    ...swipeStatus,
+                    currentIndex,
+                    currentDataItem,
+                  })
                 }
               }}
               options={options}

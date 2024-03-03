@@ -18,7 +18,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { type RenderCardAddedProps } from './RenderCardProps'
 import { type SwipeDirection } from './SwipeDirection'
-import { type SwipeUpdate } from './SwipeUpdate'
+import { SwipeStatus } from './SwipeUpdate'
 import { type SwipeableCardRef } from './SwipeableCardStack'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { shouldValidateSwipe } from './shouldValidateSwipe'
@@ -29,7 +29,7 @@ type SwipeableCardWrapperProps = {
   animationPosition: SharedValue<number>
   currentIndex: number
   cardWrapperStyle: StyleProp<ViewStyle>
-  onCardSwipeStatusUpdated: (swipeStatus: SwipeUpdate) => void
+  onCardSwipeStatusUpdated: (swipeStatus: SwipeStatus) => void
   options: SwipeableCardStackOptions
 }
 
