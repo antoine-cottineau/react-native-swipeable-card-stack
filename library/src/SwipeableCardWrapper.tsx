@@ -57,6 +57,10 @@ export const SwipeableCardWrapper = forwardRef(
           () => {
             runOnJS(onCardSwipeStatusUpdated)({
               direction: 'left',
+              phase: 'validated',
+            })
+            runOnJS(onCardSwipeStatusUpdated)({
+              direction: 'left',
               phase: 'ended',
             })
           },
@@ -67,6 +71,10 @@ export const SwipeableCardWrapper = forwardRef(
           options.endedSwipeAnimationPosition,
           undefined,
           () => {
+            runOnJS(onCardSwipeStatusUpdated)({
+              direction: 'right',
+              phase: 'validated',
+            })
             runOnJS(onCardSwipeStatusUpdated)({
               direction: 'right',
               phase: 'ended',

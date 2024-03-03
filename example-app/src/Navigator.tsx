@@ -19,7 +19,11 @@ export const Navigator = () => (
       }}
     >
       <RootStack.Screen name="Swipe" component={SwipePage} />
-      <RootStack.Screen name="Match" component={MatchPage} />
+      <RootStack.Screen
+        name="Match"
+        component={MatchPage}
+        options={{ presentation: 'fullScreenModal' }}
+      />
     </RootStack.Navigator>
   </NavigationContainer>
 )
