@@ -1,6 +1,6 @@
 import styled from '@emotion/native'
 import { Image } from 'expo-image'
-import Animated, { BounceInDown } from 'react-native-reanimated'
+import Animated, { FadeInDown } from 'react-native-reanimated'
 
 const SIZE = 180
 
@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const MatchProfileAvatar = ({ imageUrl }: Props) => (
-  <Container entering={BounceInDown}>
+  <Container entering={FadeInDown.delay(300)}>
     <AvatarImage source={{ uri: imageUrl }} />
   </Container>
 )
@@ -19,7 +19,7 @@ const Container = styled(Animated.View)({
   aspectRatio: 1,
   borderRadius: SIZE / 2,
   borderWidth: 3,
-  borderColor: '#7C4DFF',
+  borderColor: '#651FFF',
   overflow: 'hidden',
 })
 
