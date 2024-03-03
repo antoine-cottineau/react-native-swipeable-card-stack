@@ -12,6 +12,7 @@
     "@emotion/native": "^11.11.0",
     "@emotion/react": "^11.11.3",
     "expo": "~50.0.6",
+    "expo-image": "~1.10.6",
     "expo-linear-gradient": "~12.7.2",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
