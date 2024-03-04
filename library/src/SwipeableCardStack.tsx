@@ -1,4 +1,4 @@
-import styled, { css } from '@emotion/native'
+import styled from '@emotion/native'
 import {
   forwardRef,
   useImperativeHandle,
@@ -15,6 +15,7 @@ import {
   type SwipeableCardStackOptions,
 } from './SwipeableCardStackOptions'
 import { SwipeableCardWrapper } from './SwipeableCardWrapper'
+import { toReversed } from './toReversed'
 import { useRefMap } from './useRefMap'
 
 export type SwipeableCardStackProps<T> = {
@@ -67,7 +68,9 @@ export const SwipeableCardStack = forwardRef(
 
     return (
       <Container>
-        {data.map((cardData, index) => {
+        {toReversed(data).map((cardData, reverseIndex) => {
+          const index = data.length - reverseIndex - 1
+
           const hasCardBeenSwiped = index < currentIndex
           const shouldNotRenderCardYet =
             index > currentIndex + numberOfRenderedCards - 1
@@ -86,10 +89,7 @@ export const SwipeableCardStack = forwardRef(
               index={index}
               animationPosition={animationPosition}
               currentIndex={currentIndex}
-              cardWrapperStyle={[
-                cardWrapperStyle,
-                css({ zIndex: data.length - index - 1 }),
-              ]}
+              cardWrapperStyle={cardWrapperStyle}
               onCardSwipeStatusUpdated={(swipeStatus) => {
                 if (swipeStatus.phase === 'ended') {
                   setCurrentIndex((index) => index + 1)
