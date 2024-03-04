@@ -1,17 +1,21 @@
 import styled from '@emotion/native'
-import { impactAsync, ImpactFeedbackStyle } from 'expo-haptics'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { ImpactFeedbackStyle, impactAsync } from 'expo-haptics'
 import { useRef } from 'react'
 import { SwipeableCardStack } from 'react-native-swipeable-card-stack'
 import { SwipeableCardRef } from 'react-native-swipeable-card-stack/dist/SwipeableCardStack'
-import { CatCard } from './CatCard'
-import { cats } from './cats'
-import { EndOfStackView } from './EndOfStackView'
+import { RootStackParamList } from '../Navigator'
+import { Page } from '../Page'
+import { CatCard } from '../modules/cat/CatCard'
+import { EndOfStackView } from '../modules/cat/EndOfStackView'
+import { cats } from '../modules/cat/cats'
 
-export const CatStack = () => {
+export const SwipePage = () => {
   const ref = useRef<SwipeableCardRef>(null)
+  const { navigate } = useNavigation<NavigationProp<RootStackParamList>>()
 
   return (
-    <>
+    <Page>
       <EndOfStackContainer>
         <EndOfStackView />
       </EndOfStackContainer>
@@ -32,13 +36,20 @@ export const CatStack = () => {
           />
         )}
         ref={ref}
-        onActiveCardUpdate={({ phase }) => {
+        onActiveCardUpdate={({ phase, direction, currentDataItem }) => {
           if (phase === 'below-threshold' || phase === 'above-threshold') {
             impactAsync(ImpactFeedbackStyle.Light).catch(console.error)
           }
+          if (
+            phase === 'validated' &&
+            direction === 'right' &&
+            currentDataItem.hasLikedMyProfile
+          ) {
+            navigate('Match', { catName: currentDataItem.name })
+          }
         }}
       />
-    </>
+    </Page>
   )
 }
 

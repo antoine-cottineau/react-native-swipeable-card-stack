@@ -1,4 +1,4 @@
-import styled, { css } from '@emotion/native'
+import styled from '@emotion/native'
 import {
   forwardRef,
   useImperativeHandle,
@@ -9,19 +9,20 @@ import {
 import { type StyleProp, type ViewStyle } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 import { type RenderCardProps } from './RenderCardProps'
-import { type SwipeStatus } from './SwipeStatus'
+import { type SwipeUpdate } from './SwipeUpdate'
 import {
   swipeableCardStackDefaultOptions,
   type SwipeableCardStackOptions,
 } from './SwipeableCardStackOptions'
 import { SwipeableCardWrapper } from './SwipeableCardWrapper'
+import { toReversed } from './toReversed'
 import { useRefMap } from './useRefMap'
 
 export type SwipeableCardStackProps<T> = {
   data: T[]
   renderCard: (params: RenderCardProps<T>) => ReactNode
   cardWrapperStyle?: StyleProp<ViewStyle>
-  onActiveCardUpdate?: (swipeStatus: SwipeStatus) => void
+  onActiveCardUpdate?: (swipeUpdate: SwipeUpdate<T>) => void
   options?: Partial<SwipeableCardStackOptions>
 }
 
@@ -67,7 +68,9 @@ export const SwipeableCardStack = forwardRef(
 
     return (
       <Container>
-        {data.map((cardData, index) => {
+        {toReversed(data).map((cardData, reverseIndex) => {
+          const index = data.length - reverseIndex - 1
+
           const hasCardBeenSwiped = index < currentIndex
           const shouldNotRenderCardYet =
             index > currentIndex + numberOfRenderedCards - 1
@@ -86,17 +89,24 @@ export const SwipeableCardStack = forwardRef(
               index={index}
               animationPosition={animationPosition}
               currentIndex={currentIndex}
-              cardWrapperStyle={[
-                cardWrapperStyle,
-                css({ zIndex: data.length - index - 1 }),
-              ]}
+              cardWrapperStyle={cardWrapperStyle}
               onCardSwipeStatusUpdated={(swipeStatus) => {
                 if (swipeStatus.phase === 'ended') {
                   setCurrentIndex((index) => index + 1)
                   animationPosition.value = 0
                 }
                 if (index === currentIndex) {
-                  onActiveCardUpdate?.(swipeStatus)
+                  const currentDataItem = data[currentIndex]
+                  if (currentDataItem === undefined) {
+                    throw new Error(
+                      `Attempted to access data item at index ${currentIndex} while data has size ${data.length}.`,
+                    )
+                  }
+                  onActiveCardUpdate?.({
+                    ...swipeStatus,
+                    currentIndex,
+                    currentDataItem,
+                  })
                 }
               }}
               options={options}

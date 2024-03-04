@@ -16,12 +16,12 @@ import Animated, {
   withTiming,
   type SharedValue,
 } from 'react-native-reanimated'
-import { type SwipeDirection } from './SwipeDirection'
-import { type SwipeStatus } from './SwipeStatus'
-import { shouldValidateSwipe } from './shouldValidateSwipe'
 import { type RenderCardAddedProps } from './RenderCardProps'
+import { type SwipeDirection } from './SwipeDirection'
+import { SwipeStatus } from './SwipeUpdate'
 import { type SwipeableCardRef } from './SwipeableCardStack'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
+import { shouldValidateSwipe } from './shouldValidateSwipe'
 
 type SwipeableCardWrapperProps = {
   renderCard: (params: RenderCardAddedProps) => ReactNode
@@ -57,6 +57,10 @@ export const SwipeableCardWrapper = forwardRef(
           () => {
             runOnJS(onCardSwipeStatusUpdated)({
               direction: 'left',
+              phase: 'validated',
+            })
+            runOnJS(onCardSwipeStatusUpdated)({
+              direction: 'left',
               phase: 'ended',
             })
           },
@@ -67,6 +71,10 @@ export const SwipeableCardWrapper = forwardRef(
           options.endedSwipeAnimationPosition,
           undefined,
           () => {
+            runOnJS(onCardSwipeStatusUpdated)({
+              direction: 'right',
+              phase: 'validated',
+            })
             runOnJS(onCardSwipeStatusUpdated)({
               direction: 'right',
               phase: 'ended',

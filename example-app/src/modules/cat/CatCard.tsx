@@ -1,4 +1,5 @@
 import styled from '@emotion/native'
+import { Image } from 'expo-image'
 import Animated, {
   Extrapolation,
   interpolate,
@@ -70,7 +71,7 @@ const Container = styled(Animated.View)({
   overflow: 'hidden',
 })
 
-const FullScreenImage = styled.Image({
+const FullScreenImage = styled(Image)({
   width: '100%',
   height: '100%',
 })
