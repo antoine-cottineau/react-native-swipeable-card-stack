@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Animated, { FadeInDown } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { RootStackParamList } from '../Navigator'
+import { Page } from '../Page'
 import { cats } from '../modules/cat/cats'
 import { MatchProfileAvatar } from '../modules/match/MatchProfileAvatar'
 import { TalkWithButton } from '../modules/match/TalkWithButton'
@@ -42,8 +43,7 @@ export const MatchPage = () => {
   )
 }
 
-const Container = styled.View({
-  flex: 1,
+const Container = styled(Page)({
   justifyContent: 'center',
   alignItems: 'center',
   gap: 16,

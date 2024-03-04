@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { SwipeableCardStack } from 'react-native-swipeable-card-stack'
 import { SwipeableCardRef } from 'react-native-swipeable-card-stack/dist/SwipeableCardStack'
 import { RootStackParamList } from '../Navigator'
+import { Page } from '../Page'
 import { CatCard } from '../modules/cat/CatCard'
 import { EndOfStackView } from '../modules/cat/EndOfStackView'
 import { cats } from '../modules/cat/cats'
@@ -14,7 +15,7 @@ export const SwipePage = () => {
   const { navigate } = useNavigation<NavigationProp<RootStackParamList>>()
 
   return (
-    <>
+    <Page>
       <EndOfStackContainer>
         <EndOfStackView />
       </EndOfStackContainer>
@@ -48,7 +49,7 @@ export const SwipePage = () => {
           }
         }}
       />
-    </>
+    </Page>
   )
 }
 
