@@ -1,6 +1,7 @@
 import styled from '@emotion/native'
 import { Image } from 'expo-image'
 import sadCatImage from '../../images/sad-cat.webp'
+import { getBrandedText } from '../../libs/fonts/getBrandedText'
 
 export const EndOfStackView = () => (
   <Container>
@@ -22,7 +23,7 @@ const FullScreenImage = styled(Image)({
   aspectRatio: 1,
 })
 
-const Label = styled.Text({
+const Label = getBrandedText({
   fontSize: 20,
   fontFamily: 'roboto-medium',
 })

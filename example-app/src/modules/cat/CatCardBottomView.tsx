@@ -5,6 +5,7 @@ import { RoundButton } from '../../RoundButton'
 import { CloseIcon } from '../../icons/CloseIcon'
 import { HeartIcon } from '../../icons/HeartIcon'
 import { UndoIcon } from '../../icons/UndoIcon'
+import { getBrandedText } from '../../libs/fonts/getBrandedText'
 import { Action } from './Action'
 
 type Props = {
@@ -90,7 +91,7 @@ const ButtonsContainer = styled.View({
   alignItems: 'center',
 })
 
-const Label = styled.Text({
+const Label = getBrandedText({
   fontSize: 40,
   fontFamily: 'roboto-bold',
   color: 'white',

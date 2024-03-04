@@ -1,10 +1,11 @@
 import styled, { css } from '@emotion/native'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
-import Animated, { FadeInDown } from 'react-native-reanimated'
+import { FadeInDown } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { RootStackParamList } from '../Navigator'
 import { Page } from '../Page'
+import { getAnimatedBrandedText } from '../libs/fonts/getBrandedText'
 import { cats } from '../modules/cat/cats'
 import { MatchProfileAvatar } from '../modules/match/MatchProfileAvatar'
 import { TalkWithButton } from '../modules/match/TalkWithButton'
@@ -55,7 +56,7 @@ const ButtonWrapper = styled.View({
   right: 16,
 })
 
-const Label = styled(Animated.Text)({
+const Label = getAnimatedBrandedText({
   color: 'white',
   fontSize: 34,
   fontFamily: 'pacifico',
