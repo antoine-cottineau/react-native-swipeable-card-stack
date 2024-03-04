@@ -1,11 +1,11 @@
 import styled from '@emotion/native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { Text } from 'react-native'
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
 import { RoundButton } from '../../RoundButton'
 import { CloseIcon } from '../../icons/CloseIcon'
 import { HeartIcon } from '../../icons/HeartIcon'
 import { UndoIcon } from '../../icons/UndoIcon'
+import { getBrandedText } from '../../libs/fonts/getBrandedText'
 import { Action } from './Action'
 
 type Props = {
@@ -39,9 +39,7 @@ export const CatCardBottomView = ({ name, age, onAction }: Props) => {
         }}
       ></LinearGradient>
       <ContentContainer>
-        <Text
-          style={{ fontSize: 32, fontWeight: '600', color: 'white' }}
-        >{`${name} - ${age}`}</Text>
+        <Label>{`${name} - ${age}`}</Label>
         <ButtonsContainer>
           <RoundButton
             Icon={CloseIcon}
@@ -91,4 +89,10 @@ const ButtonsContainer = styled.View({
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
+})
+
+const Label = getBrandedText({
+  fontSize: 40,
+  fontFamily: 'roboto-bold',
+  color: 'white',
 })

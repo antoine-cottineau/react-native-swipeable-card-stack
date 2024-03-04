@@ -2,6 +2,7 @@ import styled, { css } from '@emotion/native'
 import { useNavigation } from '@react-navigation/native'
 import { Pressable } from 'react-native'
 import Animated, { FadeInDown } from 'react-native-reanimated'
+import { getBrandedText } from '../../libs/fonts/getBrandedText'
 
 type Props = {
   catName: string
@@ -35,8 +36,8 @@ export const TalkWithButton = ({ catName }: Props) => {
 
 const Container = styled(Animated.View)({})
 
-const Label = styled.Text({
+const Label = getBrandedText({
   color: 'white',
-  fontWeight: '600',
+  fontFamily: 'roboto-medium',
   fontSize: 20,
 })
