@@ -1,3 +1,7 @@
 export type SupportedFontFamily = (typeof supportedFontFamilies)[number]
 
-const supportedFontFamilies = ['pacifico'] as const
+const supportedFontFamilies = [
+  'pacifico',
+  'roboto-bold',
+  'roboto-medium',
+] as const

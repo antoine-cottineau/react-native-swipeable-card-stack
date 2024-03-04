@@ -24,5 +24,5 @@ const FullScreenImage = styled(Image)({
 
 const Label = styled.Text({
   fontSize: 20,
-  fontWeight: '700',
+  fontFamily: 'roboto-medium',
 })

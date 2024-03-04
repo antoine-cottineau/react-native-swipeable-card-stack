@@ -37,6 +37,6 @@ const Container = styled(Animated.View)({})
 
 const Label = styled.Text({
   color: 'white',
-  fontWeight: '600',
+  fontFamily: 'roboto-medium',
   fontSize: 20,
 })
