@@ -57,6 +57,6 @@ const ButtonWrapper = styled.View({
 
 const Label = styled(Animated.Text)({
   color: 'white',
-  fontWeight: '700',
-  fontSize: 24,
+  fontSize: 34,
+  fontFamily: 'pacifico',
 })
