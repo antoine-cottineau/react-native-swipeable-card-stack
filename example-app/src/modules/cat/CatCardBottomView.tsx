@@ -6,7 +6,7 @@ import { CloseIcon } from '../../icons/CloseIcon'
 import { HeartIcon } from '../../icons/HeartIcon'
 import { UndoIcon } from '../../icons/UndoIcon'
 import { getBrandedText } from '../../libs/fonts/getBrandedText'
-import { Action } from './Action'
+import { type Action } from './Action'
 
 type Props = {
   name: string

@@ -1,9 +1,9 @@
-import { RenderCardProps } from './RenderCardProps'
-import { SwipeDirection } from './SwipeDirection'
-import { SwipePhase } from './SwipePhase'
-import { SwipeUpdate } from './SwipeUpdate'
+import { type RenderCardProps } from './RenderCardProps'
+import { type SwipeDirection } from './SwipeDirection'
+import { type SwipePhase } from './SwipePhase'
+import { type SwipeUpdate } from './SwipeUpdate'
 import { SwipeableCardStack } from './SwipeableCardStack'
-import { SwipeableCardStackOptions } from './SwipeableCardStackOptions'
+import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 
 export {
   SwipeableCardStack,

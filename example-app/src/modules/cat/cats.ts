@@ -1,4 +1,4 @@
-import { CatDataItem } from './CatDataItem'
+import { type CatDataItem } from './CatDataItem'
 
 export const cats: CatDataItem[] = [
   {

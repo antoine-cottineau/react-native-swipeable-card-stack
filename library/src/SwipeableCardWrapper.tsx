@@ -18,7 +18,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { type RenderCardAddedProps } from './RenderCardProps'
 import { type SwipeDirection } from './SwipeDirection'
-import { SwipeStatus } from './SwipeUpdate'
+import { type SwipeStatus } from './SwipeUpdate'
 import { type SwipeableCardRef } from './SwipeableCardStack'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { shouldValidateSwipe } from './shouldValidateSwipe'

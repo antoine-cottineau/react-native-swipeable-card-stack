@@ -6,10 +6,10 @@ import Animated, {
   interpolateColor,
   useAnimatedStyle,
 } from 'react-native-reanimated'
-import { RenderCardProps } from 'react-native-swipeable-card-stack'
-import { Action } from './Action'
+import { type RenderCardProps } from 'react-native-swipeable-card-stack'
+import { type Action } from './Action'
 import { CatCardBottomView } from './CatCardBottomView'
-import { CatDataItem } from './CatDataItem'
+import { type CatDataItem } from './CatDataItem'
 
 type Props = RenderCardProps<CatDataItem> & {
   onAction: (action: Action) => void

@@ -1,6 +1,6 @@
 import { css } from '@emotion/native'
 import { Pressable } from 'react-native'
-import { IconType } from './icons/Icon'
+import { type IconType } from './icons/Icon'
 
 type Size = 'small' | 'large'
 
