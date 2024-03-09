@@ -8,6 +8,10 @@
   },
   "scripts": {
     "serve": "yarn workspace react-native-swipeable-card-stack tsc -w",
-    "start": "yarn workspace example-app start"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "eslint": "^8.57.0"
   }
 }
