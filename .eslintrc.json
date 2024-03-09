@@ -17,6 +17,24 @@
     }
   },
   "rules": {
-    "no-console": ["error", { "allow": ["error"] }]
+    // eslint
+    "arrow-body-style": "error",
+    "func-style": ["error", "expression"],
+    "no-console": ["error", { "allow": ["error"] }],
+    "no-else-return": "error",
+    "no-inline-comments": "error",
+    "no-negated-condition": "error",
+    "no-useless-return": "error",
+    "prefer-arrow-callback": "error",
+    "require-await": "error",
+
+    // typescript-eslint
+    "@typescript-eslint/consistent-indexed-object-style": "error",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { "fixStyle": "inline-type-imports" }
+    ],
+    "@typescript-eslint/no-require-imports": "error",
+    "@typescript-eslint/non-nullable-type-assertion-style": "error"
   }
 }
