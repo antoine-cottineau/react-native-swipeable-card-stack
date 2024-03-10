@@ -1,14 +1,14 @@
 type Params = {
-  animationPosition: number
+  translation: number
   velocity: number
-  validateSwipeAnimationPositionThreshold: number
+  validateSwipeTranslationThreshold: number
   validateSwipeVelocityThreshold: number
 }
 
 export const shouldValidateSwipe = ({
-  animationPosition,
+  translation,
   velocity,
-  validateSwipeAnimationPositionThreshold,
+  validateSwipeTranslationThreshold,
   validateSwipeVelocityThreshold,
 }: Params) => {
   'worklet'
@@ -19,13 +19,13 @@ export const shouldValidateSwipe = ({
   // but quick swipe to the right and have the swipe validated, even
   // if it makes no sense to the user.
   const isVelocityInCorrectDirection =
-    Math.sign(velocity) === Math.sign(animationPosition)
+    Math.sign(velocity) === Math.sign(translation)
   if (!isVelocityInCorrectDirection) {
     return false
   }
 
   return (
-    Math.abs(animationPosition) > validateSwipeAnimationPositionThreshold ||
+    Math.abs(translation) > validateSwipeTranslationThreshold ||
     Math.abs(velocity) > validateSwipeVelocityThreshold
   )
 }

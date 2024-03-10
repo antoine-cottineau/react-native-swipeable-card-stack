@@ -21,6 +21,16 @@ export type SwipeableCardStackOptions = {
    */
   endedSwipePosition: number
 
-  validateSwipeAnimationPositionThreshold: number
+  /**
+   * The translation needed for a swipe to be considered as validated, which means that if the user releases the card, the swipe animation will finish and the swipe will be completed.
+   *
+   * For example, if you set *validatedSwipeTranslationThreshold* to 200 and the user swipes 190 to the right and releases the card, the swipe will be aborted. Hovewer, if the user swipes 210 to the right, the swipe will complete.
+   *
+   * Note that the same behaviour is valid on the left side (negative positions).
+   *
+   * Default value: 0.5 * screenWidth
+   */
+  validateSwipeTranslationThreshold: number
+
   validateSwipeVelocityThreshold: number
 }

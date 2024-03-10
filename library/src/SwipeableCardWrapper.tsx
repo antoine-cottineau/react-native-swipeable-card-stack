@@ -88,12 +88,12 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       const direction: SwipeDirection = translationX > 0 ? 'right' : 'left'
       if (
         shouldValidateSwipe({
-          animationPosition: animationPosition.value,
+          translation: translationX,
           velocity: velocityX,
-          validateSwipeAnimationPositionThreshold:
-            options.validateSwipeAnimationPositionThreshold,
+          validateSwipeTranslationThreshold:
+            options.validateSwipeTranslationThreshold,
           validateSwipeVelocityThreshold:
-            options.validateSwipeVelocityThreshold,
+            options.validateSwipeTranslationThreshold,
         })
       ) {
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })
@@ -142,7 +142,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     () =>
       isActive &&
       Math.abs(animationPosition.value) >
-        options.validateSwipeAnimationPositionThreshold,
+        options.validateSwipeTranslationThreshold,
     (newValue, previousValue) => {
       if (previousValue === null || newValue === previousValue) {
         return
