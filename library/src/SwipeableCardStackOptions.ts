@@ -1,3 +1,6 @@
+import { type PanGestureHandlerEventPayload } from 'react-native-gesture-handler'
+import { type WithSpringConfig } from 'react-native-reanimated'
+
 export type SwipeableCardStackOptions = {
   /**
    * How many cards should be rendered at the same time.
@@ -42,4 +45,15 @@ export type SwipeableCardStackOptions = {
    * Default value: 800
    */
   validateSwipeVelocityThreshold: number
+
+  /**
+   * A function that returns a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/) that will be used in the final animation once a swipe is validated.
+   *
+   * @param payload A gesture-handler payload that you can use to customize the config.
+   *
+   * Default value: see *useDefaultOptions.ts*.
+   */
+  validatedSwipeAnimationConfig: (
+    payload: PanGestureHandlerEventPayload,
+  ) => WithSpringConfig
 }

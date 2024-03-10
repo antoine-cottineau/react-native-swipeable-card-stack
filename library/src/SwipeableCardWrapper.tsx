@@ -84,12 +84,13 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     .onUpdate(({ translationX }) => {
       animationPosition.value = translationX / options.endedSwipePosition
     })
-    .onEnd(({ translationX, velocityX }) => {
-      const direction: SwipeDirection = translationX > 0 ? 'right' : 'left'
+    .onEnd((payload) => {
+      const direction: SwipeDirection =
+        payload.translationX > 0 ? 'right' : 'left'
       if (
         shouldValidateSwipe({
-          translation: translationX,
-          velocity: velocityX,
+          translation: payload.translationX,
+          velocity: payload.velocityX,
           validateSwipeTranslationThreshold:
             options.validateSwipeTranslationThreshold,
           validateSwipeVelocityThreshold:
@@ -98,13 +99,8 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       ) {
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })
         animationPosition.value = withSpring(
-          Math.sign(translationX),
-          {
-            velocity: 0.0001 * velocityX,
-            mass: 1,
-            damping: 100,
-            stiffness: 200,
-          },
+          Math.sign(payload.translationX),
+          options.validatedSwipeAnimationConfig(payload),
           () => {
             runOnJS(onCardSwipeStatusUpdated)({
               direction,
