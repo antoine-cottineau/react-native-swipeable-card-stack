@@ -7,10 +7,13 @@
     ]
   },
   "scripts": {
+    "build": "yarn workspace react-native-swipeable-card-stack tsc",
     "serve": "yarn workspace react-native-swipeable-card-stack tsc -w",
     "start": "yarn workspace example-app start",
-    "lint": "eslint '**/src/**/*.{ts,tsx}'",
-    "format": "prettier -w ."
+    "format": "prettier -w .",
+    "test": "yarn test:format && yarn test:lint",
+    "test:format": "prettier -c .",
+    "test:lint": "eslint '**/src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.20.1",

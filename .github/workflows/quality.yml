@@ -1,0 +1,28 @@
+name: Quality
+
+on: push
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup node
+        id: setup-node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build react-native-swipeable-card-stack
+        run: yarn build
+
+      - name: Test formatting
+        run: yarn test:format
+
+      - name: Test linting
+        run: yarn test:lint
