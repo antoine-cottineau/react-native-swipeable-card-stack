@@ -1,7 +1,9 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/strict-type-checked"
+    "plugin:@typescript-eslint/strict-type-checked",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
@@ -25,7 +27,7 @@
     "no-inline-comments": "error",
     "no-negated-condition": "error",
     "no-useless-return": "error",
-    "prefer-arrow-callback": "error",
+    "prefer-arrow-callback": ["error", { "allowNamedFunctions": true }],
     "require-await": "error",
 
     // typescript-eslint
