@@ -30,8 +30,6 @@ export type SwipeableCardRef = {
   swipeRight: () => void
 }
 
-const numberOfRenderedCards = 3
-
 export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
   {
     data,
@@ -71,7 +69,7 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
 
         const hasCardBeenSwiped = index < currentIndex
         const shouldNotRenderCardYet =
-          index > currentIndex + numberOfRenderedCards - 1
+          index > currentIndex + options.numberOfRenderedCards - 1
         if (hasCardBeenSwiped || shouldNotRenderCardYet) {
           return null
         }
