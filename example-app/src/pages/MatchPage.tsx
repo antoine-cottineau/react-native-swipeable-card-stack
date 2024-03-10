@@ -32,7 +32,7 @@ export const MatchPage = () => {
           left: 0,
           right: 0,
           top: 0,
-          bottom: 0
+          bottom: 0,
         }}
       ></LinearGradient>
       <MatchProfileAvatar imageUrl={cat.imageUrl} />
@@ -47,17 +47,17 @@ export const MatchPage = () => {
 const Container = styled(Page)({
   justifyContent: 'center',
   alignItems: 'center',
-  gap: 16
+  gap: 16,
 })
 
 const ButtonWrapper = styled.View({
   position: 'absolute',
   left: 16,
-  right: 16
+  right: 16,
 })
 
 const Label = getAnimatedBrandedText({
   color: 'white',
   fontSize: 34,
-  fontFamily: 'pacifico'
+  fontFamily: 'pacifico',
 })

@@ -5,4 +5,4 @@ export type SwipePhase =
   | 'below-threshold'
   | 'above-threshold'
   | 'validated'
-  | 'ended';
+  | 'ended'

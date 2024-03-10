@@ -11,5 +11,5 @@ export {
   type SwipeDirection,
   type SwipePhase,
   type SwipeUpdate,
-  type SwipeableCardStackOptions
+  type SwipeableCardStackOptions,
 }
