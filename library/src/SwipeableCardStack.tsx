@@ -23,8 +23,7 @@ export type SwipeableCardStackProps<T> = {
   renderCard: (params: RenderCardProps<T>) => ReactNode
   cardWrapperStyle?: StyleProp<ViewStyle>
   onActiveCardUpdate?: (swipeUpdate: SwipeUpdate<T>) => void
-  options?: Partial<SwipeableCardStackOptions>
-}
+} & Partial<SwipeableCardStackOptions>
 
 export type SwipeableCardRef = {
   swipeLeft: () => void
@@ -39,7 +38,7 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
     renderCard,
     cardWrapperStyle,
     onActiveCardUpdate,
-    options: userOptions,
+    ...userOptions
   }: SwipeableCardStackProps<T>,
   ref: ForwardedRef<SwipeableCardRef>,
 ) {
