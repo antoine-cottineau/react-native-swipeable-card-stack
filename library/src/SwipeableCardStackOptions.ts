@@ -9,7 +9,18 @@ export type SwipeableCardStackOptions = {
    * Default value: 3
    */
   numberOfRenderedCards: number
+
+  /**
+   * The position where the cards rest at the end of a swipe.
+   *
+   * For example, if you set *endedSwipePosition* to 400, a card swipped to the left will end its movement at -400 while a card swipped to the right will end its movement at +400.
+   *
+   * Before any swipe, the cards sit idle at the position 0.
+   *
+   * Default value: 1.5 * screenWidth
+   */
+  endedSwipePosition: number
+
   validateSwipeAnimationPositionThreshold: number
   validateSwipeVelocityThreshold: number
-  endedSwipeAnimationPosition: number
 }

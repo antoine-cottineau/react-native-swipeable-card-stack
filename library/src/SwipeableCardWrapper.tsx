@@ -5,7 +5,7 @@ import {
   type ForwardedRef,
   type ReactNode,
 } from 'react'
-import { Dimensions, type StyleProp, type ViewStyle } from 'react-native'
+import { type StyleProp, type ViewStyle } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
   Easing,
@@ -45,41 +45,32 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   }: SwipeableCardWrapperProps,
   ref: ForwardedRef<SwipeableCardRef>,
 ) {
-  const width = Dimensions.get('window').width
   const isActive = index === currentIndex
 
   useImperativeHandle(ref, () => ({
     swipeLeft: () => {
-      animationPosition.value = withTiming(
-        -options.endedSwipeAnimationPosition,
-        undefined,
-        () => {
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'left',
-            phase: 'validated',
-          })
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'left',
-            phase: 'ended',
-          })
-        },
-      )
+      animationPosition.value = withTiming(-1, undefined, () => {
+        runOnJS(onCardSwipeStatusUpdated)({
+          direction: 'left',
+          phase: 'validated',
+        })
+        runOnJS(onCardSwipeStatusUpdated)({
+          direction: 'left',
+          phase: 'ended',
+        })
+      })
     },
     swipeRight: () => {
-      animationPosition.value = withTiming(
-        options.endedSwipeAnimationPosition,
-        undefined,
-        () => {
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'right',
-            phase: 'validated',
-          })
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'right',
-            phase: 'ended',
-          })
-        },
-      )
+      animationPosition.value = withTiming(1, undefined, () => {
+        runOnJS(onCardSwipeStatusUpdated)({
+          direction: 'right',
+          phase: 'validated',
+        })
+        runOnJS(onCardSwipeStatusUpdated)({
+          direction: 'right',
+          phase: 'ended',
+        })
+      })
     },
   }))
 
@@ -91,7 +82,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       })
     })
     .onUpdate(({ translationX }) => {
-      animationPosition.value = translationX / width
+      animationPosition.value = translationX / options.endedSwipePosition
     })
     .onEnd(({ translationX, velocityX }) => {
       const direction: SwipeDirection = translationX > 0 ? 'right' : 'left'
@@ -107,7 +98,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       ) {
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })
         animationPosition.value = withSpring(
-          Math.sign(translationX) * options.endedSwipeAnimationPosition,
+          Math.sign(translationX),
           {
             velocity: 0.0001 * velocityX,
             mass: 1,
@@ -138,7 +129,13 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     .enabled(isActive)
 
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: isActive ? animationPosition.value * width : 0 }],
+    transform: [
+      {
+        translateX: isActive
+          ? animationPosition.value * options.endedSwipePosition
+          : 0,
+      },
+    ],
   }))
 
   useAnimatedReaction(
