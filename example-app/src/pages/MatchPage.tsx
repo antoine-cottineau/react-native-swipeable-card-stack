@@ -1,5 +1,5 @@
 import styled, { css } from '@emotion/native'
-import { type RouteProp, useRoute } from '@react-navigation/native'
+import { useRoute, type RouteProp } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { FadeInDown } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -36,7 +36,7 @@ export const MatchPage = () => {
         }}
       ></LinearGradient>
       <MatchProfileAvatar imageUrl={cat.imageUrl} />
-      <Label entering={FadeInDown.delay(300)}>It's a match!</Label>
+      <Label entering={FadeInDown.delay(300)}>It&apos;s a match!</Label>
       <ButtonWrapper style={css({ bottom: bottom + 16 })}>
         <TalkWithButton catName={cat.name} />
       </ButtonWrapper>
