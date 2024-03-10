@@ -10,12 +10,10 @@ import { type StyleProp, type ViewStyle } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 import { type RenderCardProps } from './RenderCardProps'
 import { type SwipeUpdate } from './SwipeUpdate'
-import {
-  swipeableCardStackDefaultOptions,
-  type SwipeableCardStackOptions,
-} from './SwipeableCardStackOptions'
+import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { SwipeableCardWrapper } from './SwipeableCardWrapper'
 import { toReversed } from './toReversed'
+import { useDefaultOptions } from './useDefaultOptions'
 import { useRefMap } from './useRefMap'
 
 export type SwipeableCardStackProps<T> = {
@@ -43,10 +41,11 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
   const [currentIndex, setCurrentIndex] = useState(0)
   const refMap = useRefMap<number, SwipeableCardRef>()
   const animationPosition = useSharedValue(0)
+  const defaultOptions = useDefaultOptions()
 
   const options: SwipeableCardStackOptions = {
     ...userOptions,
-    ...swipeableCardStackDefaultOptions,
+    ...defaultOptions,
   }
 
   useImperativeHandle(
