@@ -62,7 +62,7 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
         refMap.get(currentIndex)?.swipeRight()
       },
     }),
-    [currentIndex],
+    [refMap, currentIndex],
   )
 
   return (
