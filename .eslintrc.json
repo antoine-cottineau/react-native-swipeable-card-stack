@@ -3,7 +3,8 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/strict-type-checked",
     "plugin:react/recommended",
-    "plugin:react/jsx-runtime"
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
@@ -37,6 +38,9 @@
       { "fixStyle": "inline-type-imports" }
     ],
     "@typescript-eslint/no-require-imports": "error",
-    "@typescript-eslint/non-nullable-type-assertion-style": "error"
+    "@typescript-eslint/non-nullable-type-assertion-style": "error",
+
+    // react-hooks
+    "react-hooks/exhaustive-deps": "error"
   }
 }
