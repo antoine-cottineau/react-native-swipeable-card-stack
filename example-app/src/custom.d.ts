@@ -1,4 +1,4 @@
 declare module '*.webp' {
-  const content: any
+  const content: unknown
   export default content
 }

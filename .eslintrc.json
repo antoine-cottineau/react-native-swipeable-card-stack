@@ -1,0 +1,65 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/strict-type-checked",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": ["./library/tsconfig.json", "./example-app/tsconfig.json"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {
+        "project": ["./library/tsconfig.json", "./example-app/tsconfig.json"]
+      }
+    }
+  },
+  "rules": {
+    // eslint
+    "arrow-body-style": "error",
+    "func-style": ["error", "expression"],
+    "no-console": ["error", { "allow": ["error"] }],
+    "no-else-return": "error",
+    "no-inline-comments": "error",
+    "no-negated-condition": "error",
+    "no-useless-return": "error",
+    "prefer-arrow-callback": ["error", { "allowNamedFunctions": true }],
+    "require-await": "error",
+
+    // typescript-eslint
+    "@typescript-eslint/consistent-indexed-object-style": "error",
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { "fixStyle": "inline-type-imports" }
+    ],
+    "@typescript-eslint/no-require-imports": "error",
+    "@typescript-eslint/non-nullable-type-assertion-style": "error",
+
+    // react-hooks
+    "react-hooks/exhaustive-deps": "error",
+
+    // import
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": false
+        }
+      }
+    ]
+  }
+}

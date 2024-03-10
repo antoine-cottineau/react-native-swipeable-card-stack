@@ -5,7 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Navigator } from './Navigator'
 import { useLoadFonts } from './libs/fonts/useLoadFonts'
 
-preventAutoHideAsync()
+preventAutoHideAsync().catch(console.error)
 
 export const App = () => {
   const { areFontsLoaded } = useLoadFonts()
@@ -14,7 +14,7 @@ export const App = () => {
     return null
   }
 
-  hideAsync()
+  hideAsync().catch(console.error)
 
   return (
     <SafeAreaProvider>

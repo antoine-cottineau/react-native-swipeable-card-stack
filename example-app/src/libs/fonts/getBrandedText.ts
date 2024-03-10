@@ -1,7 +1,7 @@
 import styled from '@emotion/native'
-import { TextStyle } from 'react-native'
+import { type TextStyle } from 'react-native'
 import Animated from 'react-native-reanimated'
-import { SupportedFontFamily } from './SupportedFontFamily'
+import { type SupportedFontFamily } from './SupportedFontFamily'
 
 type Props = Omit<TextStyle, 'fontFamily' | 'fontWeight'> & {
   fontFamily: SupportedFontFamily

@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useFonts, type FontSource } from 'expo-font'
-import { SupportedFontFamily } from './SupportedFontFamily'
+import { type SupportedFontFamily } from './SupportedFontFamily'
 
 const fontPathMapping: Record<SupportedFontFamily, FontSource> = {
   pacifico: require('./fonts/Pacifico-Regular.ttf'),

@@ -7,7 +7,23 @@
     ]
   },
   "scripts": {
+    "build": "yarn workspace react-native-swipeable-card-stack tsc",
     "serve": "yarn workspace react-native-swipeable-card-stack tsc -w",
-    "start": "yarn workspace example-app start"
+    "start": "yarn workspace example-app start",
+    "format": "prettier -w .",
+    "test": "yarn test:format && yarn test:lint",
+    "test:format": "prettier -c .",
+    "test:lint": "eslint '**/src/**/*.{ts,tsx}'"
+  },
+  "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.20.1",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "eslint": "^8.57.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.2.5"
   }
 }
