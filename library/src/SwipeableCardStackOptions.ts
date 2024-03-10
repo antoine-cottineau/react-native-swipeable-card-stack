@@ -28,9 +28,18 @@ export type SwipeableCardStackOptions = {
    *
    * Note that the same behaviour is valid on the left side (negative positions).
    *
+   * A swipe can also be validated if the velocity is high enough, see *validateSwipeVelocityThreshold*.
+   *
    * Default value: 0.5 * screenWidth
    */
   validateSwipeTranslationThreshold: number
 
+  /**
+   * The velocity needed for a swipe to be validated.
+   *
+   * A swipe can also be validated if the translation is high enough, see *validateSwipeTranslationThreshold*.
+   *
+   * Default value: 800
+   */
   validateSwipeVelocityThreshold: number
 }
