@@ -40,19 +40,21 @@ To see a more complete implementation, check out the [example app](./example-app
 
 ## Installation
 
+First, follow [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/) and [react-native-gesture-handler](https://docs.swmansion.com/react-native-gesture-handler/docs/fundamentals/installation/) installation guides.
+
+Then install the library through npm:
+
 ### Expo
 
 ```sh
-expo install react-native-reanimated react-native-gesture-handler react-native-swipeable-card-stack
+expo install react-native-swipeable-card-stack
 ```
 
 ### Bare React Native
 
 ```sh
-yarn add react-native-reanimated react-native-gesture-handler react-native-swipeable-card-stack
+yarn add react-native-swipeable-card-stack
 ```
-
-TODO: complete instructions
 
 ## Documentation
 
