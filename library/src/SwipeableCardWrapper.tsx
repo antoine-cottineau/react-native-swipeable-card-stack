@@ -8,7 +8,6 @@ import {
 import { type StyleProp, type ViewStyle } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
-  Easing,
   runOnJS,
   useAnimatedReaction,
   useAnimatedStyle,
@@ -122,9 +121,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
 
       animationPosition.value = withTiming(
         0,
-        {
-          easing: Easing.inOut(Easing.ease),
-        },
+        options.stoppedSwipeAnimationConfig,
         () => {
           runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
         },

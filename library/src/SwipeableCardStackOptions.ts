@@ -66,4 +66,11 @@ export type SwipeableCardStackOptions = {
    * Default value: undefined
    */
   imperativeSwipeAnimationConfig?: WithTimingConfig
+
+  /**
+   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the swipe is stopped without being validated and the card position gets reset.
+   *
+   * Default value: undefined
+   */
+  stoppedSwipeAnimationConfig?: WithTimingConfig
 }

@@ -15,5 +15,6 @@ export const useDefaultOptions = (): SwipeableCardStackOptions => {
       stiffness: 200,
     }),
     imperativeSwipeAnimationConfig: undefined,
+    stoppedSwipeAnimationConfig: undefined,
   }
 }
