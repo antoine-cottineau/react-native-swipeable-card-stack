@@ -14,5 +14,6 @@ export const useDefaultOptions = (): SwipeableCardStackOptions => {
       damping: 100,
       stiffness: 200,
     }),
+    imperativeSwipeAnimationConfig: undefined,
   }
 }

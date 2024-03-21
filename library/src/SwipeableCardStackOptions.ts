@@ -1,5 +1,8 @@
 import { type PanGestureHandlerEventPayload } from 'react-native-gesture-handler'
-import { type WithSpringConfig } from 'react-native-reanimated'
+import {
+  type WithTimingConfig,
+  type WithSpringConfig,
+} from 'react-native-reanimated'
 
 export type SwipeableCardStackOptions = {
   /**
@@ -56,4 +59,11 @@ export type SwipeableCardStackOptions = {
   validatedSwipeAnimationConfig: (
     payload: PanGestureHandlerEventPayload,
   ) => WithSpringConfig
+
+  /**
+   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the card is imperatively swipped via `ref.swipeLeft` or `ref.swipeRight`.
+   *
+   * Default value: undefined
+   */
+  imperativeSwipeAnimationConfig?: WithTimingConfig
 }
