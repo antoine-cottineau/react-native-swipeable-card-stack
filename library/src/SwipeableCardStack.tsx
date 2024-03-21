@@ -10,28 +10,40 @@ import { type StyleProp, type ViewStyle } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 import { type RenderCardProps } from './RenderCardProps'
 import { type SwipeUpdate } from './SwipeUpdate'
-import {
-  swipeableCardStackDefaultOptions,
-  type SwipeableCardStackOptions,
-} from './SwipeableCardStackOptions'
+import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { SwipeableCardWrapper } from './SwipeableCardWrapper'
 import { toReversed } from './toReversed'
+import { useDefaultOptions } from './useDefaultOptions'
 import { useRefMap } from './useRefMap'
 
 export type SwipeableCardStackProps<T> = {
+  /**
+   * An array of data items that will be passed to `renderCard`.
+   */
   data: T[]
+
+  /**
+   * A function that render a card based on the provided data and helpful information (see [RenderCardProps](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/blob/main/library/src/RenderCardProps.ts)).
+   */
   renderCard: (params: RenderCardProps<T>) => ReactNode
+
+  /**
+   * An optional `ViewStyle` that will be applied to the wrapper component of every card.
+   */
   cardWrapperStyle?: StyleProp<ViewStyle>
+
+  /**
+   * An optional function that will be triggered everytime a swipe update occurs.
+   *
+   * This is where you should listen for important updates such as a validated swipe.
+   */
   onActiveCardUpdate?: (swipeUpdate: SwipeUpdate<T>) => void
-  options?: Partial<SwipeableCardStackOptions>
-}
+} & Partial<SwipeableCardStackOptions>
 
 export type SwipeableCardRef = {
   swipeLeft: () => void
   swipeRight: () => void
 }
-
-const numberOfRenderedCards = 3
 
 export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
   {
@@ -39,17 +51,18 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
     renderCard,
     cardWrapperStyle,
     onActiveCardUpdate,
-    options: userOptions,
+    ...userOptions
   }: SwipeableCardStackProps<T>,
   ref: ForwardedRef<SwipeableCardRef>,
 ) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const refMap = useRefMap<number, SwipeableCardRef>()
   const animationPosition = useSharedValue(0)
+  const defaultOptions = useDefaultOptions()
 
   const options: SwipeableCardStackOptions = {
     ...userOptions,
-    ...swipeableCardStackDefaultOptions,
+    ...defaultOptions,
   }
 
   useImperativeHandle(
@@ -72,7 +85,7 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
 
         const hasCardBeenSwiped = index < currentIndex
         const shouldNotRenderCardYet =
-          index > currentIndex + numberOfRenderedCards - 1
+          index > currentIndex + options.numberOfRenderedCards - 1
         if (hasCardBeenSwiped || shouldNotRenderCardYet) {
           return null
         }

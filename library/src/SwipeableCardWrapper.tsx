@@ -5,10 +5,9 @@ import {
   type ForwardedRef,
   type ReactNode,
 } from 'react'
-import { Dimensions, type StyleProp, type ViewStyle } from 'react-native'
+import { type StyleProp, type ViewStyle } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
-  Easing,
   runOnJS,
   useAnimatedReaction,
   useAnimatedStyle,
@@ -45,14 +44,13 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   }: SwipeableCardWrapperProps,
   ref: ForwardedRef<SwipeableCardRef>,
 ) {
-  const width = Dimensions.get('window').width
   const isActive = index === currentIndex
 
   useImperativeHandle(ref, () => ({
     swipeLeft: () => {
       animationPosition.value = withTiming(
-        -options.endedSwipeAnimationPosition,
-        undefined,
+        -1,
+        options.imperativeSwipeAnimationConfig,
         () => {
           runOnJS(onCardSwipeStatusUpdated)({
             direction: 'left',
@@ -67,8 +65,8 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     },
     swipeRight: () => {
       animationPosition.value = withTiming(
-        options.endedSwipeAnimationPosition,
-        undefined,
+        1,
+        options.imperativeSwipeAnimationConfig,
         () => {
           runOnJS(onCardSwipeStatusUpdated)({
             direction: 'right',
@@ -91,29 +89,25 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       })
     })
     .onUpdate(({ translationX }) => {
-      animationPosition.value = translationX / width
+      animationPosition.value = translationX / options.endedSwipePosition
     })
-    .onEnd(({ translationX, velocityX }) => {
-      const direction: SwipeDirection = translationX > 0 ? 'right' : 'left'
+    .onEnd((payload) => {
+      const direction: SwipeDirection =
+        payload.translationX > 0 ? 'right' : 'left'
       if (
         shouldValidateSwipe({
-          animationPosition: animationPosition.value,
-          velocity: velocityX,
-          validateSwipeAnimationPositionThreshold:
-            options.validateSwipeAnimationPositionThreshold,
+          translation: payload.translationX,
+          velocity: payload.velocityX,
+          validateSwipeTranslationThreshold:
+            options.validateSwipeTranslationThreshold,
           validateSwipeVelocityThreshold:
-            options.validateSwipeVelocityThreshold,
+            options.validateSwipeTranslationThreshold,
         })
       ) {
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })
         animationPosition.value = withSpring(
-          Math.sign(translationX) * options.endedSwipeAnimationPosition,
-          {
-            velocity: 0.0001 * velocityX,
-            mass: 1,
-            damping: 100,
-            stiffness: 200,
-          },
+          Math.sign(payload.translationX),
+          options.validatedSwipeAnimationConfig(payload),
           () => {
             runOnJS(onCardSwipeStatusUpdated)({
               direction,
@@ -127,9 +121,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
 
       animationPosition.value = withTiming(
         0,
-        {
-          easing: Easing.inOut(Easing.ease),
-        },
+        options.stoppedSwipeAnimationConfig,
         () => {
           runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
         },
@@ -138,14 +130,20 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     .enabled(isActive)
 
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: isActive ? animationPosition.value * width : 0 }],
+    transform: [
+      {
+        translateX: isActive
+          ? animationPosition.value * options.endedSwipePosition
+          : 0,
+      },
+    ],
   }))
 
   useAnimatedReaction(
     () =>
       isActive &&
       Math.abs(animationPosition.value) >
-        options.validateSwipeAnimationPositionThreshold,
+        options.validateSwipeTranslationThreshold,
     (newValue, previousValue) => {
       if (previousValue === null || newValue === previousValue) {
         return
