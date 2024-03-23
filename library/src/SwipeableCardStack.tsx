@@ -15,6 +15,7 @@ import { type SwipeableCardStackProps, type SwipeDirection } from '.'
 export type SwipeableCardRef = {
   swipeLeft: () => void
   swipeRight: () => void
+  unswipe: () => void
 }
 
 export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
@@ -79,6 +80,14 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
           runOnJS(onCardImperativelySwipped)('right')
         },
       )
+    },
+    unswipe: () => {
+      setCurrentIndex((index) => {
+        if (index === 0) {
+          return 0
+        }
+        return index - 1
+      })
     },
   }))
 
