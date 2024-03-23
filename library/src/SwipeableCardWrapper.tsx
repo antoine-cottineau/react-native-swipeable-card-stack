@@ -1,10 +1,5 @@
 import styled from '@emotion/native'
-import {
-  forwardRef,
-  useImperativeHandle,
-  type ForwardedRef,
-  type ReactNode,
-} from 'react'
+import { type ReactNode } from 'react'
 import { type StyleProp, type ViewStyle } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
@@ -18,7 +13,6 @@ import Animated, {
 import { type RenderCardAddedProps } from './RenderCardProps'
 import { type SwipeDirection } from './SwipeDirection'
 import { type SwipeStatus } from './SwipeUpdate'
-import { type SwipeableCardRef } from './SwipeableCardStack'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { shouldValidateSwipe } from './shouldValidateSwipe'
 
@@ -32,54 +26,16 @@ type SwipeableCardWrapperProps = {
   options: SwipeableCardStackOptions
 }
 
-export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
-  {
-    renderCard,
-    animationPosition,
-    cardWrapperStyle,
-    onCardSwipeStatusUpdated,
-    index,
-    currentIndex,
-    options,
-  }: SwipeableCardWrapperProps,
-  ref: ForwardedRef<SwipeableCardRef>,
-) {
+export const SwipeableCardWrapper = ({
+  renderCard,
+  animationPosition,
+  cardWrapperStyle,
+  onCardSwipeStatusUpdated,
+  index,
+  currentIndex,
+  options,
+}: SwipeableCardWrapperProps) => {
   const isActive = index === currentIndex
-
-  useImperativeHandle(ref, () => ({
-    swipeLeft: () => {
-      animationPosition.value = withTiming(
-        -1,
-        options.imperativeSwipeAnimationConfig,
-        () => {
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'left',
-            phase: 'validated',
-          })
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'left',
-            phase: 'ended',
-          })
-        },
-      )
-    },
-    swipeRight: () => {
-      animationPosition.value = withTiming(
-        1,
-        options.imperativeSwipeAnimationConfig,
-        () => {
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'right',
-            phase: 'validated',
-          })
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'right',
-            phase: 'ended',
-          })
-        },
-      )
-    },
-  }))
 
   const panGesture = Gesture.Pan()
     .onStart(({ translationX }) => {
@@ -174,7 +130,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       </GestureDetector>
     </OuterContainer>
   )
-})
+}
 
 const OuterContainer = styled.View({
   height: '100%',
