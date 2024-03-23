@@ -4,41 +4,13 @@ import {
   useImperativeHandle,
   useState,
   type ForwardedRef,
-  type ReactNode,
 } from 'react'
-import { type StyleProp, type ViewStyle } from 'react-native'
 import { runOnJS, useSharedValue, withTiming } from 'react-native-reanimated'
-import { type RenderCardProps } from './RenderCardProps'
-import { type SwipeUpdate } from './SwipeUpdate'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { SwipeableCardWrapper } from './SwipeableCardWrapper'
 import { toReversed } from './toReversed'
 import { useDefaultOptions } from './useDefaultOptions'
-import { type SwipeDirection } from '.'
-
-export type SwipeableCardStackProps<T> = {
-  /**
-   * An array of data items that will be passed to `renderCard`.
-   */
-  data: T[]
-
-  /**
-   * A function that render a card based on the provided data and helpful information (see [RenderCardProps](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/blob/main/library/src/RenderCardProps.ts)).
-   */
-  renderCard: (params: RenderCardProps<T>) => ReactNode
-
-  /**
-   * An optional `ViewStyle` that will be applied to the wrapper component of every card.
-   */
-  cardWrapperStyle?: StyleProp<ViewStyle>
-
-  /**
-   * An optional function that will be triggered everytime a swipe update occurs.
-   *
-   * This is where you should listen for important updates such as a validated swipe.
-   */
-  onActiveCardUpdate?: (swipeUpdate: SwipeUpdate<T>) => void
-} & Partial<SwipeableCardStackOptions>
+import { type SwipeableCardStackProps, type SwipeDirection } from '.'
 
 export type SwipeableCardRef = {
   swipeLeft: () => void
