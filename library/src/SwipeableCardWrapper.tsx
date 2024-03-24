@@ -79,6 +79,9 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         },
       )
     },
+    unswipe: () => {
+      animationPosition.value = withTiming(0)
+    },
   }))
 
   const panGesture = Gesture.Pan()

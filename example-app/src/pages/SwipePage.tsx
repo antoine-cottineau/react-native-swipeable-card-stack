@@ -27,10 +27,12 @@ export const SwipePage = () => {
             onAction={(action) => {
               if (action === 'swipe-left') {
                 ref.current?.swipeLeft()
-                return
               }
               if (action === 'swipe-right') {
                 ref.current?.swipeRight()
+              }
+              if (action === 'undo') {
+                ref.current?.unswipe()
               }
             }}
           />

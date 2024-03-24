@@ -15,6 +15,7 @@ import { type SwipeableCardStackProps } from '.'
 export type SwipeableCardRef = {
   swipeLeft: () => void
   swipeRight: () => void
+  unswipe: () => void
 }
 
 export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
@@ -45,6 +46,13 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
       swipeRight: () => {
         refMap.get(currentIndex)?.swipeRight()
       },
+      unswipe: () => {
+        if (currentIndex === 0) {
+          return
+        }
+        setCurrentIndex((index) => index - 1)
+        refMap.get(currentIndex - 1)?.unswipe()
+      },
     }),
     [refMap, currentIndex],
   )
@@ -54,10 +62,9 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
       {toReversed(data).map((cardData, reverseIndex) => {
         const index = data.length - reverseIndex - 1
 
-        const hasCardBeenSwiped = index < currentIndex
         const shouldNotRenderCardYet =
           index > currentIndex + options.numberOfRenderedCards - 1
-        if (hasCardBeenSwiped || shouldNotRenderCardYet) {
+        if (shouldNotRenderCardYet) {
           return null
         }
 
