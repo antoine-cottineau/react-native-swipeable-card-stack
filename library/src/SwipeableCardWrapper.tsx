@@ -21,6 +21,7 @@ import { type SwipeStatus } from './SwipeUpdate'
 import { type SwipeableCardRef } from './SwipeableCardStack'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { shouldValidateSwipe } from './shouldValidateSwipe'
+import { swipeDirectionAnimationPositionMapping } from './swipeDirectionAnimationPositionMapping'
 
 type SwipeableCardWrapperProps = {
   renderCard: (params: RenderCardAddedProps) => ReactNode
@@ -29,6 +30,7 @@ type SwipeableCardWrapperProps = {
   cardWrapperStyle: StyleProp<ViewStyle>
   onCardSwipeStatusUpdated: (swipeStatus: SwipeStatus) => void
   options: SwipeableCardStackOptions
+  initialSwipeDirection?: SwipeDirection
 }
 
 export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
@@ -39,10 +41,15 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     index,
     currentIndex,
     options,
+    initialSwipeDirection,
   }: SwipeableCardWrapperProps,
   ref: ForwardedRef<SwipeableCardRef>,
 ) {
-  const animationPosition = useSharedValue(0)
+  const animationPosition = useSharedValue(
+    initialSwipeDirection === undefined
+      ? 0
+      : swipeDirectionAnimationPositionMapping[initialSwipeDirection],
+  )
 
   const isActive = index === currentIndex
 
