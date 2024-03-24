@@ -13,7 +13,7 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
   withTiming,
-  type SharedValue,
+  useSharedValue,
 } from 'react-native-reanimated'
 import { type RenderCardAddedProps } from './RenderCardProps'
 import { type SwipeDirection } from './SwipeDirection'
@@ -25,7 +25,6 @@ import { shouldValidateSwipe } from './shouldValidateSwipe'
 type SwipeableCardWrapperProps = {
   renderCard: (params: RenderCardAddedProps) => ReactNode
   index: number
-  animationPosition: SharedValue<number>
   currentIndex: number
   cardWrapperStyle: StyleProp<ViewStyle>
   onCardSwipeStatusUpdated: (swipeStatus: SwipeStatus) => void
@@ -35,7 +34,6 @@ type SwipeableCardWrapperProps = {
 export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   {
     renderCard,
-    animationPosition,
     cardWrapperStyle,
     onCardSwipeStatusUpdated,
     index,
@@ -44,6 +42,8 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   }: SwipeableCardWrapperProps,
   ref: ForwardedRef<SwipeableCardRef>,
 ) {
+  const animationPosition = useSharedValue(0)
+
   const isActive = index === currentIndex
 
   useImperativeHandle(ref, () => ({

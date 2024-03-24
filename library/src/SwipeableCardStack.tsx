@@ -5,7 +5,6 @@ import {
   useState,
   type ForwardedRef,
 } from 'react'
-import { useSharedValue } from 'react-native-reanimated'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { SwipeableCardWrapper } from './SwipeableCardWrapper'
 import { toReversed } from './toReversed'
@@ -30,7 +29,6 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
 ) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const refMap = useRefMap<number, SwipeableCardRef>()
-  const animationPosition = useSharedValue(0)
   const defaultOptions = useDefaultOptions()
 
   const options: SwipeableCardStackOptions = {
@@ -72,13 +70,11 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
               renderCard({ ...cardData, ...renderCardAddedProps })
             }
             index={index}
-            animationPosition={animationPosition}
             currentIndex={currentIndex}
             cardWrapperStyle={cardWrapperStyle}
             onCardSwipeStatusUpdated={(swipeStatus) => {
               if (swipeStatus.phase === 'ended') {
                 setCurrentIndex((index) => index + 1)
-                animationPosition.value = 0
               }
               if (index === currentIndex) {
                 const currentDataItem = data[currentIndex]
