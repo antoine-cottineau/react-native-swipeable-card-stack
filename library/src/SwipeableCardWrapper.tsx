@@ -1,5 +1,10 @@
 import styled from '@emotion/native'
-import { type ReactNode } from 'react'
+import {
+  forwardRef,
+  useImperativeHandle,
+  type ForwardedRef,
+  type ReactNode,
+} from 'react'
 import { type StyleProp, type ViewStyle } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
@@ -8,34 +13,83 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
   withTiming,
-  type SharedValue,
+  useSharedValue,
 } from 'react-native-reanimated'
 import { type RenderCardAddedProps } from './RenderCardProps'
 import { type SwipeDirection } from './SwipeDirection'
 import { type SwipeStatus } from './SwipeUpdate'
+import { type SwipeableCardRef } from './SwipeableCardStack'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { shouldValidateSwipe } from './shouldValidateSwipe'
+import { swipeDirectionAnimationPositionMapping } from './swipeDirectionAnimationPositionMapping'
 
 type SwipeableCardWrapperProps = {
   renderCard: (params: RenderCardAddedProps) => ReactNode
   index: number
-  animationPosition: SharedValue<number>
   currentIndex: number
   cardWrapperStyle: StyleProp<ViewStyle>
   onCardSwipeStatusUpdated: (swipeStatus: SwipeStatus) => void
   options: SwipeableCardStackOptions
+  initialSwipeDirection?: SwipeDirection
 }
 
-export const SwipeableCardWrapper = ({
-  renderCard,
-  animationPosition,
-  cardWrapperStyle,
-  onCardSwipeStatusUpdated,
-  index,
-  currentIndex,
-  options,
-}: SwipeableCardWrapperProps) => {
+export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
+  {
+    renderCard,
+    cardWrapperStyle,
+    onCardSwipeStatusUpdated,
+    index,
+    currentIndex,
+    options,
+    initialSwipeDirection,
+  }: SwipeableCardWrapperProps,
+  ref: ForwardedRef<SwipeableCardRef>,
+) {
+  const animationPosition = useSharedValue(
+    initialSwipeDirection === undefined
+      ? 0
+      : swipeDirectionAnimationPositionMapping[initialSwipeDirection],
+  )
+
   const isActive = index === currentIndex
+
+  useImperativeHandle(ref, () => ({
+    swipeLeft: () => {
+      animationPosition.value = withTiming(
+        -1,
+        options.imperativeSwipeAnimationConfig,
+        () => {
+          runOnJS(onCardSwipeStatusUpdated)({
+            direction: 'left',
+            phase: 'validated',
+          })
+          runOnJS(onCardSwipeStatusUpdated)({
+            direction: 'left',
+            phase: 'ended',
+          })
+        },
+      )
+    },
+    swipeRight: () => {
+      animationPosition.value = withTiming(
+        1,
+        options.imperativeSwipeAnimationConfig,
+        () => {
+          runOnJS(onCardSwipeStatusUpdated)({
+            direction: 'right',
+            phase: 'validated',
+          })
+          runOnJS(onCardSwipeStatusUpdated)({
+            direction: 'right',
+            phase: 'ended',
+          })
+        },
+      )
+    },
+    unswipe: () => {
+      animationPosition.value = withTiming(0, options.unswipeAnimationConfig)
+    },
+  }))
 
   const panGesture = Gesture.Pan()
     .onStart(({ translationX }) => {
@@ -88,9 +142,7 @@ export const SwipeableCardWrapper = ({
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        translateX: isActive
-          ? animationPosition.value * options.endedSwipePosition
-          : 0,
+        translateX: animationPosition.value * options.endedSwipePosition,
       },
     ],
   }))
@@ -122,22 +174,16 @@ export const SwipeableCardWrapper = ({
   )
 
   return (
-    <OuterContainer style={cardWrapperStyle}>
+    <Container style={[cardWrapperStyle, animatedStyle]}>
       <GestureDetector gesture={panGesture}>
-        <InnerContainer style={[animatedStyle]}>
-          {renderCard({ index, animationPosition, currentIndex })}
-        </InnerContainer>
+        {renderCard({ index, animationPosition, currentIndex })}
       </GestureDetector>
-    </OuterContainer>
+    </Container>
   )
-}
+})
 
-const OuterContainer = styled.View({
+const Container = styled(Animated.View)({
   height: '100%',
   width: '100%',
   position: 'absolute',
-})
-
-const InnerContainer = styled(Animated.View)({
-  flex: 1,
 })

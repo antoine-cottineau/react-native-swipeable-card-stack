@@ -5,12 +5,14 @@ import {
   useState,
   type ForwardedRef,
 } from 'react'
-import { runOnJS, useSharedValue, withTiming } from 'react-native-reanimated'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { SwipeableCardWrapper } from './SwipeableCardWrapper'
+import { getRenderWindow } from './getRenderWindow'
 import { toReversed } from './toReversed'
 import { useDefaultOptions } from './useDefaultOptions'
-import { type SwipeableCardStackProps, type SwipeDirection } from '.'
+import { useRefMap } from './useRefMap'
+import { useSwippedCardsStore } from './useSwippedCardsStore'
+import { type SwipeableCardStackProps } from '.'
 
 export type SwipeableCardRef = {
   swipeLeft: () => void
@@ -29,92 +31,66 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
   ref: ForwardedRef<SwipeableCardRef>,
 ) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const animationPosition = useSharedValue(0)
+  const refMap = useRefMap<number, SwipeableCardRef>()
   const defaultOptions = useDefaultOptions()
+  const { getSwippedCardSwipeDirection, pushSwippedCard, popSwippedCard } =
+    useSwippedCardsStore()
 
   const options: SwipeableCardStackOptions = {
     ...userOptions,
     ...defaultOptions,
   }
+  const [renderWindowMinIndex, renderWindowMaxIndex] = getRenderWindow({
+    currentIndex,
+    dataLength: data.length,
+    numberOfRenderedCards: options.numberOfRenderedCards,
+  })
 
-  const incrementCurrentIndex = () => {
-    setCurrentIndex((index) => index + 1)
-    animationPosition.value = 0
-  }
-
-  const onCardImperativelySwipped = (direction: SwipeDirection) => {
-    const currentDataItem = data[currentIndex]
-    if (onActiveCardUpdate === undefined || currentDataItem === undefined) {
-      return
-    }
-    onActiveCardUpdate({
-      direction,
-      phase: 'validated',
-      currentIndex,
-      currentDataItem,
-    })
-    onActiveCardUpdate({
-      direction,
-      phase: 'ended',
-      currentIndex,
-      currentDataItem,
-    })
-    incrementCurrentIndex()
-  }
-
-  useImperativeHandle(ref, () => ({
-    swipeLeft: () => {
-      animationPosition.value = withTiming(
-        -1,
-        options.imperativeSwipeAnimationConfig,
-        () => {
-          runOnJS(onCardImperativelySwipped)('left')
-        },
-      )
-    },
-    swipeRight: () => {
-      animationPosition.value = withTiming(
-        1,
-        options.imperativeSwipeAnimationConfig,
-        () => {
-          runOnJS(onCardImperativelySwipped)('right')
-        },
-      )
-    },
-    unswipe: () => {
-      setCurrentIndex((index) => {
-        if (index === 0) {
-          return 0
+  useImperativeHandle(
+    ref,
+    () => ({
+      swipeLeft: () => {
+        refMap.get(currentIndex)?.swipeLeft()
+      },
+      swipeRight: () => {
+        refMap.get(currentIndex)?.swipeRight()
+      },
+      unswipe: () => {
+        if (currentIndex === 0) {
+          return
         }
-        return index - 1
-      })
-    },
-  }))
+        setCurrentIndex((index) => index - 1)
+        refMap.get(currentIndex - 1)?.unswipe()
+        popSwippedCard()
+      },
+    }),
+    [refMap, currentIndex, popSwippedCard],
+  )
 
   return (
     <Container>
       {toReversed(data).map((cardData, reverseIndex) => {
         const index = data.length - reverseIndex - 1
 
-        const hasCardBeenSwiped = index < currentIndex
-        const shouldNotRenderCardYet =
-          index > currentIndex + options.numberOfRenderedCards - 1
-        if (hasCardBeenSwiped || shouldNotRenderCardYet) {
+        if (index < renderWindowMinIndex || index > renderWindowMaxIndex) {
           return null
         }
 
         return (
           <SwipeableCardWrapper
+            ref={(ref) => {
+              refMap.initRef(index, ref)
+            }}
             renderCard={(renderCardAddedProps) =>
               renderCard({ ...cardData, ...renderCardAddedProps })
             }
             index={index}
-            animationPosition={animationPosition}
             currentIndex={currentIndex}
             cardWrapperStyle={cardWrapperStyle}
             onCardSwipeStatusUpdated={(swipeStatus) => {
               if (swipeStatus.phase === 'ended') {
-                incrementCurrentIndex()
+                setCurrentIndex((index) => index + 1)
+                pushSwippedCard(swipeStatus.direction)
               }
               if (index === currentIndex) {
                 const currentDataItem = data[currentIndex]
@@ -131,6 +107,7 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
               }
             }}
             options={options}
+            initialSwipeDirection={getSwippedCardSwipeDirection(index)}
             key={index}
           />
         )
