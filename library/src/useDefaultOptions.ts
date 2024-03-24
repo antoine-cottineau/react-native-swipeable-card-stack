@@ -16,5 +16,6 @@ export const useDefaultOptions = (): SwipeableCardStackOptions => {
     }),
     imperativeSwipeAnimationConfig: undefined,
     stoppedSwipeAnimationConfig: undefined,
+    unswipeAnimationConfig: undefined,
   }
 }

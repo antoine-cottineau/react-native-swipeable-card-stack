@@ -73,4 +73,11 @@ export type SwipeableCardStackOptions = {
    * Default value: `undefined`
    */
   stoppedSwipeAnimationConfig?: WithTimingConfig
+
+  /**
+   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when an unswipe is performed.
+   *
+   * Default value: `undefined`
+   */
+  unswipeAnimationConfig?: WithTimingConfig
 }

@@ -80,7 +80,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       )
     },
     unswipe: () => {
-      animationPosition.value = withTiming(0)
+      animationPosition.value = withTiming(0, options.unswipeAnimationConfig)
     },
   }))
 
