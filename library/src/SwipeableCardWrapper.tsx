@@ -132,9 +132,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        translateX: isActive
-          ? animationPosition.value * options.endedSwipePosition
-          : 0,
+        translateX: animationPosition.value * options.endedSwipePosition,
       },
     ],
   }))
@@ -166,22 +164,16 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   )
 
   return (
-    <OuterContainer style={cardWrapperStyle}>
+    <Container style={[cardWrapperStyle, animatedStyle]}>
       <GestureDetector gesture={panGesture}>
-        <InnerContainer style={[animatedStyle]}>
-          {renderCard({ index, animationPosition, currentIndex })}
-        </InnerContainer>
+        {renderCard({ index, animationPosition, currentIndex })}
       </GestureDetector>
-    </OuterContainer>
+    </Container>
   )
 })
 
-const OuterContainer = styled.View({
+const Container = styled(Animated.View)({
   height: '100%',
   width: '100%',
   position: 'absolute',
-})
-
-const InnerContainer = styled(Animated.View)({
-  flex: 1,
 })
