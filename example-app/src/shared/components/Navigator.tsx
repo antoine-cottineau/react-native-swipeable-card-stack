@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { MatchPage, type MatchPageParams } from './pages/MatchPage'
-import { SwipePage } from './pages/SwipePage'
+import { MatchPage, type MatchPageParams } from '../../cats/MatchPage'
+import { SwipePage } from '../../cats/SwipePage'
 
 export type RootStackParamList = {
   Swipe: undefined

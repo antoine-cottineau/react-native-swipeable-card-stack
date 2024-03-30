@@ -4,11 +4,11 @@ import { ImpactFeedbackStyle, impactAsync } from 'expo-haptics'
 import { useRef } from 'react'
 import { SwipeableCardStack } from 'react-native-swipeable-card-stack'
 import { type SwipeableCardRef } from 'react-native-swipeable-card-stack/dist/SwipeableCardStack'
-import { type RootStackParamList } from '../Navigator'
-import { Page } from '../Page'
-import { CatCard } from '../modules/cat/CatCard'
-import { EndOfStackView } from '../modules/cat/EndOfStackView'
-import { cats } from '../modules/cat/cats'
+import { type RootStackParamList } from '../shared/components/Navigator'
+import { Page } from '../shared/components/Page'
+import { CatCard } from './CatCard'
+import { EndOfStackView } from './EndOfStackView'
+import { cats } from './cats'
 
 export const SwipePage = () => {
   const ref = useRef<SwipeableCardRef>(null)

@@ -2,7 +2,7 @@ import styled, { css } from '@emotion/native'
 import { useNavigation } from '@react-navigation/native'
 import { Pressable } from 'react-native'
 import Animated, { FadeInDown } from 'react-native-reanimated'
-import { getBrandedText } from '../../libs/fonts/getBrandedText'
+import { getBrandedText } from '../shared/fonts/getBrandedText'
 
 type Props = {
   catName: string

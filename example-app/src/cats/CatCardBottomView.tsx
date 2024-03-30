@@ -1,11 +1,11 @@
 import styled from '@emotion/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
-import { RoundButton } from '../../RoundButton'
-import { CloseIcon } from '../../icons/CloseIcon'
-import { HeartIcon } from '../../icons/HeartIcon'
-import { UndoIcon } from '../../icons/UndoIcon'
-import { getBrandedText } from '../../libs/fonts/getBrandedText'
+import { RoundButton } from '../shared/components/RoundButton'
+import { getBrandedText } from '../shared/fonts/getBrandedText'
+import { CloseIcon } from '../shared/icons/CloseIcon'
+import { HeartIcon } from '../shared/icons/HeartIcon'
+import { UndoIcon } from '../shared/icons/UndoIcon'
 import { type Action } from './Action'
 
 type Props = {

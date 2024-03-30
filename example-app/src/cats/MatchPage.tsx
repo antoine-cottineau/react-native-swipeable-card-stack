@@ -3,12 +3,12 @@ import { useRoute, type RouteProp } from '@react-navigation/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { FadeInDown } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { type RootStackParamList } from '../Navigator'
-import { Page } from '../Page'
-import { getAnimatedBrandedText } from '../libs/fonts/getBrandedText'
-import { cats } from '../modules/cat/cats'
-import { MatchProfileAvatar } from '../modules/match/MatchProfileAvatar'
-import { TalkWithButton } from '../modules/match/TalkWithButton'
+import { type RootStackParamList } from '../shared/components/Navigator'
+import { Page } from '../shared/components/Page'
+import { getAnimatedBrandedText } from '../shared/fonts/getBrandedText'
+import { MatchProfileAvatar } from './MatchProfileAvatar'
+import { TalkWithButton } from './TalkWithButton'
+import { cats } from './cats'
 
 export type MatchPageParams = {
   catName: string
