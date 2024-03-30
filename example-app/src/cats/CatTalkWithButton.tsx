@@ -8,7 +8,7 @@ type Props = {
   catName: string
 }
 
-export const TalkWithButton = ({ catName }: Props) => {
+export const CatTalkWithButton = ({ catName }: Props) => {
   const { goBack } = useNavigation()
 
   return (

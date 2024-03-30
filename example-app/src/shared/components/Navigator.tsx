@@ -1,14 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import { MatchPage, type MatchPageParams } from '../../cats/MatchPage'
-import { SwipePage } from '../../cats/SwipePage'
+import { CatMatchPage, type MatchPageParams } from '../../cats/CatMatchPage'
+import { CatSwipePage } from '../../cats/CatSwipePage'
 import { HomePage } from './HomePage'
 
 export type RootStackParamList = {
   Home: undefined
-  Swipe: undefined
-  Match: MatchPageParams
+  CatSwipe: undefined
+  CatMatch: MatchPageParams
 }
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()
@@ -22,10 +22,10 @@ export const Navigator = () => (
       }}
     >
       <RootStack.Screen name="Home" component={HomePage} />
-      <RootStack.Screen name="Swipe" component={SwipePage} />
+      <RootStack.Screen name="CatSwipe" component={CatSwipePage} />
       <RootStack.Screen
-        name="Match"
-        component={MatchPage}
+        name="CatMatch"
+        component={CatMatchPage}
         options={{ presentation: 'fullScreenModal' }}
       />
     </RootStack.Navigator>

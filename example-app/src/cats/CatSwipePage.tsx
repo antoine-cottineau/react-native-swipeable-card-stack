@@ -7,17 +7,17 @@ import { type SwipeableCardRef } from 'react-native-swipeable-card-stack/dist/Sw
 import { type RootStackParamList } from '../shared/components/Navigator'
 import { Page } from '../shared/components/Page'
 import { CatCard } from './CatCard'
-import { EndOfStackView } from './EndOfStackView'
+import { CatEndOfStackView } from './CatEndOfStackView'
 import { cats } from './cats'
 
-export const SwipePage = () => {
+export const CatSwipePage = () => {
   const ref = useRef<SwipeableCardRef>(null)
   const { navigate } = useNavigation<NavigationProp<RootStackParamList>>()
 
   return (
     <Page>
       <EndOfStackContainer>
-        <EndOfStackView />
+        <CatEndOfStackView />
       </EndOfStackContainer>
       <SwipeableCardStack
         data={cats}
@@ -47,7 +47,7 @@ export const SwipePage = () => {
             direction === 'right' &&
             currentDataItem.hasLikedMyProfile
           ) {
-            navigate('Match', { catName: currentDataItem.name })
+            navigate('CatMatch', { catName: currentDataItem.name })
           }
         }}
       />

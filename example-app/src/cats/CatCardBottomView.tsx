@@ -6,12 +6,12 @@ import { getBrandedText } from '../shared/fonts/getBrandedText'
 import { CloseIcon } from '../shared/icons/CloseIcon'
 import { HeartIcon } from '../shared/icons/HeartIcon'
 import { UndoIcon } from '../shared/icons/UndoIcon'
-import { type Action } from './Action'
+import { type CatAction } from './CatAction'
 
 type Props = {
   name: string
   age: number
-  onAction: (action: Action) => void
+  onAction: (action: CatAction) => void
 }
 
 export const CatCardBottomView = ({ name, age, onAction }: Props) => {

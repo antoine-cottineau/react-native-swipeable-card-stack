@@ -6,16 +6,16 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { type RootStackParamList } from '../shared/components/Navigator'
 import { Page } from '../shared/components/Page'
 import { getAnimatedBrandedText } from '../shared/fonts/getBrandedText'
-import { MatchProfileAvatar } from './MatchProfileAvatar'
-import { TalkWithButton } from './TalkWithButton'
+import { CatMatchProfileAvatar } from './CatMatchProfileAvatar'
+import { CatTalkWithButton } from './CatTalkWithButton'
 import { cats } from './cats'
 
 export type MatchPageParams = {
   catName: string
 }
 
-export const MatchPage = () => {
-  const { params } = useRoute<RouteProp<RootStackParamList, 'Match'>>()
+export const CatMatchPage = () => {
+  const { params } = useRoute<RouteProp<RootStackParamList, 'CatMatch'>>()
   const { bottom } = useSafeAreaInsets()
   const cat = cats.find((_) => _.name === params.catName)
 
@@ -35,10 +35,10 @@ export const MatchPage = () => {
           bottom: 0,
         }}
       ></LinearGradient>
-      <MatchProfileAvatar imageUrl={cat.imageUrl} />
+      <CatMatchProfileAvatar imageUrl={cat.imageUrl} />
       <Label entering={FadeInDown.delay(300)}>It&apos;s a match!</Label>
       <ButtonWrapper style={css({ bottom: bottom + 16 })}>
-        <TalkWithButton catName={cat.name} />
+        <CatTalkWithButton catName={cat.name} />
       </ButtonWrapper>
     </Container>
   )

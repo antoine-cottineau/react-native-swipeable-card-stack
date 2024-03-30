@@ -7,12 +7,12 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated'
 import { type RenderCardProps } from 'react-native-swipeable-card-stack'
-import { type Action } from './Action'
+import { type CatAction } from './CatAction'
 import { CatCardBottomView } from './CatCardBottomView'
 import { type CatDataItem } from './CatDataItem'
 
 type Props = RenderCardProps<CatDataItem> & {
-  onAction: (action: Action) => void
+  onAction: (action: CatAction) => void
 }
 
 export const CatCard = ({
