@@ -1,6 +1,7 @@
 import styled from '@emotion/native'
 import { type NavigationProp, useNavigation } from '@react-navigation/native'
 import { ImpactFeedbackStyle, impactAsync } from 'expo-haptics'
+import { StatusBar } from 'expo-status-bar'
 import { useRef } from 'react'
 import { SwipeableCardStack } from 'react-native-swipeable-card-stack'
 import { type SwipeableCardRef } from 'react-native-swipeable-card-stack/dist/SwipeableCardStack'
@@ -16,6 +17,7 @@ export const CatSwipePage = () => {
 
   return (
     <Page>
+      <StatusBar style="light" />
       <EndOfStackContainer>
         <CatEndOfStackView />
       </EndOfStackContainer>
