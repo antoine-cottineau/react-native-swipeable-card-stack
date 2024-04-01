@@ -3,6 +3,7 @@ import { useNavigation, type NavigationProp } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { AnimalIcon } from '../icons/AnimalIcon'
+import { BackgroundGradient } from './BackgroundGradient'
 import { HomeButton } from './HomeButton'
 import { type RootStackParamList } from './Navigator'
 import { Page } from './Page'
@@ -12,7 +13,8 @@ export const HomePage = () => {
 
   return (
     <StyledPage>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
+      <BackgroundGradient />
       <SafeAreaView>
         <HomeButton
           title="Cat example"
@@ -28,6 +30,5 @@ export const HomePage = () => {
 }
 
 const StyledPage = styled(Page)({
-  backgroundColor: '#EDE7F6',
   paddingHorizontal: 16,
 })
