@@ -1,1 +1,1 @@
-export type PokemonElement = 'fire' | 'water'
+export type PokemonElement = 'fire' | 'water' | 'grass' | 'flying'
