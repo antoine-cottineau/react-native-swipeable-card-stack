@@ -1,10 +1,12 @@
-import styled from '@emotion/native'
+import styled, { css } from '@emotion/native'
 import { type NavigationProp, useNavigation } from '@react-navigation/native'
 import { ImpactFeedbackStyle, impactAsync } from 'expo-haptics'
 import { StatusBar } from 'expo-status-bar'
 import { useRef } from 'react'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { SwipeableCardStack } from 'react-native-swipeable-card-stack'
 import { type SwipeableCardRef } from 'react-native-swipeable-card-stack/dist/SwipeableCardStack'
+import { GoToHomeButton } from '../shared/components/GoToHomeButton'
 import { type RootStackParamList } from '../shared/components/Navigator'
 import { Page } from '../shared/components/Page'
 import { CatCard } from './CatCard'
@@ -14,6 +16,7 @@ import { cats } from './cats'
 export const CatSwipePage = () => {
   const ref = useRef<SwipeableCardRef>(null)
   const { navigate } = useNavigation<NavigationProp<RootStackParamList>>()
+  const { top } = useSafeAreaInsets()
 
   return (
     <Page>
@@ -53,6 +56,9 @@ export const CatSwipePage = () => {
           }
         }}
       />
+      <GoToHomeButtonContainer style={css({ top: top + 16 })}>
+        <GoToHomeButton />
+      </GoToHomeButtonContainer>
     </Page>
   )
 }
@@ -63,4 +69,9 @@ const EndOfStackContainer = styled.View({
   bottom: 0,
   left: 0,
   right: 0,
+})
+
+const GoToHomeButtonContainer = styled.View({
+  position: 'absolute',
+  left: 16,
 })
