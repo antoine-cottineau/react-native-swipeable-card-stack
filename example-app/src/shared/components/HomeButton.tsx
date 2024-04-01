@@ -1,5 +1,5 @@
 import styled from '@emotion/native'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import { getBrandedText } from '../fonts/getBrandedText'
 import { type IconType } from '../icons/Icon'
 
@@ -13,10 +13,12 @@ type Props = {
 export const HomeButton = ({ title, subTitle, Icon, onPress }: Props) => (
   <Container onPress={onPress}>
     <Icon size={32} color="black" />
-    <View>
+    <Column>
       <Title>{title}</Title>
-      <SubTitle>{subTitle}</SubTitle>
-    </View>
+      <SubTitleWrapper>
+        <SubTitle>{subTitle}</SubTitle>
+      </SubTitleWrapper>
+    </Column>
   </Container>
 )
 
@@ -35,12 +37,22 @@ const Container = styled(TouchableOpacity)(() => ({
   elevation: 8,
 }))
 
+const Column = styled.View({
+  flex: 1,
+})
+
 const Title = getBrandedText({
   fontFamily: 'pacifico',
   fontSize: 24,
 })
 
+const SubTitleWrapper = styled.View({
+  flexDirection: 'row',
+  alignItems: 'center',
+})
+
 const SubTitle = getBrandedText({
+  flex: 1,
   fontFamily: 'roboto-medium',
   color: '#333',
   fontSize: 16,
