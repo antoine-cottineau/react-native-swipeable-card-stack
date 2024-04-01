@@ -1,9 +1,9 @@
 import styled from '@emotion/native'
 import { Image } from 'expo-image'
-import sadCatImage from '../../images/sad-cat.webp'
-import { getBrandedText } from '../../libs/fonts/getBrandedText'
+import { getBrandedText } from '../shared/fonts/getBrandedText'
+import sadCatImage from '../shared/images/sad-cat.webp'
 
-export const EndOfStackView = () => (
+export const CatEndOfStackView = () => (
   <Container>
     <FullScreenImage source={sadCatImage} contentFit="contain" />
     <Label>No more cats to match</Label>

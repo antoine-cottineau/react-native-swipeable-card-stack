@@ -1,17 +1,17 @@
 import styled from '@emotion/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
-import { RoundButton } from '../../RoundButton'
-import { CloseIcon } from '../../icons/CloseIcon'
-import { HeartIcon } from '../../icons/HeartIcon'
-import { UndoIcon } from '../../icons/UndoIcon'
-import { getBrandedText } from '../../libs/fonts/getBrandedText'
-import { type Action } from './Action'
+import { RoundButton } from '../shared/components/RoundButton'
+import { getBrandedText } from '../shared/fonts/getBrandedText'
+import { CloseIcon } from '../shared/icons/CloseIcon'
+import { HeartIcon } from '../shared/icons/HeartIcon'
+import { UndoIcon } from '../shared/icons/UndoIcon'
+import { type CatAction } from './CatAction'
 
 type Props = {
   name: string
   age: number
-  onAction: (action: Action) => void
+  onAction: (action: CatAction) => void
 }
 
 export const CatCardBottomView = ({ name, age, onAction }: Props) => {

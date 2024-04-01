@@ -1,23 +1,28 @@
-import styled from '@emotion/native'
+import styled, { css } from '@emotion/native'
 import { type NavigationProp, useNavigation } from '@react-navigation/native'
 import { ImpactFeedbackStyle, impactAsync } from 'expo-haptics'
+import { StatusBar } from 'expo-status-bar'
 import { useRef } from 'react'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { SwipeableCardStack } from 'react-native-swipeable-card-stack'
 import { type SwipeableCardRef } from 'react-native-swipeable-card-stack/dist/SwipeableCardStack'
-import { type RootStackParamList } from '../Navigator'
-import { Page } from '../Page'
-import { CatCard } from '../modules/cat/CatCard'
-import { EndOfStackView } from '../modules/cat/EndOfStackView'
-import { cats } from '../modules/cat/cats'
+import { GoToHomeButton } from '../shared/components/GoToHomeButton'
+import { type RootStackParamList } from '../shared/components/Navigator'
+import { Page } from '../shared/components/Page'
+import { CatCard } from './CatCard'
+import { CatEndOfStackView } from './CatEndOfStackView'
+import { cats } from './cats'
 
-export const SwipePage = () => {
+export const CatSwipePage = () => {
   const ref = useRef<SwipeableCardRef>(null)
   const { navigate } = useNavigation<NavigationProp<RootStackParamList>>()
+  const { top } = useSafeAreaInsets()
 
   return (
     <Page>
+      <StatusBar style="light" />
       <EndOfStackContainer>
-        <EndOfStackView />
+        <CatEndOfStackView />
       </EndOfStackContainer>
       <SwipeableCardStack
         data={cats}
@@ -47,10 +52,13 @@ export const SwipePage = () => {
             direction === 'right' &&
             currentDataItem.hasLikedMyProfile
           ) {
-            navigate('Match', { catName: currentDataItem.name })
+            navigate('CatMatch', { catName: currentDataItem.name })
           }
         }}
       />
+      <GoToHomeButtonContainer style={css({ top: top + 16 })}>
+        <GoToHomeButton />
+      </GoToHomeButtonContainer>
     </Page>
   )
 }
@@ -61,4 +69,9 @@ const EndOfStackContainer = styled.View({
   bottom: 0,
   left: 0,
   right: 0,
+})
+
+const GoToHomeButtonContainer = styled.View({
+  position: 'absolute',
+  left: 16,
 })

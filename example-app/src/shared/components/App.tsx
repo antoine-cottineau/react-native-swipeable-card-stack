@@ -1,9 +1,8 @@
 import { hideAsync, preventAutoHideAsync } from 'expo-splash-screen'
-import { StatusBar } from 'expo-status-bar'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { useLoadFonts } from '../fonts/useLoadFonts'
 import { Navigator } from './Navigator'
-import { useLoadFonts } from './libs/fonts/useLoadFonts'
 
 preventAutoHideAsync().catch(console.error)
 
@@ -19,7 +18,6 @@ export const App = () => {
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <StatusBar style="light" />
         <Navigator />
       </GestureHandlerRootView>
     </SafeAreaProvider>

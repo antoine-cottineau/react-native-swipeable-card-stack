@@ -8,7 +8,7 @@ type Props = {
   imageUrl: string
 }
 
-export const MatchProfileAvatar = ({ imageUrl }: Props) => (
+export const CatMatchProfileAvatar = ({ imageUrl }: Props) => (
   <Container entering={FadeInDown.delay(300)}>
     <AvatarImage source={{ uri: imageUrl }} />
   </Container>
