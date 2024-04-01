@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import styled, { css } from '@emotion/native'
 import { StatusBar } from 'expo-status-bar'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SwipeableCardStack } from 'react-native-swipeable-card-stack'
 import { GoToHomeButton } from '../shared/components/GoToHomeButton'
 import { Page } from '../shared/components/Page'
 import { PokemonCard } from './PokemonCard'
@@ -13,10 +13,10 @@ export const PokemonSwipePage = () => {
   return (
     <Page>
       <StatusBar style="light" />
+      <SwipeableCardStack data={pokemon} renderCard={PokemonCard} />
       <GoToHomeButtonContainer style={css({ top: top + 16 })}>
         <GoToHomeButton />
       </GoToHomeButtonContainer>
-      <PokemonCard {...pokemon[0]!} />
     </Page>
   )
 }
