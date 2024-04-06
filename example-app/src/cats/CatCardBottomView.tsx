@@ -48,7 +48,7 @@ export const CatCardBottomView = ({ name, age, onAction }: Props) => {
               onAction('swipe-left')
             }}
             color={colors.swipeLeft}
-            size="large"
+            size={80}
           />
           <RoundButton
             Icon={UndoIcon}
@@ -56,7 +56,7 @@ export const CatCardBottomView = ({ name, age, onAction }: Props) => {
               onAction('undo')
             }}
             color={colors.unswipe}
-            size="small"
+            size={70}
           />
           <RoundButton
             Icon={HeartIcon}
@@ -64,7 +64,7 @@ export const CatCardBottomView = ({ name, age, onAction }: Props) => {
               onAction('swipe-right')
             }}
             color={colors.swipeRight}
-            size="large"
+            size={80}
           />
         </ButtonsContainer>
       </ContentContainer>

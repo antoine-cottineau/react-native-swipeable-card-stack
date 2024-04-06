@@ -10,6 +10,8 @@ import {
 import { colors } from '../shared/colors'
 import { GoToHomeButton } from '../shared/components/GoToHomeButton'
 import { Page } from '../shared/components/Page'
+import { RoundButton } from '../shared/components/RoundButton'
+import { UndoIcon } from '../shared/icons/UndoIcon'
 import { PokemonCard } from './PokemonCard'
 import { PokemonControls } from './PokemonControls'
 import { type PokemonElement } from './PokemonElement'
@@ -33,6 +35,16 @@ export const PokemonSwipePage = () => {
       <GoToHomeButtonContainer style={css({ top: top + 16 })}>
         <GoToHomeButton />
       </GoToHomeButtonContainer>
+      <UnswipeButtonContainer>
+        <RoundButton
+          Icon={UndoIcon}
+          onPress={() => {
+            ref.current?.unswipe()
+          }}
+          color={'black'}
+          size={56}
+        />
+      </UnswipeButtonContainer>
       <PokemonControlsContainer>
         <PokemonControls
           onPress={(element) => {
@@ -63,5 +75,12 @@ const PokemonControlsContainer = styled(SafeAreaView)({
   position: 'absolute',
   bottom: 0,
   right: 0,
+  padding: 16,
+})
+
+const UnswipeButtonContainer = styled(SafeAreaView)({
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
   padding: 16,
 })
