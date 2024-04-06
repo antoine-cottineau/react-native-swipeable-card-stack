@@ -19,7 +19,7 @@ const TouchableContainer = styled.View({
 })
 
 const CardContainer = styled.View({
-  width: 200,
+  width: 160,
   aspectRatio: 1,
   justifyContent: 'center',
   alignItems: 'center',

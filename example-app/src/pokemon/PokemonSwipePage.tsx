@@ -5,6 +5,7 @@ import { SwipeableCardStack } from 'react-native-swipeable-card-stack'
 import { GoToHomeButton } from '../shared/components/GoToHomeButton'
 import { Page } from '../shared/components/Page'
 import { PokemonCard } from './PokemonCard'
+import { PokemonSwipePageBackground } from './PokemonSwipePageBackground'
 import { pokemon } from './pokemon'
 
 export const PokemonSwipePage = () => {
@@ -13,6 +14,7 @@ export const PokemonSwipePage = () => {
   return (
     <Page>
       <StatusBar style="light" />
+      <PokemonSwipePageBackground />
       <SwipeableCardStack data={pokemon} renderCard={PokemonCard} />
       <GoToHomeButtonContainer style={css({ top: top + 16 })}>
         <GoToHomeButton />
