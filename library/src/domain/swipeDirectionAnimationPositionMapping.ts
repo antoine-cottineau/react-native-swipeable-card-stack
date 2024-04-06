@@ -6,6 +6,6 @@ export const swipeDirectionAnimationPositionMapping: Record<
 > = {
   left: -1,
   right: 1,
-  bottom: -1,
-  top: 1,
+  bottom: 1,
+  top: -1,
 }

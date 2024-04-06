@@ -6,8 +6,8 @@ export const useDefaultOptions = (): SwipeableCardStackOptions => {
   return {
     numberOfRenderedCards: 3,
     endedSwipePosition: {
-      horizontal: 1.5 * width,
-      vertical: 1.5 * height,
+      x: 1.5 * width,
+      y: 1.5 * height,
     },
     validateSwipeTranslationThreshold: 0.5 * width,
     validateSwipeVelocityThreshold: 800,

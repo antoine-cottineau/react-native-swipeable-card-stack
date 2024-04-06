@@ -1,3 +1,3 @@
-export const allAxis = ['horizontal', 'vertical'] as const
+export const allAxis = ['x', 'y'] as const
 
 export type SwipeAxis = (typeof allAxis)[number]

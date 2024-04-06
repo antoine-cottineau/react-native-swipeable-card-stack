@@ -20,13 +20,13 @@ export type SwipeableCardStackOptions = {
   /**
    * The position where the cards rest at the end of a swipe.
    *
-   * This prop accepts either a number or an object whose keys are swipe axis ("horizontal" and "vertical") and whose values are numbers.
+   * This prop accepts either a number or an object whose keys are swipe axis ("x" and "y") and whose values are numbers.
    *
    * For example, if you set `endedSwipePosition` to 400, a card swipped respectively to the left or to the bottom will end its movement at respectively +400 to the left or +400 to the bottom. A card swipped respectively to the right or to the top will end its movement at respectively +400 to the right or +400 to the top.
    *
    * Before any swipe, the cards sit idle at the position 0.
    *
-   * Default value: `{ horizontal: 1.5 * screenWidth, vertical: 1.5 * screenHeight }`
+   * Default value: `{ x: 1.5 * screenWidth, y: 1.5 * screenHeight }`
    */
   endedSwipePosition: SwipeAxisDependentProp<number>
 
