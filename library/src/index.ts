@@ -1,4 +1,5 @@
 import { type RenderCardProps } from './domain/RenderCardProps'
+import { type SwipeAxis } from './domain/SwipeAxis'
 import { type SwipeDirection } from './domain/SwipeDirection'
 import { type SwipePhase } from './domain/SwipePhase'
 import { type SwipeUpdate } from './domain/SwipeUpdate'
@@ -13,6 +14,7 @@ export {
   type RenderCardProps,
   type SwipeableCardRef,
   type SwipeDirection,
+  type SwipeAxis,
   type SwipePhase,
   type SwipeUpdate,
   type SwipeableCardStackOptions,

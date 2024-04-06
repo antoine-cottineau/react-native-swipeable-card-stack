@@ -16,7 +16,11 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated'
 import { type RenderCardAddedProps } from '../domain/RenderCardProps'
-import { isHorizontal, type SwipeDirection } from '../domain/SwipeDirection'
+import { type SwipeAxis } from '../domain/SwipeAxis'
+import {
+  swipeDirectionAxisMapping,
+  type SwipeDirection,
+} from '../domain/SwipeDirection'
 import { type SwipeStatus } from '../domain/SwipeUpdate'
 import { shouldValidateSwipe } from '../domain/shouldValidateSwipe'
 import { swipeDirectionAnimationPositionMapping } from '../domain/swipeDirectionAnimationPositionMapping'
@@ -46,16 +50,17 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   ref: ForwardedRef<SwipeableCardRef>,
 ) {
   const horizontalAnimationPosition = useSharedValue(
-    initialSwipeDirection === undefined
-      ? 0
-      : swipeDirectionAnimationPositionMapping[initialSwipeDirection],
+    getSwipeSharedValueInitialValue(initialSwipeDirection, 'horizontal'),
+  )
+  const verticalAnimationPosition = useSharedValue(
+    getSwipeSharedValueInitialValue(initialSwipeDirection, 'vertical'),
   )
 
   const isActive = index === currentIndex
 
   useImperativeHandle(ref, () => ({
     swipe: (direction) => {
-      if (isHorizontal(direction)) {
+      if (swipeDirectionAxisMapping[direction] === 'horizontal') {
         horizontalAnimationPosition.value = withTiming(
           swipeDirectionAnimationPositionMapping[direction],
           options.imperativeSwipeAnimationConfig,
@@ -182,3 +187,16 @@ const Container = styled(Animated.View)({
   width: '100%',
   position: 'absolute',
 })
+
+const getSwipeSharedValueInitialValue = (
+  initialSwipeDirection: SwipeDirection | undefined,
+  wantedSwipeAxis: SwipeAxis,
+) => {
+  if (initialSwipeDirection === undefined) {
+    return 0
+  }
+  if (swipeDirectionAxisMapping[initialSwipeDirection] === wantedSwipeAxis) {
+    return swipeDirectionAnimationPositionMapping[initialSwipeDirection]
+  }
+  return 0
+}
