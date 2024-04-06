@@ -16,7 +16,7 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated'
 import { type RenderCardAddedProps } from '../domain/RenderCardProps'
-import { type SwipeDirection } from '../domain/SwipeDirection'
+import { isHorizontal, type SwipeDirection } from '../domain/SwipeDirection'
 import { type SwipeStatus } from '../domain/SwipeUpdate'
 import { shouldValidateSwipe } from '../domain/shouldValidateSwipe'
 import { swipeDirectionAnimationPositionMapping } from '../domain/swipeDirectionAnimationPositionMapping'
@@ -54,37 +54,23 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   const isActive = index === currentIndex
 
   useImperativeHandle(ref, () => ({
-    swipeLeft: () => {
-      animationPosition.value = withTiming(
-        -1,
-        options.imperativeSwipeAnimationConfig,
-        () => {
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'left',
-            phase: 'validated',
-          })
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'left',
-            phase: 'ended',
-          })
-        },
-      )
-    },
-    swipeRight: () => {
-      animationPosition.value = withTiming(
-        1,
-        options.imperativeSwipeAnimationConfig,
-        () => {
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'right',
-            phase: 'validated',
-          })
-          runOnJS(onCardSwipeStatusUpdated)({
-            direction: 'right',
-            phase: 'ended',
-          })
-        },
-      )
+    swipe: (direction) => {
+      if (isHorizontal(direction)) {
+        animationPosition.value = withTiming(
+          swipeDirectionAnimationPositionMapping[direction],
+          options.imperativeSwipeAnimationConfig,
+          () => {
+            runOnJS(onCardSwipeStatusUpdated)({
+              direction,
+              phase: 'validated',
+            })
+            runOnJS(onCardSwipeStatusUpdated)({
+              direction,
+              phase: 'ended',
+            })
+          },
+        )
+      }
     },
     unswipe: () => {
       animationPosition.value = withTiming(0, options.unswipeAnimationConfig)
