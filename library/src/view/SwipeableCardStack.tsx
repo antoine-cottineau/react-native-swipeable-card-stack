@@ -5,7 +5,7 @@ import {
   useState,
   type ForwardedRef,
 } from 'react'
-import { type SwipeDirection, type SwipeableCardStackProps } from '..'
+import { type SwipeableCardRef, type SwipeableCardStackProps } from '..'
 import { getRenderWindow } from '../domain/getRenderWindow'
 import { toReversed } from '../utils/toReversed'
 import { useRefMap } from '../utils/useRefMap'
@@ -13,11 +13,6 @@ import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { SwipeableCardWrapper } from './SwipeableCardWrapper'
 import { useDefaultOptions } from './useDefaultOptions'
 import { useSwippedCardsStore } from './useSwippedCardsStore'
-
-export type SwipeableCardRef = {
-  swipe: (direction: SwipeDirection) => void
-  unswipe: () => void
-}
 
 export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
   {

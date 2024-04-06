@@ -15,6 +15,7 @@ import Animated, {
   withTiming,
   useSharedValue,
 } from 'react-native-reanimated'
+import { type SwipeableCardRef } from '..'
 import { type RenderCardAddedProps } from '../domain/RenderCardProps'
 import { type SwipeAxis } from '../domain/SwipeAxis'
 import { extractSwipeAxisDependentPropValue } from '../domain/SwipeAxisDependentProp'
@@ -26,7 +27,6 @@ import { type SwipeStatus } from '../domain/SwipeUpdate'
 import { getSwipeDirection } from '../domain/getSwipeDirection'
 import { shouldValidateSwipe } from '../domain/shouldValidateSwipe'
 import { swipeDirectionAnimationPositionMapping } from '../domain/swipeDirectionAnimationPositionMapping'
-import { type SwipeableCardRef } from './SwipeableCardStack'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 
 type SwipeableCardWrapperProps = {
