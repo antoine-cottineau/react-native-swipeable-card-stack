@@ -9,7 +9,6 @@ import { type StyleProp, type ViewStyle } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
   runOnJS,
-  useAnimatedReaction,
   useAnimatedStyle,
   withSpring,
   withTiming,
@@ -28,6 +27,7 @@ import { getSwipeDirection } from '../domain/getSwipeDirection'
 import { shouldValidateSwipe } from '../domain/shouldValidateSwipe'
 import { swipeDirectionAnimationPositionMapping } from '../domain/swipeDirectionAnimationPositionMapping'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
+import { useThresholdEventSender } from './useThresholdEventSender'
 
 type SwipeableCardWrapperProps = {
   renderCard: (params: RenderCardAddedProps) => ReactNode
@@ -84,6 +84,17 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   )
 
   const isActive = index === currentIndex
+
+  useThresholdEventSender({
+    isActive,
+    xAnimationPosition,
+    yAnimationPosition,
+    xAnimationThreshold:
+      validateSwipeXTranslationThreshold / xEndedSwipePosition,
+    yAnimationThreshold:
+      validateSwipeYTranslationThreshold / yEndedSwipePosition,
+    onCardSwipeStatusUpdated,
+  })
 
   useImperativeHandle(ref, () => ({
     swipe: (direction) => {
@@ -195,32 +206,6 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       },
     ],
   }))
-
-  useAnimatedReaction(
-    () =>
-      isActive &&
-      Math.abs(xAnimationPosition.value) >
-        validateSwipeXTranslationThreshold / xEndedSwipePosition,
-    (newValue, previousValue) => {
-      if (previousValue === null || newValue === previousValue) {
-        return
-      }
-
-      const direction: SwipeDirection =
-        xAnimationPosition.value > 0 ? 'right' : 'left'
-      if (newValue) {
-        runOnJS(onCardSwipeStatusUpdated)({
-          direction,
-          phase: 'above-threshold',
-        })
-      } else {
-        runOnJS(onCardSwipeStatusUpdated)({
-          direction,
-          phase: 'below-threshold',
-        })
-      }
-    },
-  )
 
   return (
     <Container style={[cardWrapperStyle, animatedStyle]}>
