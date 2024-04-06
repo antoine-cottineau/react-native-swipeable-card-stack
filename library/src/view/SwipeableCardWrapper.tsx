@@ -74,6 +74,14 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     options.validateSwipeTranslationThreshold,
     'y',
   )
+  const validateSwipeXVelocityThreshold = extractSwipeAxisDependentPropValue(
+    options.validateSwipeVelocityThreshold,
+    'x',
+  )
+  const validateSwipeYVelocityThreshold = extractSwipeAxisDependentPropValue(
+    options.validateSwipeVelocityThreshold,
+    'y',
+  )
 
   const isActive = index === currentIndex
 
@@ -128,13 +136,17 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         axis === 'x'
           ? validateSwipeXTranslationThreshold
           : validateSwipeYTranslationThreshold
+      const velocityThreshold =
+        axis === 'x'
+          ? validateSwipeXVelocityThreshold
+          : validateSwipeYVelocityThreshold
 
       if (
         shouldValidateSwipe({
           translation,
           velocity,
           translationThreshold,
-          velocityThreshold: options.validateSwipeVelocityThreshold,
+          velocityThreshold,
         })
       ) {
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })

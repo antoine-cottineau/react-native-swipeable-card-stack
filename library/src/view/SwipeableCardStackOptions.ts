@@ -46,11 +46,13 @@ export type SwipeableCardStackOptions = {
   /**
    * The velocity needed for a swipe to be validated.
    *
+   * This prop accepts either a number or an object whose keys are swipe axis ("x" and "y") and whose values are numbers.
+   *
    * A swipe can also be validated if the translation is high enough, see `validateSwipeTranslationThreshold`.
    *
    * Default value: `800`
    */
-  validateSwipeVelocityThreshold: number
+  validateSwipeVelocityThreshold: SwipeAxisDependentProp<number>
 
   /**
    * A function that returns a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/) that will be used in the final animation once a swipe is validated.
