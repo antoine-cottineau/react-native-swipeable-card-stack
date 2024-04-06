@@ -45,7 +45,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   }: SwipeableCardWrapperProps,
   ref: ForwardedRef<SwipeableCardRef>,
 ) {
-  const animationPosition = useSharedValue(
+  const horizontalAnimationPosition = useSharedValue(
     initialSwipeDirection === undefined
       ? 0
       : swipeDirectionAnimationPositionMapping[initialSwipeDirection],
@@ -56,7 +56,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   useImperativeHandle(ref, () => ({
     swipe: (direction) => {
       if (isHorizontal(direction)) {
-        animationPosition.value = withTiming(
+        horizontalAnimationPosition.value = withTiming(
           swipeDirectionAnimationPositionMapping[direction],
           options.imperativeSwipeAnimationConfig,
           () => {
@@ -73,7 +73,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       }
     },
     unswipe: () => {
-      animationPosition.value = withTiming(0, options.unswipeAnimationConfig)
+      horizontalAnimationPosition.value = withTiming(
+        0,
+        options.unswipeAnimationConfig,
+      )
     },
   }))
 
@@ -85,7 +88,8 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       })
     })
     .onUpdate(({ translationX }) => {
-      animationPosition.value = translationX / options.endedSwipePosition
+      horizontalAnimationPosition.value =
+        translationX / options.endedSwipePosition
     })
     .onEnd((payload) => {
       const direction: SwipeDirection =
@@ -101,7 +105,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         })
       ) {
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })
-        animationPosition.value = withSpring(
+        horizontalAnimationPosition.value = withSpring(
           Math.sign(payload.translationX),
           options.validatedSwipeAnimationConfig(payload),
           () => {
@@ -115,7 +119,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         return
       }
 
-      animationPosition.value = withTiming(
+      horizontalAnimationPosition.value = withTiming(
         0,
         options.stoppedSwipeAnimationConfig,
         () => {
@@ -128,7 +132,8 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
       {
-        translateX: animationPosition.value * options.endedSwipePosition,
+        translateX:
+          horizontalAnimationPosition.value * options.endedSwipePosition,
       },
     ],
   }))
@@ -136,7 +141,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   useAnimatedReaction(
     () =>
       isActive &&
-      Math.abs(animationPosition.value) >
+      Math.abs(horizontalAnimationPosition.value) >
         options.validateSwipeTranslationThreshold,
     (newValue, previousValue) => {
       if (previousValue === null || newValue === previousValue) {
@@ -144,7 +149,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       }
 
       const direction: SwipeDirection =
-        animationPosition.value > 0 ? 'right' : 'left'
+        horizontalAnimationPosition.value > 0 ? 'right' : 'left'
       if (newValue) {
         runOnJS(onCardSwipeStatusUpdated)({
           direction,
@@ -162,7 +167,11 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   return (
     <Container style={[cardWrapperStyle, animatedStyle]}>
       <GestureDetector gesture={panGesture}>
-        {renderCard({ index, animationPosition, currentIndex })}
+        {renderCard({
+          index,
+          horizontalAnimationPosition,
+          currentIndex,
+        })}
       </GestureDetector>
     </Container>
   )
