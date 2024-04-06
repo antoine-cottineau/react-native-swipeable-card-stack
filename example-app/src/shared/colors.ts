@@ -2,7 +2,7 @@ export const colors = {
   fire: '#FF1744',
   water: '#2196F3',
   grass: '#4CAF50',
-  flying: '#FFA000',
+  flying: '#FF6F00',
   swipeRight: '#43A047',
   swipeLeft: '#F44336',
   unswipe: '#81D4FA',
