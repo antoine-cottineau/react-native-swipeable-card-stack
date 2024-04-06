@@ -26,7 +26,7 @@ const CardContainer = styled.View({
   alignItems: 'center',
   borderRadius: 16,
   backgroundColor: colors.secondaryFaded,
-  shadowColor: 'black',
+  shadowColor: colors.secondary,
   shadowOffset: { width: 0, height: 4 },
   shadowOpacity: 0.3,
   shadowRadius: 5,
