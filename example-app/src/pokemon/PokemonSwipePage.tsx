@@ -16,7 +16,11 @@ export const PokemonSwipePage = () => {
     <StyledPage>
       <StatusBar style="dark" />
       <PokemonSwipePageBackground score={8} />
-      <SwipeableCardStack data={pokemon} renderCard={PokemonCard} />
+      <SwipeableCardStack
+        data={pokemon}
+        renderCard={PokemonCard}
+        cardWrapperStyle={{ justifyContent: 'center', alignItems: 'center' }}
+      />
       <GoToHomeButtonContainer style={css({ top: top + 16 })}>
         <GoToHomeButton />
       </GoToHomeButtonContainer>
