@@ -87,25 +87,29 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
 
   useImperativeHandle(ref, () => ({
     swipe: (direction) => {
+      const targetAnimationPosition = withTiming(
+        swipeDirectionAnimationPositionMapping[direction],
+        options.imperativeSwipeAnimationConfig,
+        () => {
+          runOnJS(onCardSwipeStatusUpdated)({
+            direction,
+            phase: 'validated',
+          })
+          runOnJS(onCardSwipeStatusUpdated)({
+            direction,
+            phase: 'ended',
+          })
+        },
+      )
       if (swipeDirectionAxisMapping[direction] === 'x') {
-        xAnimationPosition.value = withTiming(
-          swipeDirectionAnimationPositionMapping[direction],
-          options.imperativeSwipeAnimationConfig,
-          () => {
-            runOnJS(onCardSwipeStatusUpdated)({
-              direction,
-              phase: 'validated',
-            })
-            runOnJS(onCardSwipeStatusUpdated)({
-              direction,
-              phase: 'ended',
-            })
-          },
-        )
+        xAnimationPosition.value = targetAnimationPosition
+      } else {
+        yAnimationPosition.value = targetAnimationPosition
       }
     },
     unswipe: () => {
       xAnimationPosition.value = withTiming(0, options.unswipeAnimationConfig)
+      yAnimationPosition.value = withTiming(0, options.unswipeAnimationConfig)
     },
   }))
 
