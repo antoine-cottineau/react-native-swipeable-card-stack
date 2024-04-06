@@ -2,10 +2,13 @@ import { useSafeAreaFrame } from 'react-native-safe-area-context'
 import { type SwipeableCardStackOptions } from '..'
 
 export const useDefaultOptions = (): SwipeableCardStackOptions => {
-  const { width } = useSafeAreaFrame()
+  const { width, height } = useSafeAreaFrame()
   return {
     numberOfRenderedCards: 3,
-    endedSwipePosition: 1.5 * width,
+    endedSwipePosition: {
+      horizontal: 1.5 * width,
+      vertical: 1.5 * height,
+    },
     validateSwipeTranslationThreshold: 0.5 * width,
     validateSwipeVelocityThreshold: 800,
     validatedSwipeAnimationConfig: ({ velocityX }) => ({

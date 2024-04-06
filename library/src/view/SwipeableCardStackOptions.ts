@@ -3,6 +3,7 @@ import {
   type WithTimingConfig,
   type WithSpringConfig,
 } from 'react-native-reanimated'
+import { type SwipeAxisDependentProp } from '../domain/SwipeAxisDependentProp'
 
 export type SwipeableCardStackOptions = {
   /**
@@ -19,13 +20,15 @@ export type SwipeableCardStackOptions = {
   /**
    * The position where the cards rest at the end of a swipe.
    *
-   * For example, if you set `endedSwipePosition` to 400, a card swipped to the left will end its movement at -400 while a card swipped to the right will end its movement at +400.
+   * This prop accepts either a number or an object whose keys are swipe axis ("horizontal" and "vertical") and whose values are numbers.
+   *
+   * For example, if you set `endedSwipePosition` to 400, a card swipped respectively to the left or to the bottom will end its movement at respectively +400 to the left or +400 to the bottom. A card swipped respectively to the right or to the top will end its movement at respectively +400 to the right or +400 to the top.
    *
    * Before any swipe, the cards sit idle at the position 0.
    *
-   * Default value: `1.5 * screenWidth`
+   * Default value: `{ horizontal: 1.5 * screenWidth, vertical: 1.5 * screenHeight }`
    */
-  endedSwipePosition: number
+  endedSwipePosition: SwipeAxisDependentProp<number>
 
   /**
    * The translation needed for a swipe to be considered as validated, which means that if the user releases the card, the swipe animation will finish and the swipe will be completed.

@@ -17,6 +17,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { type RenderCardAddedProps } from '../domain/RenderCardProps'
 import { type SwipeAxis } from '../domain/SwipeAxis'
+import { extractSwipeAxisDependentPropValue } from '../domain/SwipeAxisDependentProp'
 import {
   swipeDirectionAxisMapping,
   type SwipeDirection,
@@ -54,6 +55,15 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   )
   const verticalAnimationPosition = useSharedValue(
     getSwipeSharedValueInitialValue(initialSwipeDirection, 'vertical'),
+  )
+
+  const horizontalEndedSwipePosition = extractSwipeAxisDependentPropValue(
+    options.endedSwipePosition,
+    'horizontal',
+  )
+  const verticalEndedSwipePosition = extractSwipeAxisDependentPropValue(
+    options.endedSwipePosition,
+    'vertical',
   )
 
   const isActive = index === currentIndex
@@ -94,9 +104,9 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     })
     .onUpdate(({ translationX, translationY }) => {
       horizontalAnimationPosition.value =
-        translationX / options.endedSwipePosition
+        translationX / horizontalEndedSwipePosition
       verticalAnimationPosition.value =
-        translationY / options.endedSwipePosition
+        translationY / verticalEndedSwipePosition
     })
     .onEnd((payload) => {
       const direction: SwipeDirection =
@@ -147,11 +157,11 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     transform: [
       {
         translateX:
-          horizontalAnimationPosition.value * options.endedSwipePosition,
+          horizontalAnimationPosition.value * horizontalEndedSwipePosition,
       },
       {
         translateY:
-          verticalAnimationPosition.value * options.endedSwipePosition,
+          verticalAnimationPosition.value * verticalEndedSwipePosition,
       },
     ],
   }))
