@@ -2,6 +2,7 @@ import styled, { css } from '@emotion/native'
 import { useNavigation } from '@react-navigation/native'
 import { Pressable } from 'react-native'
 import Animated, { FadeInDown } from 'react-native-reanimated'
+import { colors } from '../shared/colors'
 import { getBrandedText } from '../shared/fonts/getBrandedText'
 
 type Props = {
@@ -16,12 +17,12 @@ export const CatTalkWithButton = ({ catName }: Props) => {
       <Pressable
         onPress={goBack}
         style={css({
-          backgroundColor: '#651FFF',
+          backgroundColor: colors.primary,
           padding: 16,
           alignSelf: 'stretch',
           alignItems: 'center',
           borderRadius: 16,
-          shadowColor: '#6A1B9A',
+          shadowColor: colors.primary,
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.3,
           shadowRadius: 5,

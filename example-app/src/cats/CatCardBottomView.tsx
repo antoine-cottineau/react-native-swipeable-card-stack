@@ -1,6 +1,7 @@
 import styled from '@emotion/native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
+import { colors } from '../shared/colors'
 import { RoundButton } from '../shared/components/RoundButton'
 import { getBrandedText } from '../shared/fonts/getBrandedText'
 import { CloseIcon } from '../shared/icons/CloseIcon'
@@ -46,7 +47,7 @@ export const CatCardBottomView = ({ name, age, onAction }: Props) => {
             onPress={() => {
               onAction('swipe-left')
             }}
-            color={'#F44336'}
+            color={colors.swipeLeft}
             size="large"
           />
           <RoundButton
@@ -54,7 +55,7 @@ export const CatCardBottomView = ({ name, age, onAction }: Props) => {
             onPress={() => {
               onAction('undo')
             }}
-            color={'#81D4FA'}
+            color={colors.unswipe}
             size="small"
           />
           <RoundButton
@@ -62,7 +63,7 @@ export const CatCardBottomView = ({ name, age, onAction }: Props) => {
             onPress={() => {
               onAction('swipe-right')
             }}
-            color={'#43A047'}
+            color={colors.swipeRight}
             size="large"
           />
         </ButtonsContainer>

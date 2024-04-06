@@ -1,5 +1,6 @@
 import styled from '@emotion/native'
 import { Image } from 'expo-image'
+import { colors } from '../shared/colors'
 import { type PokemonDataItem } from './PokemonDataItem'
 
 type Props = PokemonDataItem
@@ -24,7 +25,7 @@ const CardContainer = styled.View({
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: 16,
-  backgroundColor: '#D1C4E9',
+  backgroundColor: colors.secondaryFaded,
   shadowColor: 'black',
   shadowOffset: { width: 0, height: 4 },
   shadowOpacity: 0.3,
