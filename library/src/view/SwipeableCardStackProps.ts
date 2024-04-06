@@ -4,7 +4,7 @@ import {
   type RenderCardProps,
   type SwipeUpdate,
   type SwipeableCardStackOptions,
-} from '.'
+} from '..'
 
 export type SwipeableCardStackProps<T> = {
   /**

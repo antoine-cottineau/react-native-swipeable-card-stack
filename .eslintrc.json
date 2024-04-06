@@ -27,6 +27,7 @@
       }
     }
   },
+  "ignorePatterns": ["**/dist/*"],
   "rules": {
     // eslint
     "arrow-body-style": "error",

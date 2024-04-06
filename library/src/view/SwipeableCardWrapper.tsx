@@ -15,13 +15,13 @@ import Animated, {
   withTiming,
   useSharedValue,
 } from 'react-native-reanimated'
-import { type RenderCardAddedProps } from './RenderCardProps'
-import { type SwipeDirection } from './SwipeDirection'
-import { type SwipeStatus } from './SwipeUpdate'
+import { type RenderCardAddedProps } from '../domain/RenderCardProps'
+import { type SwipeDirection } from '../domain/SwipeDirection'
+import { type SwipeStatus } from '../domain/SwipeUpdate'
+import { shouldValidateSwipe } from '../domain/shouldValidateSwipe'
+import { swipeDirectionAnimationPositionMapping } from '../domain/swipeDirectionAnimationPositionMapping'
 import { type SwipeableCardRef } from './SwipeableCardStack'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
-import { shouldValidateSwipe } from './shouldValidateSwipe'
-import { swipeDirectionAnimationPositionMapping } from './swipeDirectionAnimationPositionMapping'
 
 type SwipeableCardWrapperProps = {
   renderCard: (params: RenderCardAddedProps) => ReactNode

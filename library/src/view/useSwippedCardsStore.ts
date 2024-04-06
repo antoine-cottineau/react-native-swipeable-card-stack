@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { type SwipeDirection } from '.'
+import { type SwipeDirection } from '..'
 
 /**
  * A hook that stores the directions in which swipped cards were swipped.

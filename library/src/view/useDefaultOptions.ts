@@ -1,5 +1,5 @@
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
-import { type SwipeableCardStackOptions } from '.'
+import { type SwipeableCardStackOptions } from '..'
 
 export const useDefaultOptions = (): SwipeableCardStackOptions => {
   const { width } = useSafeAreaFrame()
