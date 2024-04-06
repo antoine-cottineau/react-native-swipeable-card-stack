@@ -7,9 +7,12 @@ export const useDefaultOptions = (): SwipeableCardStackOptions => {
     numberOfRenderedCards: 3,
     endedSwipePosition: {
       x: 1.5 * width,
-      y: 1.5 * height,
+      y: 1 * height,
     },
-    validateSwipeTranslationThreshold: 0.5 * width,
+    validateSwipeTranslationThreshold: {
+      x: 0.5 * width,
+      y: 0.25 * height,
+    },
     validateSwipeVelocityThreshold: 800,
     validatedSwipeAnimationConfig: ({ velocityX }) => ({
       velocity: 0.0001 * velocityX,

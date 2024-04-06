@@ -26,22 +26,22 @@ export type SwipeableCardStackOptions = {
    *
    * Before any swipe, the cards sit idle at the position 0.
    *
-   * Default value: `{ x: 1.5 * screenWidth, y: 1.5 * screenHeight }`
+   * Default value: `{ x: 1.5 * screenWidth, y: 1 * screenHeight }`
    */
   endedSwipePosition: SwipeAxisDependentProp<number>
 
   /**
    * The translation needed for a swipe to be considered as validated, which means that if the user releases the card, the swipe animation will finish and the swipe will be completed.
    *
-   * For example, if you set `validatedSwipeTranslationThreshold` to 200 and the user swipes 190 to the right and releases the card, the swipe will be aborted. Hovewer, if the user swipes 210 to the right, the swipe will complete.
+   * This prop accepts either a number or an object whose keys are swipe axis ("x" and "y") and whose values are numbers.
    *
-   * Note that the same behaviour is valid on the left side (negative positions).
+   * For example, if you set `validatedSwipeTranslationThreshold` to 200 and the user swipes 190 to the right and releases the card, the swipe will be aborted. Hovewer, if the user swipes 210 to the right, the swipe will complete.
    *
    * A swipe can also be validated if the velocity is high enough, see `validateSwipeVelocityThreshold`.
    *
-   * Default value: `0.5 * screenWidth`
+   * Default value: `{ x: 0.5 * screenWidth, y: 0.25 * screenHeight }`
    */
-  validateSwipeTranslationThreshold: number
+  validateSwipeTranslationThreshold: SwipeAxisDependentProp<number>
 
   /**
    * The velocity needed for a swipe to be validated.

@@ -23,6 +23,7 @@ import {
   type SwipeDirection,
 } from '../domain/SwipeDirection'
 import { type SwipeStatus } from '../domain/SwipeUpdate'
+import { getSwipeDirection } from '../domain/getSwipeDirection'
 import { shouldValidateSwipe } from '../domain/shouldValidateSwipe'
 import { swipeDirectionAnimationPositionMapping } from '../domain/swipeDirectionAnimationPositionMapping'
 import { type SwipeableCardRef } from './SwipeableCardStack'
@@ -65,6 +66,14 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     options.endedSwipePosition,
     'y',
   )
+  const validateSwipeXTranslationThreshold = extractSwipeAxisDependentPropValue(
+    options.validateSwipeTranslationThreshold,
+    'x',
+  )
+  const validateSwipeYTranslationThreshold = extractSwipeAxisDependentPropValue(
+    options.validateSwipeTranslationThreshold,
+    'y',
+  )
 
   const isActive = index === currentIndex
 
@@ -104,21 +113,33 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       yAnimationPosition.value = translationY / yEndedSwipePosition
     })
     .onEnd((payload) => {
-      const direction: SwipeDirection =
-        payload.translationX > 0 ? 'right' : 'left'
+      const { translationX, translationY, velocityX, velocityY } = payload
+      const direction = getSwipeDirection({
+        xTranslation: translationX,
+        yTranslation: translationY,
+        xEndedSwipePosition,
+        yEndedSwipePosition,
+      })
+
+      const axis = swipeDirectionAxisMapping[direction]
+      const translation = axis === 'x' ? translationX : translationY
+      const velocity = axis === 'x' ? velocityX : velocityY
+      const translationThreshold =
+        axis === 'x'
+          ? validateSwipeXTranslationThreshold
+          : validateSwipeYTranslationThreshold
+
       if (
         shouldValidateSwipe({
-          translation: payload.translationX,
-          velocity: payload.velocityX,
-          validateSwipeTranslationThreshold:
-            options.validateSwipeTranslationThreshold,
-          validateSwipeVelocityThreshold:
-            options.validateSwipeTranslationThreshold,
+          translation,
+          velocity,
+          translationThreshold,
+          velocityThreshold: options.validateSwipeVelocityThreshold,
         })
       ) {
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })
-        xAnimationPosition.value = withSpring(
-          Math.sign(payload.translationX),
+        const targetAnimationPosition = withSpring(
+          swipeDirectionAnimationPositionMapping[direction],
           options.validatedSwipeAnimationConfig(payload),
           () => {
             runOnJS(onCardSwipeStatusUpdated)({
@@ -127,24 +148,24 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
             })
           },
         )
-
+        if (axis === 'x') {
+          xAnimationPosition.value = targetAnimationPosition
+        } else {
+          yAnimationPosition.value = targetAnimationPosition
+        }
         return
       }
 
-      xAnimationPosition.value = withTiming(
+      const targetAnimationPosition = withTiming(
         0,
         options.stoppedSwipeAnimationConfig,
         () => {
           runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
         },
       )
-      yAnimationPosition.value = withTiming(
-        0,
-        options.stoppedSwipeAnimationConfig,
-        () => {
-          runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
-        },
-      )
+
+      xAnimationPosition.value = targetAnimationPosition
+      yAnimationPosition.value = targetAnimationPosition
     })
     .enabled(isActive)
 
@@ -162,8 +183,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   useAnimatedReaction(
     () =>
       isActive &&
-      Math.abs(xAnimationPosition.value) >
-        options.validateSwipeTranslationThreshold,
+      Math.abs(xAnimationPosition.value) > validateSwipeXTranslationThreshold,
     (newValue, previousValue) => {
       if (previousValue === null || newValue === previousValue) {
         return
