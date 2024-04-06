@@ -1,5 +1,6 @@
 import styled from '@emotion/native'
 import { TouchableOpacity } from 'react-native'
+import { colors } from '../colors'
 import { getBrandedText } from '../fonts/getBrandedText'
 import { type IconType } from '../icons/Icon'
 
@@ -28,9 +29,9 @@ const Container = styled(TouchableOpacity)(() => ({
   padding: 16,
   borderRadius: 16,
   borderColor: 'gray',
-  backgroundColor: '#D1C4E9',
+  backgroundColor: colors.secondaryFaded,
   gap: 12,
-  shadowColor: '#D1C4E9',
+  shadowColor: colors.secondaryFaded,
   shadowOffset: { width: 0, height: 4 },
   shadowOpacity: 0.3,
   shadowRadius: 5,

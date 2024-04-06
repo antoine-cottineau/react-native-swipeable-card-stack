@@ -1,6 +1,7 @@
 import styled from '@emotion/native'
 import { Image } from 'expo-image'
 import Animated, { FadeInDown } from 'react-native-reanimated'
+import { colors } from '../shared/colors'
 
 const SIZE = 180
 
@@ -19,7 +20,7 @@ const Container = styled(Animated.View)({
   aspectRatio: 1,
   borderRadius: SIZE / 2,
   borderWidth: 3,
-  borderColor: '#651FFF',
+  borderColor: colors.primary,
   overflow: 'hidden',
 })
 

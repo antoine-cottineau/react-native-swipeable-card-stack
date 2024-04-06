@@ -1,8 +1,9 @@
 import styled from '@emotion/native'
 import { LinearGradient } from 'expo-linear-gradient'
+import { colors } from '../colors'
 
 export const BackgroundGradient = () => (
-  <Gradient colors={['#651FFF', '#BA68C8']}></Gradient>
+  <Gradient colors={[colors.primary, colors.secondary]} />
 )
 
 const Gradient = styled(LinearGradient)({

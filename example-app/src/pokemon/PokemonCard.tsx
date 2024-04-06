@@ -1,5 +1,7 @@
 import styled from '@emotion/native'
 import { Image } from 'expo-image'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { colors } from '../shared/colors'
 import { type PokemonDataItem } from './PokemonDataItem'
 
 type Props = PokemonDataItem
@@ -12,20 +14,20 @@ export const PokemonCard = ({ imageUrl }: Props) => (
   </TouchableContainer>
 )
 
-const TouchableContainer = styled.View({
+const TouchableContainer = styled(SafeAreaView)({
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
 })
 
 const CardContainer = styled.View({
-  width: 200,
+  width: 160,
   aspectRatio: 1,
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: 16,
-  backgroundColor: '#D1C4E9',
-  shadowColor: 'black',
+  backgroundColor: colors.secondaryFaded,
+  shadowColor: colors.secondary,
   shadowOffset: { width: 0, height: 4 },
   shadowOpacity: 0.3,
   shadowRadius: 5,

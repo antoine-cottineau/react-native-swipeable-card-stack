@@ -7,6 +7,7 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated'
 import { type RenderCardProps } from 'react-native-swipeable-card-stack'
+import { colors } from '../shared/colors'
 import { type CatAction } from './CatAction'
 import { CatCardBottomView } from './CatCardBottomView'
 import { type CatDataItem } from './CatDataItem'
@@ -46,7 +47,7 @@ export const CatCard = ({
       backgroundColor: interpolateColor(
         animationPosition.value,
         [-1, 0, 1],
-        ['#F44336', 'transparent', '#43A047'],
+        [colors.swipeLeft, 'transparent', colors.swipeRight],
       ),
       opacity: interpolate(
         Math.abs(animationPosition.value),
