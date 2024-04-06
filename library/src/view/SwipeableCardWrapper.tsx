@@ -195,7 +195,8 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   useAnimatedReaction(
     () =>
       isActive &&
-      Math.abs(xAnimationPosition.value) > validateSwipeXTranslationThreshold,
+      Math.abs(xAnimationPosition.value) >
+        validateSwipeXTranslationThreshold / xEndedSwipePosition,
     (newValue, previousValue) => {
       if (previousValue === null || newValue === previousValue) {
         return
