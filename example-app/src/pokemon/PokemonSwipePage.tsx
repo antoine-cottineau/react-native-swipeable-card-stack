@@ -1,6 +1,6 @@
 import styled, { css } from '@emotion/native'
 import { StatusBar } from 'expo-status-bar'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import {
   type SwipeableCardRef,
@@ -21,16 +21,36 @@ import { pokemon } from './pokemon'
 export const PokemonSwipePage = () => {
   const { top } = useSafeAreaInsets()
   const ref = useRef<SwipeableCardRef>(null)
+  const [score, setScore] = useState(0)
+  const [numberOfSwipes, setNumberOfSwipes] = useState(0)
 
   return (
     <StyledPage>
       <StatusBar style="dark" />
-      <PokemonSwipePageBackground score={8} />
+      <PokemonSwipePageBackground
+        score={score}
+        numberOfSwipes={numberOfSwipes}
+      />
       <SwipeableCardStack
         data={pokemon}
         renderCard={PokemonCard}
         cardWrapperStyle={{ justifyContent: 'center', alignItems: 'center' }}
         ref={ref}
+        onActiveCardUpdate={({ phase, direction, currentDataItem }) => {
+          if (phase !== 'validated') {
+            return
+          }
+          const mapping: Record<SwipeDirection, PokemonElement> = {
+            left: 'fire',
+            right: 'water',
+            top: 'grass',
+            bottom: 'flying',
+          }
+          if (mapping[direction] === currentDataItem.element) {
+            setScore((_) => _ + 1)
+          }
+          setNumberOfSwipes((_) => _ + 1)
+        }}
       />
       <GoToHomeButtonContainer style={css({ top: top + 16 })}>
         <GoToHomeButton />
