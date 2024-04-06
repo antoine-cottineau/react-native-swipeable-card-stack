@@ -24,9 +24,9 @@ export const useThresholdEventSender = ({
   onCardSwipeStatusUpdated,
 }: Params) => {
   useAnimatedReaction(
-    () => isActive && Math.abs(xAnimationPosition.value) > xAnimationThreshold,
+    () => Math.abs(xAnimationPosition.value) > xAnimationThreshold,
     (newValue, previousValue) => {
-      if (previousValue === null || newValue === previousValue) {
+      if (!isActive || previousValue === null || newValue === previousValue) {
         return
       }
 
@@ -47,9 +47,9 @@ export const useThresholdEventSender = ({
   )
 
   useAnimatedReaction(
-    () => isActive && Math.abs(yAnimationPosition.value) > yAnimationThreshold,
+    () => Math.abs(yAnimationPosition.value) > yAnimationThreshold,
     (newValue, previousValue) => {
-      if (previousValue === null || newValue === previousValue) {
+      if (!isActive || previousValue === null || newValue === previousValue) {
         return
       }
 

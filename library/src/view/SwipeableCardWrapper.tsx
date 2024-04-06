@@ -183,12 +183,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         return
       }
 
+      runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
       const targetAnimationPosition = withTiming(
         0,
         options.stoppedSwipeAnimationConfig,
-        () => {
-          runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
-        },
       )
 
       xAnimationPosition.value = targetAnimationPosition
