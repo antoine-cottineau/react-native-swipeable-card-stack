@@ -15,7 +15,7 @@ export const PokemonSwipePage = () => {
   return (
     <StyledPage>
       <StatusBar style="dark" />
-      <PokemonSwipePageBackground />
+      <PokemonSwipePageBackground score={8} />
       <SwipeableCardStack data={pokemon} renderCard={PokemonCard} />
       <GoToHomeButtonContainer style={css({ top: top + 16 })}>
         <GoToHomeButton />
