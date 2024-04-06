@@ -92,9 +92,11 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         phase: 'started',
       })
     })
-    .onUpdate(({ translationX }) => {
+    .onUpdate(({ translationX, translationY }) => {
       horizontalAnimationPosition.value =
         translationX / options.endedSwipePosition
+      verticalAnimationPosition.value =
+        translationY / options.endedSwipePosition
     })
     .onEnd((payload) => {
       const direction: SwipeDirection =
@@ -131,6 +133,13 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
           runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
         },
       )
+      verticalAnimationPosition.value = withTiming(
+        0,
+        options.stoppedSwipeAnimationConfig,
+        () => {
+          runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
+        },
+      )
     })
     .enabled(isActive)
 
@@ -139,6 +148,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       {
         translateX:
           horizontalAnimationPosition.value * options.endedSwipePosition,
+      },
+      {
+        translateY:
+          verticalAnimationPosition.value * options.endedSwipePosition,
       },
     ],
   }))
