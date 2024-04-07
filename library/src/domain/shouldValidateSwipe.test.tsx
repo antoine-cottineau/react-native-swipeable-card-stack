@@ -91,7 +91,7 @@ it('returns false for a swipe with enough translation but in a locked direction'
   ).toBe(false)
 })
 
-it('returns false for a swipe with enough velocity but in a locked direction', () => {
+it('returns false for a bottom swipe with enough velocity when bottom is locked', () => {
   expect(
     shouldValidateSwipe({
       translation: 100,
@@ -100,6 +100,19 @@ it('returns false for a swipe with enough velocity but in a locked direction', (
       velocityThreshold: 600,
       axis: 'y',
       lockedDirections: ['bottom'],
+    }),
+  ).toBe(false)
+})
+
+it('returns false for a right swipe with enough velocity when right is locked', () => {
+  expect(
+    shouldValidateSwipe({
+      translation: 100,
+      velocity: 700,
+      translationThreshold: 200,
+      velocityThreshold: 600,
+      axis: 'x',
+      lockedDirections: ['right'],
     }),
   ).toBe(false)
 })
