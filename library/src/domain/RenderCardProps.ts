@@ -11,7 +11,7 @@ export type RenderCardAddedProps = {
   /**
    * A reanimated [SharedValue](https://docs.swmansion.com/react-native-reanimated/docs/core/useSharedValue/) that is synced with the swipe x position of the current card and can be used to perform custom animations.
    *
-   * The value runs between -1 (the card is totally swipped to the left) and 1 (the card is totally swipped to the right).
+   * The value runs between -1 (the card is totally swiped to the left) and 1 (the card is totally swiped to the right).
    *
    * A value of 0 means the card is at its resting x position.
    */

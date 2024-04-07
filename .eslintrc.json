@@ -27,7 +27,7 @@
       }
     }
   },
-  "ignorePatterns": ["**/dist/*"],
+  "ignorePatterns": ["**/dist/*", "jest.config.js", "babel.config.js"],
   "rules": {
     // eslint
     "arrow-body-style": "error",

@@ -24,6 +24,7 @@ import {
 } from '../domain/SwipeDirection'
 import { type SwipeStatus } from '../domain/SwipeUpdate'
 import { getSwipeDirection } from '../domain/getSwipeDirection'
+import { isSwipeLocked } from '../domain/isSwipeLocked'
 import { shouldValidateSwipe } from '../domain/shouldValidateSwipe'
 import { swipeDirectionAnimationPositionMapping } from '../domain/swipeDirectionAnimationPositionMapping'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
@@ -132,16 +133,22 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       })
     })
     .onUpdate(({ translationX, translationY }) => {
-      const canUpdateXPosition =
-        (!options.lockedDirections.includes('left') && translationX < 0) ||
-        (!options.lockedDirections.includes('right') && translationX > 0)
-      const canUpdateYPosition =
-        (!options.lockedDirections.includes('top') && translationY < 0) ||
-        (!options.lockedDirections.includes('bottom') && translationY > 0)
-      if (canUpdateXPosition) {
+      if (
+        !isSwipeLocked({
+          translation: translationX,
+          axis: 'x',
+          lockedDirections: options.lockedDirections,
+        })
+      ) {
         xAnimationPosition.value = translationX / xEndedSwipePosition
       }
-      if (canUpdateYPosition) {
+      if (
+        !isSwipeLocked({
+          translation: translationY,
+          axis: 'y',
+          lockedDirections: options.lockedDirections,
+        })
+      ) {
         yAnimationPosition.value = translationY / yEndedSwipePosition
       }
     })
