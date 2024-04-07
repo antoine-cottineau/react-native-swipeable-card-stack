@@ -30,7 +30,7 @@ export const shouldValidateSwipe = ({
     (axis === 'x' && shouldPreventXValidation) ||
     (axis === 'y' && shouldPreventYValidation)
   ) {
-    return
+    return false
   }
 
   // We must check that, even if the velocity is high enough
