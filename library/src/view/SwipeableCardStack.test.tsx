@@ -1,8 +1,7 @@
-import { render, screen } from '@testing-library/react-native'
-import { type ReactNode } from 'react'
+import { screen } from '@testing-library/react-native'
 import { View, Text } from 'react-native'
-import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { type RenderCardProps } from '../domain/RenderCardProps'
+import { renderWithWrapper } from '../testHelpers/renderWithWrapper'
 import { SwipeableCardStack } from './SwipeableCardStack'
 
 type FruitCardProps = RenderCardProps<{
@@ -16,7 +15,7 @@ const FruitCard = ({ fruit }: FruitCardProps) => (
 )
 
 it('correctly renders', () => {
-  render(
+  renderWithWrapper(
     <SwipeableCardStack
       data={[
         { fruit: 'banana' },
@@ -26,12 +25,7 @@ it('correctly renders', () => {
       ]}
       renderCard={FruitCard}
     />,
-    { wrapper: TestWrapper },
   )
 
   expect(screen.getByText('banana')).toBeOnTheScreen()
 })
-
-const TestWrapper = ({ children }: { children: ReactNode }) => (
-  <SafeAreaProvider>{children}</SafeAreaProvider>
-)
