@@ -28,4 +28,5 @@ it('correctly renders', () => {
   )
 
   expect(screen.getByText('banana')).toBeOnTheScreen()
+  expect(screen).toMatchSnapshot()
 })

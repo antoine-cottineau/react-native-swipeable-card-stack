@@ -225,7 +225,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   }))
 
   return (
-    <Container style={[cardWrapperStyle, animatedStyle]}>
+    <Container
+      style={[cardWrapperStyle, animatedStyle]}
+      testID={`swipeable-card-wrapper-${index}`}
+    >
       <GestureDetector gesture={panGesture}>
         {renderCard({
           index,
