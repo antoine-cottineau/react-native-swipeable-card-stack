@@ -4,6 +4,7 @@ import {
   type WithSpringConfig,
 } from 'react-native-reanimated'
 import { type SwipeAxisDependentProp } from '../domain/SwipeAxisDependentProp'
+import { type SwipeDirection } from '../domain/SwipeDirection'
 
 export type SwipeableCardStackOptions = {
   /**
@@ -13,7 +14,7 @@ export type SwipeableCardStackOptions = {
    * This has usually no visual impact from a user standpoint because most of the cards are hidden by the two first cards of the stack.
    * However, if you encounter a case where some cards are not visible, you may want to increase this value.
    *
-   * Default value: `3`
+   * Default value: `3`.
    */
   numberOfRenderedCards: number
 
@@ -26,7 +27,7 @@ export type SwipeableCardStackOptions = {
    *
    * Before any swipe, the cards sit idle at the position 0.
    *
-   * Default value: `{ x: 1.5 * screenWidth, y: 1 * screenHeight }`
+   * Default value: `{ x: 1.5 * screenWidth, y: 1 * screenHeight }`.
    */
   endedSwipePosition: SwipeAxisDependentProp<number>
 
@@ -39,7 +40,7 @@ export type SwipeableCardStackOptions = {
    *
    * A swipe can also be validated if the velocity is high enough, see `validateSwipeVelocityThreshold`.
    *
-   * Default value: `{ x: 0.5 * screenWidth, y: 0.25 * screenHeight }`
+   * Default value: `{ x: 0.5 * screenWidth, y: 0.25 * screenHeight }`.
    */
   validateSwipeTranslationThreshold: SwipeAxisDependentProp<number>
 
@@ -50,7 +51,7 @@ export type SwipeableCardStackOptions = {
    *
    * A swipe can also be validated if the translation is high enough, see `validateSwipeTranslationThreshold`.
    *
-   * Default value: `800`
+   * Default value: `800`.
    */
   validateSwipeVelocityThreshold: SwipeAxisDependentProp<number>
 
@@ -68,21 +69,30 @@ export type SwipeableCardStackOptions = {
   /**
    * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the card is imperatively swipped via `ref.swipeLeft` or `ref.swipeRight`.
    *
-   * Default value: `undefined`
+   * Default value: `undefined`.
    */
-  imperativeSwipeAnimationConfig?: WithTimingConfig
+  imperativeSwipeAnimationConfig: WithTimingConfig | undefined
 
   /**
    * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the swipe is stopped without being validated and the card position gets reset.
    *
-   * Default value: `undefined`
+   * Default value: `undefined`.
    */
-  stoppedSwipeAnimationConfig?: WithTimingConfig
+  stoppedSwipeAnimationConfig: WithTimingConfig | undefined
 
   /**
    * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when an unswipe is performed.
    *
-   * Default value: `undefined`
+   * Default value: `undefined`.
    */
-  unswipeAnimationConfig?: WithTimingConfig
+  unswipeAnimationConfig: WithTimingConfig | undefined
+
+  /**
+   * An array of directions ("left", "right", "top" or "bottom") in which cards cannot be moved.
+   *
+   * For example, if you want to only allow for horizontal swipes, you should set `lockedDirections` to ["top", "bottom"].
+   *
+   * Defaut value: `[]`.
+   */
+  lockedDirections: SwipeDirection[]
 }

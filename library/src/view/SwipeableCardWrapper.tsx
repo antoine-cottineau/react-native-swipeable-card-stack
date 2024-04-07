@@ -132,8 +132,18 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       })
     })
     .onUpdate(({ translationX, translationY }) => {
-      xAnimationPosition.value = translationX / xEndedSwipePosition
-      yAnimationPosition.value = translationY / yEndedSwipePosition
+      const canUpdateXPosition =
+        (!options.lockedDirections.includes('left') && translationX < 0) ||
+        (!options.lockedDirections.includes('right') && translationX > 0)
+      const canUpdateYPosition =
+        (!options.lockedDirections.includes('top') && translationY < 0) ||
+        (!options.lockedDirections.includes('bottom') && translationY > 0)
+      if (canUpdateXPosition) {
+        xAnimationPosition.value = translationX / xEndedSwipePosition
+      }
+      if (canUpdateYPosition) {
+        yAnimationPosition.value = translationY / yEndedSwipePosition
+      }
     })
     .onEnd((payload) => {
       const { translationX, translationY, velocityX, velocityY } = payload
@@ -162,6 +172,8 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
           velocity,
           translationThreshold,
           velocityThreshold,
+          axis,
+          lockedDirections: options.lockedDirections,
         })
       ) {
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })

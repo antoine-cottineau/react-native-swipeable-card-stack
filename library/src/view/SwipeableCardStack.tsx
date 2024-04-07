@@ -31,8 +31,8 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
     useSwippedCardsStore()
 
   const options: SwipeableCardStackOptions = {
-    ...userOptions,
     ...defaultOptions,
+    ...userOptions,
   }
   const [renderWindowMinIndex, renderWindowMaxIndex] = getRenderWindow({
     currentIndex,

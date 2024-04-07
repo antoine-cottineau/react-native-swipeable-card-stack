@@ -19,6 +19,8 @@ export type SwipeableCardStackProps<T> = {
 
   /**
    * An optional `ViewStyle` that will be applied to the wrapper component of every card.
+   *
+   * Default value: `undefined`
    */
   cardWrapperStyle?: StyleProp<ViewStyle>
 
@@ -26,6 +28,8 @@ export type SwipeableCardStackProps<T> = {
    * An optional function that will be triggered everytime a swipe update occurs.
    *
    * This is where you should listen for important updates such as a validated swipe.
+   *
+   * Default value: `undefined`
    */
   onActiveCardUpdate?: (swipeUpdate: SwipeUpdate<T>) => void
 } & Partial<SwipeableCardStackOptions>
