@@ -12,7 +12,7 @@ import { useRefMap } from '../utils/useRefMap'
 import { type SwipeableCardStackOptions } from './SwipeableCardStackOptions'
 import { SwipeableCardWrapper } from './SwipeableCardWrapper'
 import { useDefaultOptions } from './useDefaultOptions'
-import { useSwippedCardsStore } from './useSwippedCardsStore'
+import { useSwipedCardsStore } from './useSwipedCardsStore'
 
 export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
   {
@@ -27,8 +27,8 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
   const [currentIndex, setCurrentIndex] = useState(0)
   const refMap = useRefMap<number, SwipeableCardRef>()
   const defaultOptions = useDefaultOptions()
-  const { getSwippedCardSwipeDirection, pushSwippedCard, popSwippedCard } =
-    useSwippedCardsStore()
+  const { getSwipedCardSwipeDirection, pushSwipedCard, popSwipedCard } =
+    useSwipedCardsStore()
 
   const options: SwipeableCardStackOptions = {
     ...defaultOptions,
@@ -52,10 +52,10 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
         }
         setCurrentIndex((index) => index - 1)
         refMap.get(currentIndex - 1)?.unswipe()
-        popSwippedCard()
+        popSwipedCard()
       },
     }),
-    [refMap, currentIndex, popSwippedCard],
+    [refMap, currentIndex, popSwipedCard],
   )
 
   return (
@@ -81,7 +81,7 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
             onCardSwipeStatusUpdated={(swipeStatus) => {
               if (swipeStatus.phase === 'ended') {
                 setCurrentIndex((index) => index + 1)
-                pushSwippedCard(swipeStatus.direction)
+                pushSwipedCard(swipeStatus.direction)
               }
               if (index === currentIndex) {
                 const currentDataItem = data[currentIndex]
@@ -98,7 +98,7 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
               }
             }}
             options={options}
-            initialSwipeDirection={getSwippedCardSwipeDirection(index)}
+            initialSwipeDirection={getSwipedCardSwipeDirection(index)}
             key={index}
           />
         )

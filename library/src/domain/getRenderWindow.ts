@@ -9,8 +9,8 @@ type Params = {
  *
  * Here are the rules that this function follows:
  * - the card at `currentIndex` must be rendered
- * - `numberOfRenderedCards` unswipped cards should be rendered
- * - if `currentIndex >= 1`, one swipped card should be rendered
+ * - `numberOfRenderedCards` unswiped cards should be rendered
+ * - if `currentIndex >= 1`, one swiped card should be rendered
  * - cards with negative indexes or with indexes superior to `dataLength` shouldn't be rendered
  *
  * @returns a tuple corresponding to the range of card indexes that should be rendered (inclusive).

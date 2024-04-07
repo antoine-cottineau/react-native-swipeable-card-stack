@@ -23,7 +23,7 @@ export type SwipeableCardStackOptions = {
    *
    * This prop accepts either a number or an object whose keys are swipe axis ("x" and "y") and whose values are numbers.
    *
-   * For example, if you set `endedSwipePosition` to 400, a card swipped respectively to the left or to the bottom will end its movement at respectively +400 to the left or +400 to the bottom. A card swipped respectively to the right or to the top will end its movement at respectively +400 to the right or +400 to the top.
+   * For example, if you set `endedSwipePosition` to 400, a card swiped respectively to the left or to the bottom will end its movement at respectively +400 to the left or +400 to the bottom. A card swiped respectively to the right or to the top will end its movement at respectively +400 to the right or +400 to the top.
    *
    * Before any swipe, the cards sit idle at the position 0.
    *
@@ -67,7 +67,7 @@ export type SwipeableCardStackOptions = {
   ) => WithSpringConfig
 
   /**
-   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the card is imperatively swipped via `ref.swipeLeft` or `ref.swipeRight`.
+   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the card is imperatively swiped via `ref.swipeLeft` or `ref.swipeRight`.
    *
    * Default value: `undefined`.
    */
