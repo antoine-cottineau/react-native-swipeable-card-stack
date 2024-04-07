@@ -1,7 +1,6 @@
 /**
  * A phase in which the swipe can be.
  *
- * - *idle*: nothing is happening, the card stays idle
  * - *started*: a swipe gesture has started
  * - *stopped*: the user just released the card, the card position will reset
  * - *below-threshold*: the card just went below the validation threshold
@@ -10,7 +9,6 @@
  * - *ended*: the card just ended its animation after being validated
  */
 export type SwipePhase =
-  | 'idle'
   | 'started'
   | 'stopped'
   | 'below-threshold'

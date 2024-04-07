@@ -1,15 +1,15 @@
 type Params = {
   translation: number
   velocity: number
-  validateSwipeTranslationThreshold: number
-  validateSwipeVelocityThreshold: number
+  translationThreshold: number
+  velocityThreshold: number
 }
 
 export const shouldValidateSwipe = ({
   translation,
   velocity,
-  validateSwipeTranslationThreshold,
-  validateSwipeVelocityThreshold,
+  translationThreshold,
+  velocityThreshold,
 }: Params) => {
   'worklet'
   // We must check that, even if the velocity is high enough
@@ -25,7 +25,7 @@ export const shouldValidateSwipe = ({
   }
 
   return (
-    Math.abs(translation) > validateSwipeTranslationThreshold ||
-    Math.abs(velocity) > validateSwipeVelocityThreshold
+    Math.abs(translation) > translationThreshold ||
+    Math.abs(velocity) > velocityThreshold
   )
 }

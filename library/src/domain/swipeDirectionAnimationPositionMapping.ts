@@ -1,4 +1,4 @@
-import { type SwipeDirection } from '.'
+import { type SwipeDirection } from '..'
 
 export const swipeDirectionAnimationPositionMapping: Record<
   SwipeDirection,
@@ -6,4 +6,6 @@ export const swipeDirectionAnimationPositionMapping: Record<
 > = {
   left: -1,
   right: 1,
+  bottom: 1,
+  top: -1,
 }

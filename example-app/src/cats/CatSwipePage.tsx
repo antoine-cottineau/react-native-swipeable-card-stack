@@ -4,8 +4,10 @@ import { ImpactFeedbackStyle, impactAsync } from 'expo-haptics'
 import { StatusBar } from 'expo-status-bar'
 import { useRef } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { SwipeableCardStack } from 'react-native-swipeable-card-stack'
-import { type SwipeableCardRef } from 'react-native-swipeable-card-stack/dist/SwipeableCardStack'
+import {
+  type SwipeableCardRef,
+  SwipeableCardStack,
+} from 'react-native-swipeable-card-stack'
 import { GoToHomeButton } from '../shared/components/GoToHomeButton'
 import { type RootStackParamList } from '../shared/components/Navigator'
 import { Page } from '../shared/components/Page'
@@ -31,10 +33,10 @@ export const CatSwipePage = () => {
             {...props}
             onAction={(action) => {
               if (action === 'swipe-left') {
-                ref.current?.swipeLeft()
+                ref.current?.swipe('left')
               }
               if (action === 'swipe-right') {
-                ref.current?.swipeRight()
+                ref.current?.swipe('right')
               }
               if (action === 'undo') {
                 ref.current?.unswipe()

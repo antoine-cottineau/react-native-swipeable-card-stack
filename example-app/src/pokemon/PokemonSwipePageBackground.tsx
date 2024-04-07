@@ -5,12 +5,16 @@ import { PokemonElementView } from './PokemonElementView'
 
 type Props = {
   score: number
+  numberOfSwipes: number
 }
 
-export const PokemonSwipePageBackground = ({ score }: Props) => (
+export const PokemonSwipePageBackground = ({
+  score,
+  numberOfSwipes,
+}: Props) => (
   <Container>
     <ScoreContainer>
-      <ScoreLabel>{`Score: ${score}`}</ScoreLabel>
+      <ScoreLabel>{`Score: ${score}/${numberOfSwipes}`}</ScoreLabel>
     </ScoreContainer>
     <PokemonElementView element="grass" />
     <MiddleRow>

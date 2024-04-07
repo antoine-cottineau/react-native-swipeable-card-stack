@@ -2,18 +2,11 @@ import { css } from '@emotion/native'
 import { Pressable } from 'react-native'
 import { type IconType } from '../icons/Icon'
 
-type Size = 'small' | 'large'
-
 type Props = {
   onPress: () => void
   Icon: IconType
   color: string
-  size: Size
-}
-
-const sizeMapping: Record<Size, number> = {
-  small: 70,
-  large: 80,
+  size: number
 }
 
 export const RoundButton = ({ onPress, Icon, color, size }: Props) => (
@@ -21,9 +14,9 @@ export const RoundButton = ({ onPress, Icon, color, size }: Props) => (
     onPress={onPress}
     style={({ pressed }) =>
       css({
-        width: sizeMapping[size],
+        width: size,
         aspectRatio: 1,
-        borderRadius: sizeMapping[size] / 2,
+        borderRadius: size / 2,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: pressed ? color : undefined,
@@ -33,7 +26,7 @@ export const RoundButton = ({ onPress, Icon, color, size }: Props) => (
     }
   >
     {({ pressed }) => (
-      <Icon size={sizeMapping[size] / 2} color={pressed ? 'white' : color} />
+      <Icon size={size / 2} color={pressed ? 'white' : color} />
     )}
   </Pressable>
 )

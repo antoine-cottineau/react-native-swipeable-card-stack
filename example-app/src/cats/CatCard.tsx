@@ -21,7 +21,7 @@ export const CatCard = ({
   age,
   imageUrl,
   onAction,
-  animationPosition,
+  xAnimationPosition,
   index,
   currentIndex,
 }: Props) => {
@@ -30,9 +30,9 @@ export const CatCard = ({
       return {}
     }
     return {
-      transform: [{ rotate: `${animationPosition.value * 10}deg` }],
+      transform: [{ rotate: `${xAnimationPosition.value * 10}deg` }],
       borderRadius: interpolate(
-        Math.abs(animationPosition.value),
+        Math.abs(xAnimationPosition.value),
         [0, 0.2],
         [0, 16],
       ),
@@ -45,12 +45,12 @@ export const CatCard = ({
     }
     return {
       backgroundColor: interpolateColor(
-        animationPosition.value,
+        xAnimationPosition.value,
         [-1, 0, 1],
         [colors.swipeLeft, 'transparent', colors.swipeRight],
       ),
       opacity: interpolate(
-        Math.abs(animationPosition.value),
+        Math.abs(xAnimationPosition.value),
         [0, 0.3],
         [0, 0.8],
         Extrapolation.CLAMP,

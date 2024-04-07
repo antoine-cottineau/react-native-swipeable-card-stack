@@ -3,6 +3,7 @@ import {
   type WithTimingConfig,
   type WithSpringConfig,
 } from 'react-native-reanimated'
+import { type SwipeAxisDependentProp } from '../domain/SwipeAxisDependentProp'
 
 export type SwipeableCardStackOptions = {
   /**
@@ -19,35 +20,39 @@ export type SwipeableCardStackOptions = {
   /**
    * The position where the cards rest at the end of a swipe.
    *
-   * For example, if you set `endedSwipePosition` to 400, a card swipped to the left will end its movement at -400 while a card swipped to the right will end its movement at +400.
+   * This prop accepts either a number or an object whose keys are swipe axis ("x" and "y") and whose values are numbers.
+   *
+   * For example, if you set `endedSwipePosition` to 400, a card swipped respectively to the left or to the bottom will end its movement at respectively +400 to the left or +400 to the bottom. A card swipped respectively to the right or to the top will end its movement at respectively +400 to the right or +400 to the top.
    *
    * Before any swipe, the cards sit idle at the position 0.
    *
-   * Default value: `1.5 * screenWidth`
+   * Default value: `{ x: 1.5 * screenWidth, y: 1 * screenHeight }`
    */
-  endedSwipePosition: number
+  endedSwipePosition: SwipeAxisDependentProp<number>
 
   /**
    * The translation needed for a swipe to be considered as validated, which means that if the user releases the card, the swipe animation will finish and the swipe will be completed.
    *
-   * For example, if you set `validatedSwipeTranslationThreshold` to 200 and the user swipes 190 to the right and releases the card, the swipe will be aborted. Hovewer, if the user swipes 210 to the right, the swipe will complete.
+   * This prop accepts either a number or an object whose keys are swipe axis ("x" and "y") and whose values are numbers.
    *
-   * Note that the same behaviour is valid on the left side (negative positions).
+   * For example, if you set `validatedSwipeTranslationThreshold` to 200 and the user swipes 190 to the right and releases the card, the swipe will be aborted. Hovewer, if the user swipes 210 to the right, the swipe will complete.
    *
    * A swipe can also be validated if the velocity is high enough, see `validateSwipeVelocityThreshold`.
    *
-   * Default value: `0.5 * screenWidth`
+   * Default value: `{ x: 0.5 * screenWidth, y: 0.25 * screenHeight }`
    */
-  validateSwipeTranslationThreshold: number
+  validateSwipeTranslationThreshold: SwipeAxisDependentProp<number>
 
   /**
    * The velocity needed for a swipe to be validated.
+   *
+   * This prop accepts either a number or an object whose keys are swipe axis ("x" and "y") and whose values are numbers.
    *
    * A swipe can also be validated if the translation is high enough, see `validateSwipeTranslationThreshold`.
    *
    * Default value: `800`
    */
-  validateSwipeVelocityThreshold: number
+  validateSwipeVelocityThreshold: SwipeAxisDependentProp<number>
 
   /**
    * A function that returns a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/) that will be used in the final animation once a swipe is validated.
