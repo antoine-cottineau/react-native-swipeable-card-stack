@@ -13,7 +13,8 @@
     "format": "prettier -w .",
     "test": "yarn test:format && yarn test:lint",
     "test:format": "prettier -c .",
-    "test:lint": "eslint '**/src/**/*.{ts,tsx}'"
+    "test:lint": "eslint '**/src/**/*.{ts,tsx}'",
+    "test:jest": "yarn workspace react-native-swipeable-card-stack jest"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.20.1",
