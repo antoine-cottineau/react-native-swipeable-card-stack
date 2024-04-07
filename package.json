@@ -14,7 +14,8 @@
     "test": "yarn test:format && yarn test:lint",
     "test:format": "prettier -c .",
     "test:lint": "eslint '**/src/**/*.{ts,tsx}'",
-    "test:jest": "yarn workspace react-native-swipeable-card-stack jest"
+    "test:jest": "yarn workspace react-native-swipeable-card-stack jest",
+    "test:coverage": "yarn test:jest --coverage"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.20.1",
