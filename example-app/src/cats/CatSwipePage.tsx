@@ -57,6 +57,7 @@ export const CatSwipePage = () => {
             navigate('CatMatch', { catName: currentDataItem.name })
           }
         }}
+        lockedDirections={['top', 'bottom']}
       />
       <GoToHomeButtonContainer style={css({ top: top + 16 })}>
         <GoToHomeButton />

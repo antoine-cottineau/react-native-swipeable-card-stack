@@ -1,8 +1,13 @@
+import { type SwipeAxis } from './SwipeAxis'
+import { type SwipeDirection } from './SwipeDirection'
+
 type Params = {
   translation: number
   velocity: number
   translationThreshold: number
   velocityThreshold: number
+  axis: SwipeAxis
+  lockedDirections: SwipeDirection[]
 }
 
 export const shouldValidateSwipe = ({
@@ -10,8 +15,24 @@ export const shouldValidateSwipe = ({
   velocity,
   translationThreshold,
   velocityThreshold,
+  axis,
+  lockedDirections,
 }: Params) => {
   'worklet'
+  const shouldPreventXValidation =
+    (lockedDirections.includes('left') && translation < 0) ||
+    (lockedDirections.includes('right') && translation > 0)
+  const shouldPreventYValidation =
+    (lockedDirections.includes('top') && translation < 0) ||
+    (lockedDirections.includes('bottom') && translation > 0)
+
+  if (
+    (axis === 'x' && shouldPreventXValidation) ||
+    (axis === 'y' && shouldPreventYValidation)
+  ) {
+    return
+  }
+
   // We must check that, even if the velocity is high enough
   // for validating the swipe, it is in the same direction
   // as the translation.

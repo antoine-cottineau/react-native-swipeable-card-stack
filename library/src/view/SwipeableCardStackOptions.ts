@@ -71,28 +71,28 @@ export type SwipeableCardStackOptions = {
    *
    * Default value: `undefined`.
    */
-  imperativeSwipeAnimationConfig?: WithTimingConfig
+  imperativeSwipeAnimationConfig: WithTimingConfig | undefined
 
   /**
    * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the swipe is stopped without being validated and the card position gets reset.
    *
    * Default value: `undefined`.
    */
-  stoppedSwipeAnimationConfig?: WithTimingConfig
+  stoppedSwipeAnimationConfig: WithTimingConfig | undefined
 
   /**
    * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when an unswipe is performed.
    *
    * Default value: `undefined`.
    */
-  unswipeAnimationConfig?: WithTimingConfig
+  unswipeAnimationConfig: WithTimingConfig | undefined
 
   /**
-   * An array of directions ("left", "right", "top", "bottom") in which cards cannot be swipped.
+   * An array of directions ("left", "right", "top" or "bottom") in which cards cannot be moved.
    *
    * For example, if you want to only allow for horizontal swipes, you should set `lockedDirections` to ["top", "bottom"].
    *
-   * Defaut value: `undefined`.
+   * Defaut value: `[]`.
    */
-  lockedDirections?: SwipeDirection[]
+  lockedDirections: SwipeDirection[]
 }
