@@ -2,5 +2,9 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
+  },
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.*ts, ${capture}.*tsx",
+    "*.tsx": "${capture}.*tsx"
   }
 }
