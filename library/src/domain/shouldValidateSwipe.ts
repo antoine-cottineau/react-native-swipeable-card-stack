@@ -1,5 +1,6 @@
 import { type SwipeAxis } from './SwipeAxis'
 import { type SwipeDirection } from './SwipeDirection'
+import { isSwipeLocked } from './isSwipeLocked'
 
 type Params = {
   translation: number
@@ -19,17 +20,7 @@ export const shouldValidateSwipe = ({
   lockedDirections,
 }: Params) => {
   'worklet'
-  const shouldPreventXValidation =
-    (lockedDirections.includes('left') && translation < 0) ||
-    (lockedDirections.includes('right') && translation > 0)
-  const shouldPreventYValidation =
-    (lockedDirections.includes('top') && translation < 0) ||
-    (lockedDirections.includes('bottom') && translation > 0)
-
-  if (
-    (axis === 'x' && shouldPreventXValidation) ||
-    (axis === 'y' && shouldPreventYValidation)
-  ) {
+  if (isSwipeLocked({ translation, axis, lockedDirections })) {
     return false
   }
 
