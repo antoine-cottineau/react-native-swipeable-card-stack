@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`correctly renders 1`] = `
+<View
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    animatedStyle={
+      {
+        "value": {
+          "transform": [
+            {
+              "translateX": 0,
+            },
+            {
+              "translateY": 0,
+            },
+          ],
+        },
+      }
+    }
+    collapsable={false}
+    style={
+      {
+        "height": "100%",
+        "position": "absolute",
+        "transform": [
+          {
+            "translateX": 0,
+          },
+          {
+            "translateY": 0,
+          },
+        ],
+        "width": "100%",
+      }
+    }
+    testID="swipeable-card-wrapper-3"
+  >
+    <View
+      collapsable={false}
+    >
+      <Text>
+        strawberry
+      </Text>
+    </View>
+  </View>
+  <View
+    animatedStyle={
+      {
+        "value": {
+          "transform": [
+            {
+              "translateX": 0,
+            },
+            {
+              "translateY": 0,
+            },
+          ],
+        },
+      }
+    }
+    collapsable={false}
+    style={
+      {
+        "height": "100%",
+        "position": "absolute",
+        "transform": [
+          {
+            "translateX": 0,
+          },
+          {
+            "translateY": 0,
+          },
+        ],
+        "width": "100%",
+      }
+    }
+    testID="swipeable-card-wrapper-2"
+  >
+    <View
+      collapsable={false}
+    >
+      <Text>
+        lemon
+      </Text>
+    </View>
+  </View>
+  <View
+    animatedStyle={
+      {
+        "value": {
+          "transform": [
+            {
+              "translateX": 0,
+            },
+            {
+              "translateY": 0,
+            },
+          ],
+        },
+      }
+    }
+    collapsable={false}
+    style={
+      {
+        "height": "100%",
+        "position": "absolute",
+        "transform": [
+          {
+            "translateX": 0,
+          },
+          {
+            "translateY": 0,
+          },
+        ],
+        "width": "100%",
+      }
+    }
+    testID="swipeable-card-wrapper-1"
+  >
+    <View
+      collapsable={false}
+    >
+      <Text>
+        apple
+      </Text>
+    </View>
+  </View>
+  <View
+    animatedStyle={
+      {
+        "value": {
+          "transform": [
+            {
+              "translateX": 0,
+            },
+            {
+              "translateY": 0,
+            },
+          ],
+        },
+      }
+    }
+    collapsable={false}
+    style={
+      {
+        "height": "100%",
+        "position": "absolute",
+        "transform": [
+          {
+            "translateX": 0,
+          },
+          {
+            "translateY": 0,
+          },
+        ],
+        "width": "100%",
+      }
+    }
+    testID="swipeable-card-wrapper-0"
+  >
+    <View
+      collapsable={false}
+    >
+      <Text>
+        banana
+      </Text>
+    </View>
+  </View>
+</View>
+`;
