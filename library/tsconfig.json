@@ -18,6 +18,5 @@
     "strict": true,
     "target": "es2022"
   },
-  "include": ["src"],
-  "exclude": ["testHelpers", "**/*.test.tsx?"]
+  "include": ["src/**/*"]
 }

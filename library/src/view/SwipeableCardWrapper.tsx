@@ -212,6 +212,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       yAnimationPosition.value = targetAnimationPosition
     })
     .enabled(isActive)
+    .withTestId(`swipeable-card-wrapper-${index}-gesture`)
 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
