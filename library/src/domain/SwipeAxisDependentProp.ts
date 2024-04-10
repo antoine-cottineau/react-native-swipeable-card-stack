@@ -2,7 +2,7 @@ import { allAxis, type SwipeAxis } from './SwipeAxis'
 
 export type SwipeAxisDependentProp<T> = T | Record<SwipeAxis, T>
 
-export const extractSwipeAxisDependentPropValue = <T>(
+export const extractPropValue = <T>(
   prop: SwipeAxisDependentProp<T>,
   axis: SwipeAxis,
 ) => {
