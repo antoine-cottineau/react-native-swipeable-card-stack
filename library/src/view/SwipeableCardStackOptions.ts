@@ -69,11 +69,15 @@ export type SwipeableCardStackOptions = {
   >
 
   /**
-   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the card is imperatively swiped via `ref.swipeLeft` or `ref.swipeRight`.
+   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the card is imperatively swiped via `ref.swipe`.
    *
-   * Default value: `undefined`.
+   * This prop can also accept an object whose keys are swipe axis ("x" and "y") and whose values are reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming).
+   *
+   * Default value: `{ duration: 300, easing: Easing.inOut(Easing.quad) }`
    */
-  imperativeSwipeAnimationConfig: WithTimingConfig | undefined
+  imperativeSwipeAnimationConfig: SwipeAxisDependentProp<
+    WithTimingConfig | undefined
+  >
 
   /**
    * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the swipe is stopped without being validated and the card position gets reset.

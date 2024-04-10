@@ -1,3 +1,4 @@
+import { Easing } from 'react-native-reanimated'
 import { useSafeAreaFrame } from 'react-native-safe-area-context'
 import { type SwipeableCardStackOptions } from '..'
 
@@ -28,9 +29,18 @@ export const useDefaultOptions = (): SwipeableCardStackOptions => {
         stiffness: 200,
       }),
     },
-    imperativeSwipeAnimationConfig: undefined,
-    stoppedSwipeAnimationConfig: undefined,
-    unswipeAnimationConfig: undefined,
+    imperativeSwipeAnimationConfig: {
+      duration: 300,
+      easing: Easing.inOut(Easing.quad),
+    },
+    stoppedSwipeAnimationConfig: {
+      duration: 300,
+      easing: Easing.inOut(Easing.quad),
+    },
+    unswipeAnimationConfig: {
+      duration: 300,
+      easing: Easing.inOut(Easing.quad),
+    },
     lockedDirections: [],
   }
 }

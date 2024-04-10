@@ -75,22 +75,6 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     options.validateSwipeTranslationThreshold,
     'y',
   )
-  const validateSwipeXVelocityThreshold = extractSwipeAxisDependentPropValue(
-    options.validateSwipeVelocityThreshold,
-    'x',
-  )
-  const validateSwipeYVelocityThreshold = extractSwipeAxisDependentPropValue(
-    options.validateSwipeVelocityThreshold,
-    'y',
-  )
-  const validatedXSwipeAnimationConfig = extractSwipeAxisDependentPropValue(
-    options.validatedSwipeAnimationConfig,
-    'x',
-  )
-  const validatedYSwipeAnimationConfig = extractSwipeAxisDependentPropValue(
-    options.validatedSwipeAnimationConfig,
-    'y',
-  )
 
   const isActive = index === currentIndex
 
@@ -109,7 +93,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     swipe: (direction) => {
       const targetAnimationPosition = withTiming(
         swipeDirectionAnimationPositionMapping[direction],
-        options.imperativeSwipeAnimationConfig,
+        extractSwipeAxisDependentPropValue(
+          options.imperativeSwipeAnimationConfig,
+          swipeDirectionAxisMapping[direction],
+        ),
         () => {
           runOnJS(onCardSwipeStatusUpdated)({
             direction,
@@ -176,10 +163,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         axis === 'x'
           ? validateSwipeXTranslationThreshold
           : validateSwipeYTranslationThreshold
-      const velocityThreshold =
-        axis === 'x'
-          ? validateSwipeXVelocityThreshold
-          : validateSwipeYVelocityThreshold
+      const velocityThreshold = extractSwipeAxisDependentPropValue(
+        options.validateSwipeVelocityThreshold,
+        axis,
+      )
 
       if (
         shouldValidateSwipe({
@@ -192,13 +179,12 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         })
       ) {
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })
-        const validatedSwipeAnimationConfig =
-          axis === 'x'
-            ? validatedXSwipeAnimationConfig
-            : validatedYSwipeAnimationConfig
         const targetAnimationPosition = withSpring(
           swipeDirectionAnimationPositionMapping[direction],
-          validatedSwipeAnimationConfig(payload),
+          extractSwipeAxisDependentPropValue(
+            options.validatedSwipeAnimationConfig,
+            axis,
+          )(payload),
           () => {
             runOnJS(onCardSwipeStatusUpdated)({
               direction,
@@ -215,6 +201,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       }
 
       runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
+
       const targetAnimationPosition = withTiming(
         0,
         options.stoppedSwipeAnimationConfig,
