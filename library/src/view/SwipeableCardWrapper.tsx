@@ -204,7 +204,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
 
       const targetAnimationPosition = withTiming(
         0,
-        options.stoppedSwipeAnimationConfig,
+        extractSwipeAxisDependentPropValue(
+          options.stoppedSwipeAnimationConfig,
+          axis,
+        ),
       )
 
       xAnimationPosition.value = targetAnimationPosition
