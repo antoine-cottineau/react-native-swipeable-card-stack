@@ -1,11 +1,10 @@
-import styled from '@emotion/native'
 import {
   forwardRef,
   useImperativeHandle,
   type ForwardedRef,
   type ReactNode,
 } from 'react'
-import { type StyleProp, type ViewStyle } from 'react-native'
+import { StyleSheet, type StyleProp, type ViewStyle } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
   runOnJS,
@@ -225,8 +224,8 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   }))
 
   return (
-    <Container
-      style={[cardWrapperStyle, animatedStyle]}
+    <Animated.View
+      style={[styles.container, cardWrapperStyle, animatedStyle]}
       testID={`swipeable-card-wrapper-${index}`}
     >
       <GestureDetector gesture={panGesture}>
@@ -236,14 +235,12 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
           currentIndex,
         })}
       </GestureDetector>
-    </Container>
+    </Animated.View>
   )
 })
 
-const Container = styled(Animated.View)({
-  height: '100%',
-  width: '100%',
-  position: 'absolute',
+const styles = StyleSheet.create({
+  container: { height: '100%', width: '100%', position: 'absolute' },
 })
 
 const getSwipeSharedValueInitialValue = (

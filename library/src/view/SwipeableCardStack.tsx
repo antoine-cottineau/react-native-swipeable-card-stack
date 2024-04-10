@@ -1,10 +1,10 @@
-import styled from '@emotion/native'
 import {
   forwardRef,
   useImperativeHandle,
   useState,
   type ForwardedRef,
 } from 'react'
+import { StyleSheet, View } from 'react-native'
 import { type SwipeableCardRef, type SwipeableCardStackProps } from '..'
 import { getRenderWindow } from '../domain/getRenderWindow'
 import { toReversed } from '../utils/toReversed'
@@ -59,7 +59,7 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
   )
 
   return (
-    <Container>
+    <View style={styles.container}>
       {toReversed(data).map((cardData, reverseIndex) => {
         const index = data.length - reverseIndex - 1
 
@@ -103,10 +103,12 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
           />
         )
       })}
-    </Container>
+    </View>
   )
 })
 
-const Container = styled.View({
-  flex: 1,
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
 })
