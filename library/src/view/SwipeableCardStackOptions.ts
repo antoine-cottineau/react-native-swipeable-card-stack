@@ -58,13 +58,15 @@ export type SwipeableCardStackOptions = {
   /**
    * A function that returns a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/) that will be used in the final animation once a swipe is validated.
    *
+   * This prop can also accept an object whose keys are swipe axis ("x" and "y") and whose values are functions that return a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/).
+   *
    * @param payload A gesture-handler payload that you can use to customize the config.
    *
-   * Default value: see *useDefaultOptions.ts*.
+   * Default value: `{ x: ({ velocityX }) => ({ velocity: 0.0001 * velocityX, mass: 1, damping: 100, stiffness: 200 }), y: ({ velocityY }) => ({ velocity: 0.0001 * velocityY, mass: 1, damping: 100, stiffness: 200 }) }`.
    */
-  validatedSwipeAnimationConfig: (
-    payload: PanGestureHandlerEventPayload,
-  ) => WithSpringConfig
+  validatedSwipeAnimationConfig: SwipeAxisDependentProp<
+    (payload: PanGestureHandlerEventPayload) => WithSpringConfig
+  >
 
   /**
    * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the card is imperatively swiped via `ref.swipeLeft` or `ref.swipeRight`.

@@ -83,6 +83,14 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     options.validateSwipeVelocityThreshold,
     'y',
   )
+  const validatedXSwipeAnimationConfig = extractSwipeAxisDependentPropValue(
+    options.validatedSwipeAnimationConfig,
+    'x',
+  )
+  const validatedYSwipeAnimationConfig = extractSwipeAxisDependentPropValue(
+    options.validatedSwipeAnimationConfig,
+    'y',
+  )
 
   const isActive = index === currentIndex
 
@@ -184,9 +192,13 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         })
       ) {
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })
+        const validatedSwipeAnimationConfig =
+          axis === 'x'
+            ? validatedXSwipeAnimationConfig
+            : validatedYSwipeAnimationConfig
         const targetAnimationPosition = withSpring(
           swipeDirectionAnimationPositionMapping[direction],
-          options.validatedSwipeAnimationConfig(payload),
+          validatedSwipeAnimationConfig(payload),
           () => {
             runOnJS(onCardSwipeStatusUpdated)({
               direction,
