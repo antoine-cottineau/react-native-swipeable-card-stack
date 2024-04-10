@@ -115,8 +115,14 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       }
     },
     unswipe: () => {
-      xAnimationPosition.value = withTiming(0, options.unswipeAnimationConfig)
-      yAnimationPosition.value = withTiming(0, options.unswipeAnimationConfig)
+      xAnimationPosition.value = withTiming(
+        0,
+        extractSwipeAxisDependentPropValue(options.unswipeAnimationConfig, 'x'),
+      )
+      yAnimationPosition.value = withTiming(
+        0,
+        extractSwipeAxisDependentPropValue(options.unswipeAnimationConfig, 'y'),
+      )
     },
   }))
 
