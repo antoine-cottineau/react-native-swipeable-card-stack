@@ -8,35 +8,91 @@ TODO: screenshots/gifs
 
 ## Features
 
-- ⏳ Support swipes to the left, right, top, and bottom
-- ⏳ Support unswipes
-- ⏳ Support locking card translation along the x or y axis
-- ✅ Support customizing each animation
-- ✅ Allow performing your own animations on the cards based on the swipe/unswipe progression
+- ✅ support swipes to the left, right, top, and bottom
+- ✅ support unswipes
+- ✅ support preventing card translation along any direction
+- ✅ support customizing swipe and unswipe animations
+- ✅ support customizing the criteria for which a card is swiped
+- ✅ allow performing your own animations on the cards based on the swipe/unswipe progression
 
-## Basic example
+## Example
 
 ```typescript
-const CatStack = () => (
-  <SwipeableCardStack
-    data={[
-      { name: 'Felix', age: 6 },
-      { name: 'Lily', age: 3 },
-      { name: 'Diego', age: 2 },
-    ]}
-    renderCard={CatCard}
-  />
-)
+type CatItem = {
+  name: string
+  age: number
+}
 
-// Example card component, you can get as complex as you want
-const CatCard = ({ name, age }: { name: string; age: number }) => (
-  <View>
-    <Text>{`${name} - ${age}`}</Text>
-  </View>
-)
+const cats: CatItem[] = [
+  { name: 'Felix', age: 6 },
+  { name: 'Lily', age: 3 },
+  { name: 'Diego', age: 2 },
+]
+
+export const CatStack = () => {
+  const ref = useRef<SwipeableCardStackRef>(null)
+
+  return (
+    <>
+      <SwipeableCardStack
+        data={cats}
+        renderCard={CatCard}
+        lockedDirections={['top', 'bottom']}
+        ref={ref}
+      />
+      <Button
+        title="Swipe left"
+        onPress={() => {
+          ref.current?.swipe('left')
+        }}
+      />
+      <Button
+        title="Unswipe"
+        onPress={() => {
+          ref.current?.unswipe()
+        }}
+      />
+      <Button
+        title="Swipe right"
+        onPress={() => {
+          ref.current?.swipe('right')
+        }}
+      />
+    </>
+  )
+}
+
+const CatCard = ({
+  name,
+  age,
+  xAnimationPosition,
+}: RenderCardProps<CatItem>) => {
+  const cardAnimatedStyle = useAnimatedStyle(() => ({
+    backgroundColor: interpolateColor(
+      xAnimationPosition.value,
+      [-1, 0, 1],
+      ['#F44336', 'white', '#43A047'],
+    ),
+  }))
+
+  return (
+    <Animated.View
+      style={[
+        {
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        cardAnimatedStyle,
+      ]}
+    >
+      <Text>{`${name} - ${age}`}</Text>
+    </Animated.View>
+  )
+}
 ```
 
-To see a more complete implementation, check out the [example app](./example-app/).
+To see two more complete examples, check out the [example app](./example-app/).
 
 ## Installation
 
@@ -58,7 +114,7 @@ yarn add react-native-swipeable-card-stack
 
 ## Documentation
 
-This library exports a `SwipeableCardStack` component that displays the cards, reacts to user gestures, performs some animations and send swipping events.
+This library exposes a `SwipeableCardStack` component that displays the cards, reacts to user gestures, performs some animations and send swipping events.
 
 Here is the list of props this component accepts:
 
