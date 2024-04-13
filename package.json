@@ -11,6 +11,7 @@
     "serve": "yarn workspace react-native-swipeable-card-stack tsc -w",
     "start": "yarn workspace example-app start",
     "format": "prettier -w .",
+    "publish": "yarn workspace react-native-swipeable-card-stack publish",
     "test": "yarn test:format && yarn test:lint",
     "test:format": "prettier -c .",
     "test:lint": "eslint '**/src/**/*.{ts,tsx}'",
