@@ -46,7 +46,7 @@ export const CatCard = ({
     return {
       backgroundColor: interpolateColor(
         xAnimationPosition.value,
-        [-1, 0, 1],
+        [-0.4, 0, 0.4],
         [colors.swipeLeft, 'transparent', colors.swipeRight],
       ),
       opacity: interpolate(
