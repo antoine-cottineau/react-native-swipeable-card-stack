@@ -220,6 +220,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         translateY: yAnimationPosition.value * yEndedSwipePosition,
       },
     ],
+    opacity: status === 'swiped' ? 0 : 1,
   }))
 
   return (
