@@ -1,5 +1,6 @@
 import styled from '@emotion/native'
 import { Image } from 'expo-image'
+import { memo } from 'react'
 import Animated, {
   Extrapolation,
   interpolate,
@@ -16,14 +17,14 @@ type Props = RenderCardProps<CatDataItem> & {
   onAction: (action: CatAction) => void
 }
 
-export const CatCard = ({
+export const CatCard = memo(function CatCard({
   name,
   age,
   imageUrl,
   onAction,
   xAnimationPosition,
   status,
-}: Props) => {
+}: Props) {
   const containerStyle = useAnimatedStyle(() => {
     if (status !== 'current') {
       return {}
@@ -64,7 +65,7 @@ export const CatCard = ({
       <CatCardBottomView name={name} age={age} onAction={onAction} />
     </Container>
   )
-}
+})
 
 const Container = styled(Animated.View)({
   flex: 1,

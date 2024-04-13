@@ -2,7 +2,7 @@ import styled, { css } from '@emotion/native'
 import { type NavigationProp, useNavigation } from '@react-navigation/native'
 import { ImpactFeedbackStyle, impactAsync } from 'expo-haptics'
 import { StatusBar } from 'expo-status-bar'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import {
   type SwipeableCardRef,
@@ -11,6 +11,7 @@ import {
 import { GoToHomeButton } from '../shared/components/GoToHomeButton'
 import { type RootStackParamList } from '../shared/components/Navigator'
 import { Page } from '../shared/components/Page'
+import { type CatAction } from './CatAction'
 import { CatCard } from './CatCard'
 import { CatEndOfStackView } from './CatEndOfStackView'
 import { cats } from './cats'
@@ -20,6 +21,18 @@ export const CatSwipePage = () => {
   const { navigate } = useNavigation<NavigationProp<RootStackParamList>>()
   const { top } = useSafeAreaInsets()
 
+  const onAction = useCallback((action: CatAction) => {
+    if (action === 'swipe-left') {
+      ref.current?.swipe('left')
+    }
+    if (action === 'swipe-right') {
+      ref.current?.swipe('right')
+    }
+    if (action === 'undo') {
+      ref.current?.unswipe()
+    }
+  }, [])
+
   return (
     <Page>
       <StatusBar style="light" />
@@ -28,22 +41,7 @@ export const CatSwipePage = () => {
       </EndOfStackContainer>
       <SwipeableCardStack
         data={cats}
-        renderCard={(props) => (
-          <CatCard
-            {...props}
-            onAction={(action) => {
-              if (action === 'swipe-left') {
-                ref.current?.swipe('left')
-              }
-              if (action === 'swipe-right') {
-                ref.current?.swipe('right')
-              }
-              if (action === 'undo') {
-                ref.current?.unswipe()
-              }
-            }}
-          />
-        )}
+        renderCard={(props) => <CatCard {...props} onAction={onAction} />}
         ref={ref}
         onActiveCardUpdate={({ phase, direction, currentDataItem }) => {
           if (phase === 'below-threshold' || phase === 'above-threshold') {
