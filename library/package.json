@@ -10,6 +10,13 @@
     "dist",
     "README.md"
   ],
+  "keywords": [
+    "swipe",
+    "tinder",
+    "react-native",
+    "card",
+    "stack"
+  ],
   "dependencies": {
     "react-native-safe-area-context": "4.8.2",
     "typescript": "^5.3.3"
