@@ -6,6 +6,7 @@ import {
 } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { type SwipeableCardRef, type SwipeableCardStackProps } from '..'
+import { getStatus } from '../domain/CardStatus'
 import { getRenderWindow } from '../domain/getRenderWindow'
 import { toReversed } from '../utils/toReversed'
 import { useRefMap } from '../utils/useRefMap'
@@ -76,7 +77,7 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
               renderCard({ ...cardData, ...renderCardAddedProps })
             }
             index={index}
-            currentIndex={currentIndex}
+            status={getStatus({ index, currentIndex })}
             cardWrapperStyle={cardWrapperStyle}
             onCardSwipeStatusUpdated={(swipeStatus) => {
               if (swipeStatus.phase === 'ended') {

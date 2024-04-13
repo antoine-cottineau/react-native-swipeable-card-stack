@@ -1,4 +1,5 @@
 import { type SharedValue } from 'react-native-reanimated'
+import { type CardStatus } from './CardStatus'
 
 export type RenderCardProps<T> = T & RenderCardAddedProps
 
@@ -9,9 +10,9 @@ export type RenderCardAddedProps = {
   index: number
 
   /**
-   * The index of the card that is currently on the top of the stack.
+   * Whether the card has been `swiped`, is the `current` one or is `unswiped` (and not the current one).
    */
-  currentIndex: number
+  status: CardStatus
 
   /**
    * A reanimated [SharedValue](https://docs.swmansion.com/react-native-reanimated/docs/core/useSharedValue/) that is synced with the swipe x position of the current card and can be used to perform custom animations.
