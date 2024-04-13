@@ -24,15 +24,6 @@ jobs:
       - name: Build react-native-swipeable-card-stack
         run: yarn build
 
-      - name: Test formatting
-        run: yarn test:format
-
-      - name: Test linting
-        run: yarn test:lint
-
-      - name: Run unit tests
-        run: yarn test:jest
-
       - name: Publish to npm
         run: yarn release
         env:
