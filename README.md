@@ -263,11 +263,11 @@ Defaut value: `[]`.
 
 The index of the card in the stack.
 
-#### ▶️ currentIndex
+#### ▶️ status
 
-> `number`
+> `CardStatus`
 
-The index of the card that is currently on the top of the stack.
+Whether the card has been `swiped`, is the `current` one or is `unswiped` (and not the current one).
 
 #### ▶️ xAnimationPosition
 

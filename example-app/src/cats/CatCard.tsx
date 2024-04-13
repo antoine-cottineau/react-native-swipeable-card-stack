@@ -22,11 +22,10 @@ export const CatCard = ({
   imageUrl,
   onAction,
   xAnimationPosition,
-  index,
-  currentIndex,
+  status,
 }: Props) => {
   const containerStyle = useAnimatedStyle(() => {
-    if (index !== currentIndex) {
+    if (status !== 'current') {
       return {}
     }
     return {
@@ -40,7 +39,7 @@ export const CatCard = ({
   })
 
   const overlayStyle = useAnimatedStyle(() => {
-    if (index !== currentIndex) {
+    if (status !== 'current') {
       return {}
     }
     return {

@@ -14,6 +14,7 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated'
 import { type SwipeableCardRef } from '..'
+import { type CardStatus } from '../domain/CardStatus'
 import { type RenderCardAddedProps } from '../domain/RenderCardProps'
 import { type SwipeAxis } from '../domain/SwipeAxis'
 import { extractPropValue } from '../domain/SwipeAxisDependentProp'
@@ -32,7 +33,7 @@ import { useThresholdEventSender } from './useThresholdEventSender'
 type SwipeableCardWrapperProps = {
   renderCard: (params: RenderCardAddedProps) => ReactNode
   index: number
-  currentIndex: number
+  status: CardStatus
   cardWrapperStyle: StyleProp<ViewStyle>
   onCardSwipeStatusUpdated: (swipeStatus: SwipeStatus) => void
   options: SwipeableCardStackOptions
@@ -45,7 +46,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     cardWrapperStyle,
     onCardSwipeStatusUpdated,
     index,
-    currentIndex,
+    status,
     options,
     initialSwipeDirection,
   }: SwipeableCardWrapperProps,
@@ -69,10 +70,8 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     'y',
   )
 
-  const isActive = index === currentIndex
-
   useThresholdEventSender({
-    isActive,
+    isActive: status === 'current',
     xAnimationPosition,
     yAnimationPosition,
     xAnimationThreshold:
@@ -209,7 +208,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       xAnimationPosition.value = targetAnimationPosition
       yAnimationPosition.value = targetAnimationPosition
     })
-    .enabled(isActive)
+    .enabled(status === 'current')
     .withTestId(`swipeable-card-wrapper-${index}-gesture`)
 
   const animatedStyle = useAnimatedStyle(() => ({
@@ -231,7 +230,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       <GestureDetector gesture={panGesture}>
         {renderCard({
           index,
-          currentIndex,
+          status,
           xAnimationPosition,
           yAnimationPosition,
         })}
