@@ -1,9 +1,11 @@
-name: Quality
+name: Release
 
-on: push
+on:
+  release:
+    types: [published]
 
 jobs:
-  quality:
+  build-and-publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,3 +32,8 @@ jobs:
 
       - name: Run unit tests
         run: yarn test:jest
+
+      - name: Publish to npm
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
