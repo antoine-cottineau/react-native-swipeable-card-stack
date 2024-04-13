@@ -34,6 +34,6 @@ jobs:
         run: yarn test:jest
 
       - name: Publish to npm
-        run: yarn publish
+        run: yarn release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
