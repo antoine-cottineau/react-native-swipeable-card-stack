@@ -8,7 +8,10 @@
   "license": "MIT",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "images/*"
   ],
   "keywords": [
     "swipe",

@@ -7,7 +7,7 @@ This library is based on [react-native-reanimated](https://github.com/software-m
 <!-- prettier-ignore -->
 | 😼 | 🔥 |
 | - | - |
-| ![example gif with cats swiping app](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/blob/main/images/demo-cats.gif?raw=true) | ![example gif with pokemon swiping app](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/blob/main/images/demo-pokemon.gif?raw=true) |
+| ![example gif with cats swiping app](./images/demo-cats.gif) | ![example gif with pokemon swiping app](./images/demo-pokemon.gif) |
 
 ## Features
 
@@ -308,4 +308,4 @@ Imperatively undo the last swipe.
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/blob/main/CONTRIBUTING.md).
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
