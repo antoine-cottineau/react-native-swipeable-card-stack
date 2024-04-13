@@ -4,7 +4,10 @@ Implement a swipeable card stack, similar to Tinder, with ease.
 
 This library is based on [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) and on [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler).
 
-TODO: screenshots/gifs
+<!-- prettier-ignore -->
+| 😼 | 🔥 |
+| - | - |
+| ![example gif with cats swiping app](./images/demo-cats.gif) | Coucou |
 
 ## Features
 
