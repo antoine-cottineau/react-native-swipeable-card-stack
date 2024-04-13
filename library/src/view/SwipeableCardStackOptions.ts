@@ -10,9 +10,7 @@ export type SwipeableCardStackOptions = {
   /**
    * How many cards should be rendered at the same time.
    *
-   * To improve performance, *react-native-swipeable-card-stack* does not render all the cards.
-   * This has usually no visual impact from a user standpoint because most of the cards are hidden by the two first cards of the stack.
-   * However, if you encounter a case where some cards are not visible, you may want to increase this value.
+   * To improve performance, *react-native-swipeable-card-stack* does not render all the cards. This has usually no visual impact from a user standpoint because most of the cards are hidden by the two first cards of the stack. However, if you encounter a case where some cards are not visible, you may want to increase this value.
    *
    * Default value: `3`.
    */
@@ -58,39 +56,51 @@ export type SwipeableCardStackOptions = {
   /**
    * A function that returns a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/) that will be used in the final animation once a swipe is validated.
    *
-   * @param payload A gesture-handler payload that you can use to customize the config.
+   * This prop can also accept an object whose keys are swipe axis ("x" and "y") and whose values are functions that return a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/).
    *
-   * Default value: see *useDefaultOptions.ts*.
+   * `payload` is a gesture-handler payload that you can use to customize the config.
+   *
+   * Default value: `{ x: ({ velocityX }) => ({ velocity: 0.0001 * velocityX, mass: 1, damping: 100, stiffness: 200 }), y: ({ velocityY }) => ({ velocity: 0.0001 * velocityY, mass: 1, damping: 100, stiffness: 200 }) }`.
    */
-  validatedSwipeAnimationConfig: (
-    payload: PanGestureHandlerEventPayload,
-  ) => WithSpringConfig
+  validatedSwipeAnimationConfig: SwipeAxisDependentProp<
+    (payload: PanGestureHandlerEventPayload) => WithSpringConfig
+  >
 
   /**
-   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the card is imperatively swiped via `ref.swipeLeft` or `ref.swipeRight`.
+   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the card is imperatively swiped via `ref.swipe`.
    *
-   * Default value: `undefined`.
+   * This prop can also accept an object whose keys are swipe axis ("x" and "y") and whose values are reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming).
+   *
+   * Default value: `{ duration: 300, easing: Easing.inOut(Easing.quad) }`.
    */
-  imperativeSwipeAnimationConfig: WithTimingConfig | undefined
+  imperativeSwipeAnimationConfig: SwipeAxisDependentProp<
+    WithTimingConfig | undefined
+  >
 
   /**
    * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when the swipe is stopped without being validated and the card position gets reset.
    *
-   * Default value: `undefined`.
+   * This prop can also accept an object whose keys are swipe axis ("x" and "y") and whose values are reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming).
+   *
+   * Default value: `{ duration: 300, easing: Easing.inOut(Easing.quad) }`.
    */
-  stoppedSwipeAnimationConfig: WithTimingConfig | undefined
+  stoppedSwipeAnimationConfig: SwipeAxisDependentProp<
+    WithTimingConfig | undefined
+  >
 
   /**
-   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when an unswipe is performed.
+   * A reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming) that is used when an unswipe (undoing of a swipe) is performed.
    *
-   * Default value: `undefined`.
+   * This prop can also accept an object whose keys are swipe axis ("x" and "y") and whose values are reanimated [TimingConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming).
+   *
+   * Default value: `{ duration: 300, easing: Easing.inOut(Easing.quad) }`.
    */
-  unswipeAnimationConfig: WithTimingConfig | undefined
+  unswipeAnimationConfig: SwipeAxisDependentProp<WithTimingConfig | undefined>
 
   /**
    * An array of directions ("left", "right", "top" or "bottom") in which cards cannot be moved.
    *
-   * For example, if you want to only allow for horizontal swipes, you should set `lockedDirections` to ["top", "bottom"].
+   * For example, if you want to only allow horizontal swipes, you should set `lockedDirections` to `["top", "bottom"]`.
    *
    * Defaut value: `[]`.
    */

@@ -1,11 +1,10 @@
-import styled from '@emotion/native'
 import {
   forwardRef,
   useImperativeHandle,
   type ForwardedRef,
   type ReactNode,
 } from 'react'
-import { type StyleProp, type ViewStyle } from 'react-native'
+import { StyleSheet, type StyleProp, type ViewStyle } from 'react-native'
 import { Gesture, GestureDetector } from 'react-native-gesture-handler'
 import Animated, {
   runOnJS,
@@ -17,7 +16,7 @@ import Animated, {
 import { type SwipeableCardRef } from '..'
 import { type RenderCardAddedProps } from '../domain/RenderCardProps'
 import { type SwipeAxis } from '../domain/SwipeAxis'
-import { extractSwipeAxisDependentPropValue } from '../domain/SwipeAxisDependentProp'
+import { extractPropValue } from '../domain/SwipeAxisDependentProp'
 import {
   swipeDirectionAxisMapping,
   type SwipeDirection,
@@ -59,28 +58,14 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     getSwipeSharedValueInitialValue(initialSwipeDirection, 'y'),
   )
 
-  const xEndedSwipePosition = extractSwipeAxisDependentPropValue(
-    options.endedSwipePosition,
-    'x',
-  )
-  const yEndedSwipePosition = extractSwipeAxisDependentPropValue(
-    options.endedSwipePosition,
-    'y',
-  )
-  const validateSwipeXTranslationThreshold = extractSwipeAxisDependentPropValue(
+  const xEndedSwipePosition = extractPropValue(options.endedSwipePosition, 'x')
+  const yEndedSwipePosition = extractPropValue(options.endedSwipePosition, 'y')
+  const validateSwipeXTranslationThreshold = extractPropValue(
     options.validateSwipeTranslationThreshold,
     'x',
   )
-  const validateSwipeYTranslationThreshold = extractSwipeAxisDependentPropValue(
+  const validateSwipeYTranslationThreshold = extractPropValue(
     options.validateSwipeTranslationThreshold,
-    'y',
-  )
-  const validateSwipeXVelocityThreshold = extractSwipeAxisDependentPropValue(
-    options.validateSwipeVelocityThreshold,
-    'x',
-  )
-  const validateSwipeYVelocityThreshold = extractSwipeAxisDependentPropValue(
-    options.validateSwipeVelocityThreshold,
     'y',
   )
 
@@ -101,7 +86,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     swipe: (direction) => {
       const targetAnimationPosition = withTiming(
         swipeDirectionAnimationPositionMapping[direction],
-        options.imperativeSwipeAnimationConfig,
+        extractPropValue(
+          options.imperativeSwipeAnimationConfig,
+          swipeDirectionAxisMapping[direction],
+        ),
         () => {
           runOnJS(onCardSwipeStatusUpdated)({
             direction,
@@ -120,8 +108,14 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       }
     },
     unswipe: () => {
-      xAnimationPosition.value = withTiming(0, options.unswipeAnimationConfig)
-      yAnimationPosition.value = withTiming(0, options.unswipeAnimationConfig)
+      xAnimationPosition.value = withTiming(
+        0,
+        extractPropValue(options.unswipeAnimationConfig, 'x'),
+      )
+      yAnimationPosition.value = withTiming(
+        0,
+        extractPropValue(options.unswipeAnimationConfig, 'y'),
+      )
     },
   }))
 
@@ -168,10 +162,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         axis === 'x'
           ? validateSwipeXTranslationThreshold
           : validateSwipeYTranslationThreshold
-      const velocityThreshold =
-        axis === 'x'
-          ? validateSwipeXVelocityThreshold
-          : validateSwipeYVelocityThreshold
+      const velocityThreshold = extractPropValue(
+        options.validateSwipeVelocityThreshold,
+        axis,
+      )
 
       if (
         shouldValidateSwipe({
@@ -186,7 +180,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
         runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'validated' })
         const targetAnimationPosition = withSpring(
           swipeDirectionAnimationPositionMapping[direction],
-          options.validatedSwipeAnimationConfig(payload),
+          extractPropValue(
+            options.validatedSwipeAnimationConfig,
+            axis,
+          )(payload),
           () => {
             runOnJS(onCardSwipeStatusUpdated)({
               direction,
@@ -203,9 +200,10 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       }
 
       runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
+
       const targetAnimationPosition = withTiming(
         0,
-        options.stoppedSwipeAnimationConfig,
+        extractPropValue(options.stoppedSwipeAnimationConfig, axis),
       )
 
       xAnimationPosition.value = targetAnimationPosition
@@ -226,25 +224,24 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
   }))
 
   return (
-    <Container
-      style={[cardWrapperStyle, animatedStyle]}
+    <Animated.View
+      style={[styles.container, cardWrapperStyle, animatedStyle]}
       testID={`swipeable-card-wrapper-${index}`}
     >
       <GestureDetector gesture={panGesture}>
         {renderCard({
           index,
-          xAnimationPosition,
           currentIndex,
+          xAnimationPosition,
+          yAnimationPosition,
         })}
       </GestureDetector>
-    </Container>
+    </Animated.View>
   )
 })
 
-const Container = styled(Animated.View)({
-  height: '100%',
-  width: '100%',
-  position: 'absolute',
+const styles = StyleSheet.create({
+  container: { height: '100%', width: '100%', position: 'absolute' },
 })
 
 const getSwipeSharedValueInitialValue = (

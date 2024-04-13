@@ -1,7 +1,11 @@
 import styled, { css } from '@emotion/native'
 import { StatusBar } from 'expo-status-bar'
 import { useRef, useState } from 'react'
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
+import {
+  SafeAreaView,
+  useSafeAreaFrame,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context'
 import {
   type SwipeableCardRef,
   SwipeableCardStack,
@@ -20,6 +24,7 @@ import { pokemon } from './pokemon'
 
 export const PokemonSwipePage = () => {
   const { top } = useSafeAreaInsets()
+  const { width, height } = useSafeAreaFrame()
   const ref = useRef<SwipeableCardRef>(null)
   const [score, setScore] = useState(0)
   const [numberOfSwipes, setNumberOfSwipes] = useState(0)
@@ -35,6 +40,10 @@ export const PokemonSwipePage = () => {
         data={pokemon}
         renderCard={PokemonCard}
         cardWrapperStyle={{ justifyContent: 'center', alignItems: 'center' }}
+        validateSwipeTranslationThreshold={{
+          x: 0.3 * width,
+          y: 0.25 * height,
+        }}
         ref={ref}
         onActiveCardUpdate={({ phase, direction, currentDataItem }) => {
           if (phase !== 'validated') {
