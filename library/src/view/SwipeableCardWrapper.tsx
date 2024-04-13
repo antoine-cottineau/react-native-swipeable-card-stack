@@ -231,8 +231,9 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       <GestureDetector gesture={panGesture}>
         {renderCard({
           index,
-          xAnimationPosition,
           currentIndex,
+          xAnimationPosition,
+          yAnimationPosition,
         })}
       </GestureDetector>
     </Animated.View>

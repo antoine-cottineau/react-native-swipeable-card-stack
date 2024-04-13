@@ -13,14 +13,14 @@ export type SwipeableCardStackProps<T> = {
   data: T[]
 
   /**
-   * A function that render a card based on the provided data and helpful information (see [RenderCardProps](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/blob/main/library/src/RenderCardProps.ts)).
+   * A function that renders a card based on the provided data and helpful information (see [RenderCardProps](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/blob/main/library/src/RenderCardProps.ts)).
    */
   renderCard: (params: RenderCardProps<T>) => ReactNode
 
   /**
    * An optional `ViewStyle` that will be applied to the wrapper component of every card.
    *
-   * Default value: `undefined`
+   * Default value: `undefined`.
    */
   cardWrapperStyle?: StyleProp<ViewStyle>
 
@@ -29,7 +29,7 @@ export type SwipeableCardStackProps<T> = {
    *
    * This is where you should listen for important updates such as a validated swipe.
    *
-   * Default value: `undefined`
+   * Default value: `undefined`.
    */
   onActiveCardUpdate?: (swipeUpdate: SwipeUpdate<T>) => void
 } & Partial<SwipeableCardStackOptions>

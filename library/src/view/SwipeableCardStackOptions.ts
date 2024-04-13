@@ -10,9 +10,7 @@ export type SwipeableCardStackOptions = {
   /**
    * How many cards should be rendered at the same time.
    *
-   * To improve performance, *react-native-swipeable-card-stack* does not render all the cards.
-   * This has usually no visual impact from a user standpoint because most of the cards are hidden by the two first cards of the stack.
-   * However, if you encounter a case where some cards are not visible, you may want to increase this value.
+   * To improve performance, *react-native-swipeable-card-stack* does not render all the cards. This has usually no visual impact from a user standpoint because most of the cards are hidden by the two first cards of the stack. However, if you encounter a case where some cards are not visible, you may want to increase this value.
    *
    * Default value: `3`.
    */
@@ -60,7 +58,7 @@ export type SwipeableCardStackOptions = {
    *
    * This prop can also accept an object whose keys are swipe axis ("x" and "y") and whose values are functions that return a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/).
    *
-   * @param payload A gesture-handler payload that you can use to customize the config.
+   * `payload` is a gesture-handler payload that you can use to customize the config.
    *
    * Default value: `{ x: ({ velocityX }) => ({ velocity: 0.0001 * velocityX, mass: 1, damping: 100, stiffness: 200 }), y: ({ velocityY }) => ({ velocity: 0.0001 * velocityY, mass: 1, damping: 100, stiffness: 200 }) }`.
    */
@@ -102,7 +100,7 @@ export type SwipeableCardStackOptions = {
   /**
    * An array of directions ("left", "right", "top" or "bottom") in which cards cannot be moved.
    *
-   * For example, if you want to only allow for horizontal swipes, you should set `lockedDirections` to ["top", "bottom"].
+   * For example, if you want to only allow horizontal swipes, you should set `lockedDirections` to `["top", "bottom"]`.
    *
    * Defaut value: `[]`.
    */
