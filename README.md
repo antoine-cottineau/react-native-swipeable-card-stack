@@ -7,7 +7,7 @@ This library is based on [react-native-reanimated](https://github.com/software-m
 <!-- prettier-ignore -->
 | 😼 | 🔥 |
 | - | - |
-| ![example gif with cats swiping app](./images/demo-cats.gif) | Coucou |
+| ![example gif with cats swiping app](./images/demo-cats.gif) | ![example gif with pokemon swiping app](./images/demo-pokemon.gif) |
 
 ## Features
 
