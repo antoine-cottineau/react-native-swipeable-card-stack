@@ -9,9 +9,7 @@
   "files": [
     "dist",
     "README.md",
-    "CONTRIBUTING.md",
-    "LICENSE",
-    "images/*"
+    "LICENSE"
   ],
   "keywords": [
     "swipe",
