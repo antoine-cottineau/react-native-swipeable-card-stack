@@ -1,5 +1,7 @@
 # React Native Swipeable Card Stack
 
+DO not merge
+
 Implement a swipeable card stack, similar to Tinder, with ease.
 
 This library is based on [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) and on [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler).
