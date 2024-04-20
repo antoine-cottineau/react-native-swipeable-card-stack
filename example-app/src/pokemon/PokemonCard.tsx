@@ -1,13 +1,14 @@
 import styled from '@emotion/native'
 import { Image } from 'expo-image'
+import { type RenderCardProps } from 'react-native-swipeable-card-stack'
 import { colors } from '../shared/colors'
 import { type PokemonDataItem } from './PokemonDataItem'
 
-type Props = PokemonDataItem
+type Props = RenderCardProps<PokemonDataItem>
 
-export const PokemonCard = ({ imageUrl }: Props) => (
+export const PokemonCard = ({ data }: Props) => (
   <CardContainer>
-    <FullScreenImage source={{ uri: imageUrl }} />
+    <FullScreenImage source={{ uri: data.imageUrl }} />
   </CardContainer>
 )
 

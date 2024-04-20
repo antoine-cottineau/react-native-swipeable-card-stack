@@ -8,9 +8,9 @@ type FruitCardProps = RenderCardProps<{
   fruit: string
 }>
 
-const FruitCard = ({ fruit }: FruitCardProps) => (
+const FruitCard = ({ data }: FruitCardProps) => (
   <View>
-    <Text>{fruit}</Text>
+    <Text>{data.fruit}</Text>
   </View>
 )
 

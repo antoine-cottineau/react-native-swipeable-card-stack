@@ -18,9 +18,7 @@ type Props = RenderCardProps<CatDataItem> & {
 }
 
 export const CatCard = memo(function CatCard({
-  name,
-  age,
-  imageUrl,
+  data,
   onAction,
   xAnimationPosition,
   status,
@@ -60,9 +58,9 @@ export const CatCard = memo(function CatCard({
 
   return (
     <Container style={containerStyle}>
-      <FullScreenImage source={{ uri: imageUrl }} />
+      <FullScreenImage source={{ uri: data.imageUrl }} />
       <Overlay style={overlayStyle} />
-      <CatCardBottomView name={name} age={age} onAction={onAction} />
+      <CatCardBottomView name={data.name} age={data.age} onAction={onAction} />
     </Container>
   )
 })
