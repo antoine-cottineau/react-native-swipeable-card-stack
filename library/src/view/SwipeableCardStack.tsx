@@ -75,7 +75,7 @@ const SwipeableCardStackMemo = forwardRef(function SwipeableCardStack<T>(
               refMap.initRef(index, ref)
             }}
             renderCard={(renderCardAddedProps) =>
-              renderCard({ ...cardData, ...renderCardAddedProps })
+              renderCard({ data: cardData, ...renderCardAddedProps })
             }
             index={index}
             status={getStatus({ index, currentIndex })}

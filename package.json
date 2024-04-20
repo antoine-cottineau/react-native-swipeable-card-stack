@@ -13,7 +13,7 @@
     "format": "prettier -w .",
     "prerelease": "cp README.md library && cp LICENSE library",
     "release": "yarn prerelease && yarn workspace react-native-swipeable-card-stack publish --non-interactive --access public",
-    "test": "yarn test:format && yarn test:lint",
+    "test": "yarn test:format && yarn test:lint && yarn test:jest",
     "test:format": "prettier -c .",
     "test:lint": "eslint '**/src/**/*.{ts,tsx}'",
     "test:jest": "yarn workspace react-native-swipeable-card-stack jest",

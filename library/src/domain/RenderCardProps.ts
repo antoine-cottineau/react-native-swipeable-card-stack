@@ -1,7 +1,12 @@
 import { type SharedValue } from 'react-native-reanimated'
 import { type CardStatus } from './CardStatus'
 
-export type RenderCardProps<T> = T & RenderCardAddedProps
+export type RenderCardProps<T> = {
+  /**
+   * The data to be used to render the card.
+   */
+  data: T
+} & RenderCardAddedProps
 
 export type RenderCardAddedProps = {
   /**

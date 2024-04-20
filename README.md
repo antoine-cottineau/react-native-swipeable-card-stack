@@ -257,6 +257,12 @@ Defaut value: `[]`.
 
 ### `renderCard`'s additional props
 
+#### ▶️ data
+
+> `T`
+
+The data to be used to render the card.
+
 #### ▶️ index
 
 > `number`

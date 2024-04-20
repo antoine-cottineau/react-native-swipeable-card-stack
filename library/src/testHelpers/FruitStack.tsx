@@ -13,9 +13,9 @@ export type FruitItem = {
 
 type FruitCardProps = RenderCardProps<FruitItem>
 
-const FruitCard = ({ fruit }: FruitCardProps) => (
+const FruitCard = ({ data }: FruitCardProps) => (
   <View>
-    <Text>{fruit}</Text>
+    <Text>{data.fruit}</Text>
   </View>
 )
 
