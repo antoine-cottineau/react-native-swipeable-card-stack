@@ -1,5 +1,6 @@
 import {
   forwardRef,
+  memo,
   useImperativeHandle,
   useState,
   type ForwardedRef,
@@ -15,7 +16,7 @@ import { SwipeableCardWrapper } from './SwipeableCardWrapper'
 import { useDefaultOptions } from './useDefaultOptions'
 import { useSwipedCardsStore } from './useSwipedCardsStore'
 
-export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
+const SwipeableCardStackMemo = forwardRef(function SwipeableCardStack<T>(
   {
     data,
     renderCard,
@@ -107,6 +108,10 @@ export const SwipeableCardStack = forwardRef(function SwipeableCardStack<T>(
     </View>
   )
 })
+
+export const SwipeableCardStack = memo(
+  SwipeableCardStackMemo,
+) as typeof SwipeableCardStackMemo
 
 const styles = StyleSheet.create({
   container: {
