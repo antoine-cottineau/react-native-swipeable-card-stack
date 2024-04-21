@@ -30,3 +30,24 @@ it('correctly renders', () => {
   expect(screen.getByText('banana')).toBeOnTheScreen()
   expect(screen).toMatchSnapshot()
 })
+
+it('respects the initialIndex prop', () => {
+  renderWithWrapper(
+    <SwipeableCardStack
+      data={[
+        { fruit: 'banana' },
+        { fruit: 'apple' },
+        { fruit: 'lemon' },
+        { fruit: 'strawberry' },
+      ]}
+      renderCard={FruitCard}
+      initialIndex={2}
+    />,
+  )
+
+  expect(screen.queryByText('banana')).not.toBeOnTheScreen()
+  expect(screen.getByTestId('swipeable-card-wrapper-1')).toHaveStyle({
+    opacity: 0,
+  })
+  expect(screen.getByText('lemon')).toBeOnTheScreen()
+})

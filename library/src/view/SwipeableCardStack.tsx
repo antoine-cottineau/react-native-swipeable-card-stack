@@ -26,16 +26,17 @@ const SwipeableCardStackMemo = forwardRef(function SwipeableCardStack<T>(
   }: SwipeableCardStackProps<T>,
   ref: ForwardedRef<SwipeableCardRef>,
 ) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const refMap = useRefMap<number, SwipeableCardRef>()
   const defaultOptions = useDefaultOptions()
-  const { getSwipedCardSwipeDirection, pushSwipedCard, popSwipedCard } =
-    useSwipedCardsStore()
-
   const options: SwipeableCardStackOptions = {
     ...defaultOptions,
     ...userOptions,
   }
+
+  const [currentIndex, setCurrentIndex] = useState(options.initialIndex)
+  const refMap = useRefMap<number, SwipeableCardRef>()
+  const { getSwipedCardSwipeDirection, pushSwipedCard, popSwipedCard } =
+    useSwipedCardsStore()
+
   const [renderWindowMinIndex, renderWindowMaxIndex] = getRenderWindow({
     currentIndex,
     dataLength: data.length,
