@@ -5,6 +5,7 @@ import { type SwipeableCardStackOptions } from '..'
 export const useDefaultOptions = (): SwipeableCardStackOptions => {
   const { width, height } = useSafeAreaFrame()
   return {
+    initialIndex: 0,
     numberOfRenderedCards: 3,
     endedSwipePosition: {
       x: 1.5 * width,
