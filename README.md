@@ -153,6 +153,16 @@ This is where you should listen for important updates such as a validated swipe.
 
 Default value: `undefined`.
 
+#### ▶️ initialIndex
+
+> `number`
+
+An optional number that will be used as the initial index of the card stack.
+
+This is useful when you don't want the first item in `data` to be the card on top of the stack.
+
+Default value: `0`.
+
 #### ▶️ numberOfRenderedCards
 
 > `number`
