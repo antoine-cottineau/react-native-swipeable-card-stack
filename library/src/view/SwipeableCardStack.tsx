@@ -6,7 +6,7 @@ import {
   type ForwardedRef,
 } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { type SwipeableCardRef, type SwipeableCardStackProps } from '..'
+import { type SwipeableCardStackRef, type SwipeableCardStackProps } from '..'
 import { getStatus } from '../domain/CardStatus'
 import { getRenderWindow } from '../domain/getRenderWindow'
 import { toReversed } from '../utils/toReversed'
@@ -24,7 +24,7 @@ const SwipeableCardStackMemo = forwardRef(function SwipeableCardStack<T>(
     onActiveCardUpdate,
     ...userOptions
   }: SwipeableCardStackProps<T>,
-  ref: ForwardedRef<SwipeableCardRef>,
+  ref: ForwardedRef<SwipeableCardStackRef>,
 ) {
   const defaultOptions = useDefaultOptions()
   const options: SwipeableCardStackOptions = {
@@ -33,7 +33,7 @@ const SwipeableCardStackMemo = forwardRef(function SwipeableCardStack<T>(
   }
 
   const [currentIndex, setCurrentIndex] = useState(options.initialIndex)
-  const refMap = useRefMap<number, SwipeableCardRef>()
+  const refMap = useRefMap<number, SwipeableCardStackRef>()
   const { getSwipedCardSwipeDirection, pushSwipedCard, popSwipedCard } =
     useSwipedCardsStore()
 

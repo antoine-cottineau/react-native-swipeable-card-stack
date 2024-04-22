@@ -1,10 +1,10 @@
 import { useRef } from 'react'
 import { Button, View, Text } from 'react-native'
 import {
-  type SwipeableCardRef,
   SwipeableCardStack,
   type SwipeableCardStackProps,
   type RenderCardProps,
+  type SwipeableCardStackRef,
 } from '..'
 
 export type FruitItem = {
@@ -22,7 +22,7 @@ const FruitCard = ({ data }: FruitCardProps) => (
 export const FruitStack = (
   props?: Partial<SwipeableCardStackProps<FruitItem>>,
 ) => {
-  const ref = useRef<SwipeableCardRef>(null)
+  const ref = useRef<SwipeableCardStackRef>(null)
 
   return (
     <>
