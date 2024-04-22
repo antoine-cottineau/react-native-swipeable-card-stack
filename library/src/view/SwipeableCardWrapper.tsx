@@ -13,7 +13,7 @@ import Animated, {
   withTiming,
   useSharedValue,
 } from 'react-native-reanimated'
-import { type SwipeableCardRef } from '..'
+import { type SwipeableCardStackRef } from '..'
 import { type CardStatus } from '../domain/CardStatus'
 import { type RenderCardAddedProps } from '../domain/RenderCardProps'
 import { type SwipeAxis } from '../domain/SwipeAxis'
@@ -50,7 +50,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     options,
     initialSwipeDirection,
   }: SwipeableCardWrapperProps,
-  ref: ForwardedRef<SwipeableCardRef>,
+  ref: ForwardedRef<SwipeableCardStackRef>,
 ) {
   const xAnimationPosition = useSharedValue(
     getSwipeSharedValueInitialValue(initialSwipeDirection, 'x'),

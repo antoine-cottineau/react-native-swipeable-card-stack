@@ -5,8 +5,8 @@ import { StatusBar } from 'expo-status-bar'
 import { useCallback, useRef } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import {
-  type SwipeableCardRef,
   SwipeableCardStack,
+  type SwipeableCardStackRef,
 } from 'react-native-swipeable-card-stack'
 import { GoToHomeButton } from '../shared/components/GoToHomeButton'
 import { type RootStackParamList } from '../shared/components/Navigator'
@@ -17,7 +17,7 @@ import { CatEndOfStackView } from './CatEndOfStackView'
 import { cats } from './cats'
 
 export const CatSwipePage = () => {
-  const ref = useRef<SwipeableCardRef>(null)
+  const ref = useRef<SwipeableCardStackRef>(null)
   const { navigate } = useNavigation<NavigationProp<RootStackParamList>>()
   const { top } = useSafeAreaInsets()
 

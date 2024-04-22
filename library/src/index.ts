@@ -12,7 +12,7 @@ export {
   SwipeableCardStack,
   type SwipeableCardStackProps,
   type RenderCardProps,
-  type SwipeableCardStackRef as SwipeableCardRef,
+  type SwipeableCardStackRef,
   type SwipeDirection,
   type SwipeAxis,
   type SwipePhase,

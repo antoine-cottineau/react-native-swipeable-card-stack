@@ -7,9 +7,9 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context'
 import {
-  type SwipeableCardRef,
   SwipeableCardStack,
   type SwipeDirection,
+  type SwipeableCardStackRef,
 } from 'react-native-swipeable-card-stack'
 import { colors } from '../shared/colors'
 import { GoToHomeButton } from '../shared/components/GoToHomeButton'
@@ -25,7 +25,7 @@ import { pokemon } from './pokemon'
 export const PokemonSwipePage = () => {
   const { top } = useSafeAreaInsets()
   const { width, height } = useSafeAreaFrame()
-  const ref = useRef<SwipeableCardRef>(null)
+  const ref = useRef<SwipeableCardStackRef>(null)
   const [score, setScore] = useState(0)
   const [numberOfSwipes, setNumberOfSwipes] = useState(0)
 
