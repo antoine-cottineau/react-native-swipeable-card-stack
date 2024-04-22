@@ -65,11 +65,7 @@ export const CatStack = () => {
   )
 }
 
-const CatCard = ({
-  name,
-  age,
-  xAnimationPosition,
-}: RenderCardProps<CatItem>) => {
+const CatCard = ({ data, xAnimationPosition }: RenderCardProps<CatItem>) => {
   const cardAnimatedStyle = useAnimatedStyle(() => ({
     backgroundColor: interpolateColor(
       xAnimationPosition.value,
@@ -89,7 +85,7 @@ const CatCard = ({
         cardAnimatedStyle,
       ]}
     >
-      <Text>{`${name} - ${age}`}</Text>
+      <Text>{`${data.name} - ${data.age}`}</Text>
     </Animated.View>
   )
 }
