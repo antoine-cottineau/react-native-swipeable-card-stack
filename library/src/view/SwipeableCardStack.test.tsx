@@ -1,7 +1,6 @@
-import { screen } from '@testing-library/react-native'
+import { render, screen } from '@testing-library/react-native'
 import { View, Text } from 'react-native'
 import { type RenderCardProps } from '../domain/RenderCardProps'
-import { renderWithWrapper } from '../testHelpers/renderWithWrapper'
 import { SwipeableCardStack } from './SwipeableCardStack'
 
 type FruitCardProps = RenderCardProps<{
@@ -15,7 +14,7 @@ const FruitCard = ({ data }: FruitCardProps) => (
 )
 
 it('correctly renders', () => {
-  renderWithWrapper(
+  render(
     <SwipeableCardStack
       data={[
         { fruit: 'banana' },
@@ -32,7 +31,7 @@ it('correctly renders', () => {
 })
 
 it('respects the initialIndex prop', () => {
-  renderWithWrapper(
+  render(
     <SwipeableCardStack
       data={[
         { fruit: 'banana' },

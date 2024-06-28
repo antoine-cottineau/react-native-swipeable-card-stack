@@ -1,9 +1,9 @@
+import { Dimensions } from 'react-native'
 import { Easing } from 'react-native-reanimated'
-import { useSafeAreaFrame } from 'react-native-safe-area-context'
 import { type SwipeableCardStackOptions } from '..'
 
 export const useDefaultOptions = (): SwipeableCardStackOptions => {
-  const { width, height } = useSafeAreaFrame()
+  const { width, height } = Dimensions.get('window')
   return {
     initialIndex: 0,
     numberOfRenderedCards: 3,

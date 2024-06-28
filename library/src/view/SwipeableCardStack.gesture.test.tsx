@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react-native'
+import { render, waitFor } from '@testing-library/react-native'
 import { type PanGesture } from 'react-native-gesture-handler'
 import {
   fireGestureHandler,
@@ -6,11 +6,10 @@ import {
 } from 'react-native-gesture-handler/jest-utils'
 import { type SwipeUpdate } from '..'
 import { type FruitItem, FruitStack } from '../testHelpers/FruitStack'
-import { renderWithWrapper } from '../testHelpers/renderWithWrapper'
 
 it('calls onActiveCardUpdate with the correct payloads when two cards are swiped with gestures', async () => {
   const onActiveCardUpdate = jest.fn()
-  renderWithWrapper(
+  render(
     <FruitStack
       onActiveCardUpdate={onActiveCardUpdate}
       validateSwipeTranslationThreshold={{
@@ -76,7 +75,7 @@ it('calls onActiveCardUpdate with the correct payloads when two cards are swiped
 
 it('calls onActiveCardUpdate with the correct payloads when a swipe is stopped before threshold', async () => {
   const onActiveCardUpdate = jest.fn()
-  renderWithWrapper(
+  render(
     <FruitStack
       validateSwipeTranslationThreshold={{
         x: 260,
@@ -122,7 +121,7 @@ it('calls onActiveCardUpdate with the correct payloads when a swipe is stopped b
 
 it('calls onActiveCardUpdate with the correct payloads when a swipe is stopped before threshold', async () => {
   const onActiveCardUpdate = jest.fn()
-  renderWithWrapper(
+  render(
     <FruitStack
       validateSwipeTranslationThreshold={{
         x: 260,

@@ -1,11 +1,15 @@
-import { fireEvent, screen, waitFor } from '@testing-library/react-native'
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react-native'
 import { type SwipeUpdate } from '..'
 import { type FruitItem, FruitStack } from '../testHelpers/FruitStack'
-import { renderWithWrapper } from '../testHelpers/renderWithWrapper'
 
 it('calls onActiveCardUpdate with the correct payloads when two cards are swiped imperatively', async () => {
   const onActiveCardUpdate = jest.fn()
-  renderWithWrapper(
+  render(
     <FruitStack
       onActiveCardUpdate={onActiveCardUpdate}
       validateSwipeTranslationThreshold={{
