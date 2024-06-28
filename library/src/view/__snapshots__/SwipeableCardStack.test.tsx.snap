@@ -9,7 +9,8 @@ exports[`correctly renders 1`] = `
   }
 >
   <View
-    animatedStyle={
+    collapsable={false}
+    jestAnimatedStyle={
       {
         "value": {
           "opacity": 1,
@@ -24,7 +25,6 @@ exports[`correctly renders 1`] = `
         },
       }
     }
-    collapsable={false}
     style={
       {
         "height": "100%",
@@ -52,7 +52,8 @@ exports[`correctly renders 1`] = `
     </View>
   </View>
   <View
-    animatedStyle={
+    collapsable={false}
+    jestAnimatedStyle={
       {
         "value": {
           "opacity": 1,
@@ -67,7 +68,6 @@ exports[`correctly renders 1`] = `
         },
       }
     }
-    collapsable={false}
     style={
       {
         "height": "100%",
@@ -95,7 +95,8 @@ exports[`correctly renders 1`] = `
     </View>
   </View>
   <View
-    animatedStyle={
+    collapsable={false}
+    jestAnimatedStyle={
       {
         "value": {
           "opacity": 1,
@@ -110,7 +111,6 @@ exports[`correctly renders 1`] = `
         },
       }
     }
-    collapsable={false}
     style={
       {
         "height": "100%",
@@ -138,7 +138,8 @@ exports[`correctly renders 1`] = `
     </View>
   </View>
   <View
-    animatedStyle={
+    collapsable={false}
+    jestAnimatedStyle={
       {
         "value": {
           "opacity": 1,
@@ -153,7 +154,6 @@ exports[`correctly renders 1`] = `
         },
       }
     }
-    collapsable={false}
     style={
       {
         "height": "100%",
