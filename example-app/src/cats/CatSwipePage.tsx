@@ -45,7 +45,9 @@ export const CatSwipePage = () => {
         ref={ref}
         onActiveCardUpdate={({ phase, direction, currentDataItem }) => {
           if (phase === 'below-threshold' || phase === 'above-threshold') {
-            impactAsync(ImpactFeedbackStyle.Light).catch(console.error)
+            impactAsync(ImpactFeedbackStyle.Light).catch((error: unknown) => {
+              console.error(error)
+            })
           }
           if (
             phase === 'validated' &&

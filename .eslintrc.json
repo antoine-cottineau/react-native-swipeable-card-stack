@@ -53,6 +53,10 @@
     ],
     "@typescript-eslint/no-require-imports": "error",
     "@typescript-eslint/non-nullable-type-assertion-style": "error",
+    "@typescript-eslint/restrict-template-expressions": [
+      "error",
+      { "allowNumber": true }
+    ],
 
     // react-hooks
     "react-hooks/exhaustive-deps": "error",
