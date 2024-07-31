@@ -16,6 +16,7 @@ This library is based on [react-native-reanimated](https://github.com/software-m
 - ✅ support preventing card translation along any direction
 - ✅ support customizing swipe and unswipe animations
 - ✅ support customizing the criteria for which a card is swiped
+- ✅ support both horizontal and vertical device orientations
 - ✅ allow performing your own animations on the cards based on the swipe/unswipe progression
 
 ## Example
