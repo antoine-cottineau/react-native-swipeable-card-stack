@@ -50,7 +50,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
     options,
     initialSwipeDirection,
   }: SwipeableCardWrapperProps,
-  ref: ForwardedRef<SwipeableCardStackRef>,
+  ref: ForwardedRef<Omit<SwipeableCardStackRef, 'canUnswipe'>>,
 ) {
   const xAnimationPosition = useSharedValue(
     getSwipeSharedValueInitialValue(initialSwipeDirection, 'x'),
