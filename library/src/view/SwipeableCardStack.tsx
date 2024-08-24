@@ -33,7 +33,7 @@ const SwipeableCardStackMemo = forwardRef(function SwipeableCardStack<T>(
   }
 
   const [currentIndex, setCurrentIndex] = useState(options.initialIndex)
-  const refMap = useRefMap<number, SwipeableCardStackRef>()
+  const refMap = useRefMap<number, Omit<SwipeableCardStackRef, 'canUnswipe'>>()
   const { getSwipedCardSwipeDirection, pushSwipedCard, popSwipedCard } =
     useSwipedCardsStore()
 
@@ -57,6 +57,7 @@ const SwipeableCardStackMemo = forwardRef(function SwipeableCardStack<T>(
         refMap.get(currentIndex - 1)?.unswipe()
         popSwipedCard()
       },
+      canUnswipe: () => currentIndex > 0,
     }),
     [refMap, currentIndex, popSwipedCard],
   )

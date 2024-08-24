@@ -319,6 +319,13 @@ The direction can either be 'left', 'right', 'top' or 'bottom'.
 
 Imperatively undo the last swipe.
 
+#### ▶️ canUnswipe
+
+> `() => boolean`
+
+Check if the last swipe can be undone.
+This is true if and only if a card in the stack has been swiped before.
+
 ## Contributing
 
 See [CONTRIBUTING.md](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/blob/main/CONTRIBUTING.md).
