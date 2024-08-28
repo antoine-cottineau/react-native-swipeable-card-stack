@@ -220,7 +220,7 @@ This prop can also accept an object whose keys are swipe axis ("x" and "y") and 
 
 `payload` is a gesture-handler payload that you can use to customize the config.
 
-Default value: `{ x: ({ velocityX }) => ({ velocity: 0.0001 * velocityX, mass: 1, damping: 100, stiffness: 200 }), y: ({ velocityY }) => ({ velocity: 0.0001 * velocityY, mass: 1, damping: 100, stiffness: 200 }) }`.
+Default value: `() => ({ duration: 300 })`.
 
 #### ▶️ imperativeSwipeAnimationConfig
 
