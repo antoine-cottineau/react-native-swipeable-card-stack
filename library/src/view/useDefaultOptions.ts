@@ -12,24 +12,11 @@ export const useDefaultOptions = (): SwipeableCardStackOptions => {
       y: 1 * height,
     },
     validateSwipeTranslationThreshold: {
-      x: 0.5 * width,
+      x: 0.4 * width,
       y: 0.25 * height,
     },
     validateSwipeVelocityThreshold: 800,
-    validatedSwipeAnimationConfig: {
-      x: ({ velocityX }) => ({
-        velocity: 0.0001 * velocityX,
-        mass: 1,
-        damping: 100,
-        stiffness: 200,
-      }),
-      y: ({ velocityY }) => ({
-        velocity: 0.0001 * velocityY,
-        mass: 1,
-        damping: 100,
-        stiffness: 200,
-      }),
-    },
+    validatedSwipeAnimationConfig: () => ({ duration: 300 }),
     imperativeSwipeAnimationConfig: {
       duration: 300,
       easing: Easing.inOut(Easing.quad),

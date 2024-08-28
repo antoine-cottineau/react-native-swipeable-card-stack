@@ -47,7 +47,7 @@ export type SwipeableCardStackOptions = {
    *
    * A swipe can also be validated if the velocity is high enough, see `validateSwipeVelocityThreshold`.
    *
-   * Default value: `{ x: 0.5 * screenWidth, y: 0.25 * screenHeight }`.
+   * Default value: `{ x: 0.4 * screenWidth, y: 0.25 * screenHeight }`.
    */
   validateSwipeTranslationThreshold: SwipeAxisDependentProp<number>
 
@@ -69,7 +69,7 @@ export type SwipeableCardStackOptions = {
    *
    * `payload` is a gesture-handler payload that you can use to customize the config.
    *
-   * Default value: `{ x: ({ velocityX }) => ({ velocity: 0.0001 * velocityX, mass: 1, damping: 100, stiffness: 200 }), y: ({ velocityY }) => ({ velocity: 0.0001 * velocityY, mass: 1, damping: 100, stiffness: 200 }) }`.
+   * Default value: `() => ({ duration: 300 })`.
    */
   validatedSwipeAnimationConfig: SwipeAxisDependentProp<
     (payload: PanGestureHandlerEventPayload) => WithSpringConfig
