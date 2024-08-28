@@ -1,7 +1,7 @@
 {
   "name": "react-native-swipeable-card-stack",
   "description": "Implement a swipeable card stack, similar to Tinder, with ease.",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "main": "dist/index.js",
   "repository": "https://github.com/antoine-cottineau/react-native-swipeable-card-stack",
   "author": "Antoine Cottineau",
