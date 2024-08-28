@@ -47,7 +47,7 @@ export type SwipeableCardStackOptions = {
    *
    * A swipe can also be validated if the velocity is high enough, see `validateSwipeVelocityThreshold`.
    *
-   * Default value: `{ x: 0.5 * screenWidth, y: 0.25 * screenHeight }`.
+   * Default value: `{ x: 0.4 * screenWidth, y: 0.25 * screenHeight }`.
    */
   validateSwipeTranslationThreshold: SwipeAxisDependentProp<number>
 

@@ -12,7 +12,7 @@ export const useDefaultOptions = (): SwipeableCardStackOptions => {
       y: 1 * height,
     },
     validateSwipeTranslationThreshold: {
-      x: 0.5 * width,
+      x: 0.4 * width,
       y: 0.25 * height,
     },
     validateSwipeVelocityThreshold: 800,
