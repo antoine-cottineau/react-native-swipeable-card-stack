@@ -2,6 +2,7 @@
 
 exports[`correctly renders 1`] = `
 <View
+  pointerEvents="box-none"
   style={
     {
       "flex": 1,
