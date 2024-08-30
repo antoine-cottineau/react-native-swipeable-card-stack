@@ -63,7 +63,7 @@ const SwipeableCardStackMemo = forwardRef(function SwipeableCardStack<T>(
   )
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} pointerEvents="box-none">
       {toReversed(data).map((cardData, reverseIndex) => {
         const index = data.length - reverseIndex - 1
 
