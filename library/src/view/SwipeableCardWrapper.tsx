@@ -120,12 +120,14 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
 
   const panGesture = Gesture.Pan()
     .onStart(({ translationX }) => {
+      'worklet'
       runOnJS(onCardSwipeStatusUpdated)({
         direction: translationX > 0 ? 'right' : 'left',
         phase: 'started',
       })
     })
     .onUpdate(({ translationX, translationY }) => {
+      'worklet'
       if (
         !isSwipeLocked({
           translation: translationX,
@@ -146,6 +148,7 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
       }
     })
     .onEnd((payload) => {
+      'worklet'
       const { translationX, translationY, velocityX, velocityY } = payload
       const direction = getSwipeDirection({
         xTranslation: translationX,
@@ -200,13 +203,13 @@ export const SwipeableCardWrapper = forwardRef(function SwipeableCardWrapper(
 
       runOnJS(onCardSwipeStatusUpdated)({ direction, phase: 'stopped' })
 
-      const targetAnimationPosition = withTiming(
-        0,
-        extractPropValue(options.stoppedSwipeAnimationConfig, axis),
+      const animationConfig = extractPropValue(
+        options.stoppedSwipeAnimationConfig,
+        axis,
       )
 
-      xAnimationPosition.value = targetAnimationPosition
-      yAnimationPosition.value = targetAnimationPosition
+      xAnimationPosition.value = withTiming(0, animationConfig)
+      yAnimationPosition.value = withTiming(0, animationConfig)
     })
     .withTestId(`swipeable-card-wrapper-${index}-gesture`)
 
