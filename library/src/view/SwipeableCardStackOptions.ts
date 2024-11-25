@@ -63,13 +63,15 @@ export type SwipeableCardStackOptions = {
   validateSwipeVelocityThreshold: SwipeAxisDependentProp<number>
 
   /**
-   * A function that returns a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/) that will be used in the final animation once a swipe is validated.
+   * A workletized function that returns a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/) that will be used in the final animation once a swipe is validated.
+   *
+   * **WARNING**: If this function isn't a worklet, the app will crash.
    *
    * This prop can also accept an object whose keys are swipe axis ("x" and "y") and whose values are functions that return a reanimated [SpringConfig](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring/).
    *
    * `payload` is a gesture-handler payload that you can use to customize the config.
    *
-   * Default value: `() => ({ duration: 300 })`.
+   * Default value: `() => { "worklet"; return ({ duration: 300 }) }`.
    */
   validatedSwipeAnimationConfig: SwipeAxisDependentProp<
     (payload: PanGestureHandlerEventPayload) => WithSpringConfig
