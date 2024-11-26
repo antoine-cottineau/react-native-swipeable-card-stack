@@ -13,6 +13,7 @@ export const getSwipeDirection = ({
   xEndedSwipePosition,
   yEndedSwipePosition,
 }: Params): SwipeDirection => {
+  'worklet'
   const horizontalRatio = Math.abs(xTranslation / xEndedSwipePosition)
   const verticalRatio = Math.abs(yTranslation / yEndedSwipePosition)
 

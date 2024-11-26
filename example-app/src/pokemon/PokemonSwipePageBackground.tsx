@@ -1,5 +1,5 @@
 import styled from '@emotion/native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { getBrandedText } from '../shared/fonts/getBrandedText'
 import { PokemonElementView } from './PokemonElementView'
 
@@ -11,24 +11,26 @@ type Props = {
 export const PokemonSwipePageBackground = ({
   score,
   numberOfSwipes,
-}: Props) => (
-  <Container>
-    <ScoreContainer>
-      <ScoreLabel>{`Score: ${score}/${numberOfSwipes}`}</ScoreLabel>
-    </ScoreContainer>
-    <PokemonElementView element="grass" />
-    <MiddleRow>
-      <PokemonElementView element="fire" />
-      <PokemonElementView element="water" />
-    </MiddleRow>
-    <PokemonElementView element="flying" />
-  </Container>
-)
+}: Props) => {
+  const { top, bottom } = useSafeAreaInsets()
+
+  return (
+    <Container style={{ top, bottom }}>
+      <ScoreContainer>
+        <ScoreLabel>{`Score: ${score}/${numberOfSwipes}`}</ScoreLabel>
+      </ScoreContainer>
+      <PokemonElementView element="grass" />
+      <MiddleRow>
+        <PokemonElementView element="fire" />
+        <PokemonElementView element="water" />
+      </MiddleRow>
+      <PokemonElementView element="flying" />
+    </Container>
+  )
+}
 
 const Container = styled(SafeAreaView)({
   position: 'absolute',
-  top: 0,
-  bottom: 0,
   left: 0,
   right: 0,
   justifyContent: 'space-between',
@@ -43,7 +45,7 @@ const MiddleRow = styled.View({
   alignItems: 'center',
 })
 
-const ScoreContainer = styled(SafeAreaView)({
+const ScoreContainer = styled.View({
   position: 'absolute',
   top: 0,
   right: 0,

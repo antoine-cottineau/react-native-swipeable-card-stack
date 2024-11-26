@@ -12,6 +12,7 @@ export const isSwipeLocked = ({
   axis,
   lockedDirections,
 }: Params): boolean => {
+  'worklet'
   const isXSwipeLocked =
     (lockedDirections.includes('left') && translation < 0) ||
     (lockedDirections.includes('right') && translation > 0)

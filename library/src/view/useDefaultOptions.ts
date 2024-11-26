@@ -16,7 +16,10 @@ export const useDefaultOptions = (): SwipeableCardStackOptions => {
       y: 0.25 * height,
     },
     validateSwipeVelocityThreshold: 800,
-    validatedSwipeAnimationConfig: () => ({ duration: 300 }),
+    validatedSwipeAnimationConfig: () => {
+      'worklet'
+      return { duration: 300 }
+    },
     imperativeSwipeAnimationConfig: {
       duration: 300,
       easing: Easing.inOut(Easing.quad),

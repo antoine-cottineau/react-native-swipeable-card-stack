@@ -2,7 +2,6 @@ import styled, { css } from '@emotion/native'
 import { StatusBar } from 'expo-status-bar'
 import { useRef, useState } from 'react'
 import {
-  SafeAreaView,
   useSafeAreaFrame,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context'
@@ -23,7 +22,7 @@ import { PokemonSwipePageBackground } from './PokemonSwipePageBackground'
 import { pokemon } from './pokemon'
 
 export const PokemonSwipePage = () => {
-  const { top } = useSafeAreaInsets()
+  const { top, bottom } = useSafeAreaInsets()
   const { width, height } = useSafeAreaFrame()
   const ref = useRef<SwipeableCardStackRef>(null)
   const [score, setScore] = useState(0)
@@ -64,7 +63,7 @@ export const PokemonSwipePage = () => {
       <GoToHomeButtonContainer style={css({ top: top + 16 })}>
         <GoToHomeButton />
       </GoToHomeButtonContainer>
-      <UnswipeButtonContainer>
+      <UnswipeButtonContainer style={{ bottom }}>
         <RoundButton
           Icon={UndoIcon}
           onPress={() => {
@@ -74,7 +73,7 @@ export const PokemonSwipePage = () => {
           size={56}
         />
       </UnswipeButtonContainer>
-      <PokemonControlsContainer>
+      <PokemonControlsContainer style={{ bottom }}>
         <PokemonControls
           onPress={(element) => {
             const mapping: Record<PokemonElement, SwipeDirection> = {
@@ -100,16 +99,14 @@ const GoToHomeButtonContainer = styled.View({
   left: 16,
 })
 
-const PokemonControlsContainer = styled(SafeAreaView)({
+const UnswipeButtonContainer = styled.View({
   position: 'absolute',
-  bottom: 0,
-  right: 0,
+  left: 0,
   padding: 16,
 })
 
-const UnswipeButtonContainer = styled(SafeAreaView)({
+const PokemonControlsContainer = styled.View({
   position: 'absolute',
-  bottom: 0,
-  left: 0,
+  right: 0,
   padding: 16,
 })
