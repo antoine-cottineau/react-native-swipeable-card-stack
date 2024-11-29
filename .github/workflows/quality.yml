@@ -27,3 +27,6 @@ jobs:
 
       - name: Test linting
         run: yarn test:lint
+
+      - name: Run unit tests
+        run: yarn test:jest
