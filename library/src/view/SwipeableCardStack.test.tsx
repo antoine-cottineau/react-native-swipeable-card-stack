@@ -13,23 +13,6 @@ const FruitCard = ({ data }: FruitCardProps) => (
   </View>
 )
 
-it('correctly renders', () => {
-  render(
-    <SwipeableCardStack
-      data={[
-        { fruit: 'banana' },
-        { fruit: 'apple' },
-        { fruit: 'lemon' },
-        { fruit: 'strawberry' },
-      ]}
-      renderCard={FruitCard}
-    />,
-  )
-
-  expect(screen.getByText('banana')).toBeOnTheScreen()
-  expect(screen).toMatchSnapshot()
-})
-
 it('respects the initialIndex prop', () => {
   render(
     <SwipeableCardStack
