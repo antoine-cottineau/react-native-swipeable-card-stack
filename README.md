@@ -1,0 +1,8 @@
+- [x] distinguish locking pan to direction and swipe to direction (i.e. we could pan in a direction but without the swipe being registered)
+- [x] add animation config customization (with either Spring or Timeout and with props specific to an axis)
+- [x] add config for when swipe is validated
+- [x] check all orientations
+- [x] allow specifying the number of unswiped rendered cards
+- [x] add parameter for resting value
+- [x] homogeinize namings
+- [] docusaurus
