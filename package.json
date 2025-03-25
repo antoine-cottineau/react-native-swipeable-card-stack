@@ -38,6 +38,7 @@
   ],
   "scripts": {
     "example": "yarn workspace react-native-swipeable-card-stack-example",
+    "docs": "yarn workspace docs",
     "test": "jest",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
@@ -97,7 +98,8 @@
     "react-native-reanimated": "^3.0.0"
   },
   "workspaces": [
-    "example"
+    "example",
+    "docs"
   ],
   "packageManager": "yarn@3.6.1",
   "jest": {
