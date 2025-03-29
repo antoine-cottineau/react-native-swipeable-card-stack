@@ -26,7 +26,7 @@ A powerful and highly customizable React Native library that lets you implement 
 
 Start by installing required peer dependencies: [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/) and [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/docs/fundamentals/installation).
 
-Then install react-native-swipeable-card-stack
+Then install react-native-swipeable-card-stack:
 
 ```bash
 # using npm
