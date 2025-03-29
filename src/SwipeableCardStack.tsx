@@ -182,25 +182,29 @@ const UnmemoizedSwipeableCardStack = <T,>({
  *
  * @example
  * ```tsx
- * const items = [
- *   { id: '1', title: 'Item 1' },
- *   { id: '2', title: 'Item 2' },
- *   { id: '3', title: 'Item 3' },
- * ];
+ * const CardStack = () => {
+ *   const [swipes, setSwipes] = useState(['right']); // First card already swiped right
  *
- * const itemSwipes = ['right', 'left']; // First item swiped right, second left
+ *   const cards = [
+ *     { id: '1', title: 'Swipe me!' },
+ *     { id: '2', title: 'Next card' },
+ *     { id: '3', title: 'Last one' },
+ *   ];
  *
- * <SwipeableCardStack
- *   data={items}
- *   swipes={itemSwipes}
- *   renderCard={({ item }) => (
- *     <View style={styles.card}>
- *       <Text>{item.title}</Text>
- *     </View>
- *   )}
- *   keyExtractor={(item) => item.id}
- *   onSwipeEnded={(item, direction) => console.log(`Item swiped ${direction}`)}
- * />
+ *   return (
+ *     <SwipeableCardStack
+ *       data={cards}
+ *       swipes={swipes}
+ *       renderCard={({ item }) => (
+ *         <View>
+ *           <Text>{item.title}</Text>
+ *         </View>
+ *       )}
+ *       keyExtractor={item => item.id}
+ *       onSwipeEnded={(_, direction) => setSwipes(current => [...current, direction])}
+ *     />
+ *   );
+ * };
  * ```
  */
 export const SwipeableCardStack = memo(UnmemoizedSwipeableCardStack) as <T>(
