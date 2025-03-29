@@ -3,28 +3,61 @@ sidebar_position: 2
 title: Getting Started
 ---
 
-A component that renders a stack of swipeable cards with customizable swipe directions, animations, and gesture handling.
+## Installation
 
-## Basic Example
+Start by installing required peer dependencies: [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/) and [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/docs/fundamentals/installation).
+
+Then install `react-native-swipeable-card-stack`:
+
+```bash
+# using npm
+npm install react-native-swipeable-card-stack
+# or yarn
+yarn add react-native-swipeable-card-stack
+```
+
+## Basic Usage
 
 ```tsx
-const items = [
-  { id: '1', title: 'Item 1' },
-  { id: '2', title: 'Item 2' },
-  { id: '3', title: 'Item 3' },
+import {
+  SwipeableCardStack,
+  type SwipeDirection,
+  type CardProps,
+} from 'react-native-swipeable-card-stack';
+import { useState } from 'react';
+
+type CardItem = {
+  id: string;
+  title: string;
+};
+
+const cards: CardItem[] = [
+  { id: '1', title: 'Swipe me!' },
+  { id: '2', title: 'Next card' },
+  { id: '3', title: 'Last one' },
 ];
 
-const itemSwipes = ['right', 'left']; // First item swiped right, second left
+const Card = ({ item }: CardProps<CardItem>) => (
+  <View>
+    <Text>{item.title}</Text>
+  </View>
+);
 
-<SwipeableCardStack
-  data={items}
-  swipes={itemSwipes}
-  renderCard={({ item }) => (
-    <View style={styles.card}>
-      <Text>{item.title}</Text>
-    </View>
-  )}
-  keyExtractor={(item) => item.id}
-  onSwipeEnded={(item, direction) => console.log(`Item swiped ${direction}`)}
-/>;
+const CardStack = () => {
+  const [swipes, setSwipes] = useState<SwipeDirection[]>(['right']); // First card already swiped right
+
+  return (
+    <SwipeableCardStack<CardItem>
+      data={cards}
+      swipes={swipes}
+      renderCard={Card}
+      keyExtractor={(item) => item.id}
+      onSwipeEnded={(_, direction) =>
+        setSwipes((current) => [...current, direction])
+      }
+    />
+  );
+};
 ```
+
+Check out the [API Reference](./api-reference) for detailed information about available props and customization options.
