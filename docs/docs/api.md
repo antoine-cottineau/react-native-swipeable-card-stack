@@ -1,6 +1,6 @@
 ---
 sidebar_position: 3
-title: SwipeableCardStack
+title: API
 ---
 
 # SwipeableCardStack Component
@@ -62,82 +62,58 @@ All animations use either `WithSpringConfig` or `WithTimingConfig` from React Na
 - [WithSpringConfig Documentation](https://docs.swmansion.com/react-native-reanimated/docs/animations/withSpring#config-object-properties)
 - [WithTimingConfig Documentation](https://docs.swmansion.com/react-native-reanimated/docs/animations/withTiming#config-object-properties)
 
-### Directional Swipe Animations
+### Swipe Animations
 
-#### Timing Configurations
+Animations used when a card is actively being swiped in a specific direction.
+Default: Timing animation
 
-| Prop                      | Default          | Description                        |
-| ------------------------- | ---------------- | ---------------------------------- |
-| `leftSwipeTimingConfig`   | Spring animation | Timing animation for left swipes   |
-| `rightSwipeTimingConfig`  | Spring animation | Timing animation for right swipes  |
-| `topSwipeTimingConfig`    | Spring animation | Timing animation for top swipes    |
-| `bottomSwipeTimingConfig` | Spring animation | Timing animation for bottom swipes |
-
-#### Spring Configurations
-
-| Prop                      | Default          | Description                        |
-| ------------------------- | ---------------- | ---------------------------------- |
-| `leftSwipeSpringConfig`   | Timing animation | Spring animation for left swipes   |
-| `rightSwipeSpringConfig`  | Timing animation | Spring animation for right swipes  |
-| `topSwipeSpringConfig`    | Timing animation | Spring animation for top swipes    |
-| `bottomSwipeSpringConfig` | Timing animation | Spring animation for bottom swipes |
+| Prop                       | Type               | Description                                       |
+| -------------------------- | ------------------ | ------------------------------------------------- |
+| `unknownSwipeTimingConfig` | `WithTimingConfig` | Timing animation when swipe direction is unknown. |
+| `unknownSwipeSpringConfig` | `WithSpringConfig` | Spring animation when swipe direction is unknown. |
+| `leftSwipeTimingConfig`    | `WithTimingConfig` | Timing animation for left swipes.                 |
+| `leftSwipeSpringConfig`    | `WithSpringConfig` | Spring animation for left swipes.                 |
+| `rightSwipeTimingConfig`   | `WithTimingConfig` | Timing animation for right swipes.                |
+| `rightSwipeSpringConfig`   | `WithSpringConfig` | Spring animation for right swipes.                |
+| `topSwipeTimingConfig`     | `WithTimingConfig` | Timing animation for top swipes.                  |
+| `topSwipeSpringConfig`     | `WithSpringConfig` | Spring animation for top swipes.                  |
+| `bottomSwipeTimingConfig`  | `WithTimingConfig` | Timing animation for bottom swipes.               |
+| `bottomSwipeSpringConfig`  | `WithSpringConfig` | Spring animation for bottom swipes.               |
 
 ### Validation Animations
 
 Triggered when a gesture ends and meets swipe threshold criteria.
+Default: Spring animation
 
-#### Timing Configurations
-
-| Prop                                | Default          | Description                            |
-| ----------------------------------- | ---------------- | -------------------------------------- |
-| `validationLeftSwipeTimingConfig`   | Spring animation | Validation animation for left swipes   |
-| `validationRightSwipeTimingConfig`  | Spring animation | Validation animation for right swipes  |
-| `validationTopSwipeTimingConfig`    | Spring animation | Validation animation for top swipes    |
-| `validationBottomSwipeTimingConfig` | Spring animation | Validation animation for bottom swipes |
-
-#### Spring Configurations
-
-| Prop                                | Default          | Description                         |
-| ----------------------------------- | ---------------- | ----------------------------------- |
-| `validationLeftSwipeSpringConfig`   | Timing animation | Spring validation for left swipes   |
-| `validationRightSwipeSpringConfig`  | Timing animation | Spring validation for right swipes  |
-| `validationTopSwipeSpringConfig`    | Timing animation | Spring validation for top swipes    |
-| `validationBottomSwipeSpringConfig` | Timing animation | Spring validation for bottom swipes |
+| Prop                                | Type                          | Description                                    |
+| ----------------------------------- | ----------------------------- | ---------------------------------------------- |
+| `validationLeftSwipeTimingConfig`   | `(event) => WithTimingConfig` | Timing animation for validating left swipes.   |
+| `validationLeftSwipeSpringConfig`   | `(event) => WithSpringConfig` | Spring animation for validating left swipes.   |
+| `validationRightSwipeTimingConfig`  | `(event) => WithTimingConfig` | Timing animation for validating right swipes.  |
+| `validationRightSwipeSpringConfig`  | `(event) => WithSpringConfig` | Spring animation for validating right swipes.  |
+| `validationTopSwipeTimingConfig`    | `(event) => WithTimingConfig` | Timing animation for validating top swipes.    |
+| `validationTopSwipeSpringConfig`    | `(event) => WithSpringConfig` | Spring animation for validating top swipes.    |
+| `validationBottomSwipeTimingConfig` | `(event) => WithTimingConfig` | Timing animation for validating bottom swipes. |
+| `validationBottomSwipeSpringConfig` | `(event) => WithSpringConfig` | Spring animation for validating bottom swipes. |
 
 ### Reset Animations
 
-Used when a card returns to its initial position.
+Used when a card needs to return to its initial position.
+Default: Timing animation
 
-| Prop                     | Default          | Description                |
-| ------------------------ | ---------------- | -------------------------- |
-| `resetSwipeTimingConfig` | Spring animation | Timing animation for reset |
-| `resetSwipeSpringConfig` | Timing animation | Spring animation for reset |
+| Prop                     | Type               | Description                                         |
+| ------------------------ | ------------------ | --------------------------------------------------- |
+| `resetSwipeTimingConfig` | `WithTimingConfig` | Timing animation for resetting to initial position. |
+| `resetSwipeSpringConfig` | `WithSpringConfig` | Spring animation for resetting to initial position. |
 
-## Example Usage
+### Cancel Animations
 
-```tsx
-<SwipeableCardStack
-  // Core props
-  data={cards}
-  swipes={['right', 'left']}
-  renderCard={Card}
-  keyExtractor={(item) => item.id}
-  // Gesture configuration
-  allowedPanDirections={['left', 'right', 'up', 'down']}
-  // Animation configurations
-  leftSwipeSpringConfig={{
-    damping: 10,
-    mass: 1,
-    stiffness: 100,
-  }}
-  validationRightSwipeTimingConfig={(event) => ({
-    duration: 300,
-    easing: Easing.bezier(0.25, 0.1, 0.25, 1),
-  })}
-  resetSwipeSpringConfig={{
-    damping: 15,
-    mass: 1,
-    stiffness: 150,
-  }}
-/>
-```
+Triggered when a swipe gesture ends without meeting the threshold criteria.
+Default: Timing animation
+
+| Prop                                  | Type                          | Description                                         |
+| ------------------------------------- | ----------------------------- | --------------------------------------------------- |
+| `canceledHorizontalSwipeTimingConfig` | `(event) => WithTimingConfig` | Timing animation when horizontal swipe is canceled. |
+| `canceledHorizontalSwipeSpringConfig` | `(event) => WithSpringConfig` | Spring animation when horizontal swipe is canceled. |
+| `canceledVerticalSwipeTimingConfig`   | `(event) => WithTimingConfig` | Timing animation when vertical swipe is canceled.   |
+| `canceledVerticalSwipeSpringConfig`   | `(event) => WithSpringConfig` | Spring animation when vertical swipe is canceled.   |
