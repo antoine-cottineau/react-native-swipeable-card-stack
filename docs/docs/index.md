@@ -38,24 +38,37 @@ yarn add react-native-swipeable-card-stack
 ## Basic Usage
 
 ```tsx
-const cards = [
+import {
+  SwipeableCardStack,
+  type SwipeDirection,
+  type CardProps,
+} from 'react-native-swipeable-card-stack';
+
+type CardItem = {
+  id: string;
+  title: string;
+};
+
+const cards: CardItem[] = [
   { id: '1', title: 'Swipe me!' },
   { id: '2', title: 'Next card' },
   { id: '3', title: 'Last one' },
 ];
 
+const Card = ({ item }: CardProps<CardItem>) => (
+  <View>
+    <Text>{item.title}</Text>
+  </View>
+);
+
 const CardStack = () => {
-  const [swipes, setSwipes] = useState(['right']); // First card already swiped right
+  const [swipes, setSwipes] = useState<SwipeDirection[]>(['right']); // First card already swiped right
 
   return (
-    <SwipeableCardStack
+    <SwipeableCardStack<CardItem>
       data={cards}
       swipes={swipes}
-      renderCard={({ item }) => (
-        <View>
-          <Text>{item.title}</Text>
-        </View>
-      )}
+      renderCard={Card}
       keyExtractor={(item) => item.id}
       onSwipeEnded={(_, direction) =>
         setSwipes((current) => [...current, direction])
