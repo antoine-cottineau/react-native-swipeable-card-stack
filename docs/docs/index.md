@@ -7,6 +7,12 @@ title: Presentation
 
 A powerful and highly customizable React Native library that lets you implement Tinder-like swipeable card stacks with ease. Built with [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/) and [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/), this library provides smooth animations and precise gesture controls for an exceptional user experience.
 
+<video style={{width: '100%', maxWidth: '400px', display: 'block', margin: '0 auto'}} autoPlay loop muted>
+
+  <source src={require('../static/videos/demo.mp4').default} type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
 ## Key Features
 
 - 🎯 **Multi-directional Swipes** - Support for left, right, top, and bottom swipes
@@ -17,7 +23,4 @@ A powerful and highly customizable React Native library that lets you implement 
 - 🔒 **Direction Locking** - Optional pan direction locking for controlled user interactions
 - 🎬 **Flexible Animation Configs** - Choose between spring and timing animations with full customization
 - 🔄 **Configurable Stack** - Control the number of visible cards in the stack
-
-## Demo
-
-[Your demo video will go here]
+- 📦 **Expo Go Compatible** - Works out of the box with Expo Go, no additional configuration needed
