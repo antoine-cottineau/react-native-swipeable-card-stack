@@ -1,6 +1,6 @@
 {
   "name": "react-native-swipeable-card-stack",
-  "version": "1.9.0",
+  "version": "2.0.0",
   "description": "Implement a swipeable card stack, similar to Tinder, with ease.",
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
