@@ -1,8 +1,17 @@
-- [x] distinguish locking pan to direction and swipe to direction (i.e. we could pan in a direction but without the swipe being registered)
-- [x] add animation config customization (with either Spring or Timeout and with props specific to an axis)
-- [x] add config for when swipe is validated
-- [x] check all orientations
-- [x] allow specifying the number of unswiped rendered cards
-- [x] add parameter for resting value
-- [x] homogeinize namings
-- [] docusaurus
+# React Native Swipeable Card Stack
+
+A powerful and highly customizable React Native library that lets you implement Tinder-like swipeable card stacks with ease. Built with [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/) and [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/), this library provides smooth animations and precise gesture controls for an exceptional user experience.
+
+[Demo gif](./demo.gif)
+
+## Key Features
+
+- 🎯 **Multi-directional Swipes** - Support for left, right, top, and bottom swipes
+- 🎮 **Fully Controlled** - Simple state management through props, no refs or imperative handling needed - just provide your data and swipe states
+- ✨ **Fluid Animations** - Smooth, native-powered animations using React Native Reanimated
+- 🎨 **Highly Customizable** - Extensive configuration options for animations, gestures, and styling
+- 📱 **Cross-Platform** - Works seamlessly on iOS, Android, and Web
+- 🔒 **Direction Locking** - Optional pan direction locking for controlled user interactions
+- 🎬 **Flexible Animation Configs** - Choose between spring and timing animations with full customization
+- 🔄 **Configurable Stack** - Control the number of visible cards in the stack
+- 📦 **Expo Go Compatible** - Works out of the box with Expo Go, no additional configuration needed
