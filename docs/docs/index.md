@@ -25,4 +25,4 @@ A powerful and highly customizable React Native library that lets you implement 
 - 🔄 **Configurable Stack** - Control the number of visible cards in the stack
 - 📦 **Expo Go Compatible** - Works out of the box with Expo Go, no additional configuration needed
 
-> **Note**: If you're using v1 of this library, please refer to the [v1 documentation](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/tree/v2/v1/README.md).
+> **Note**: If you're using v1 of this library, please refer to the [v1 documentation](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/blob/main/v1/README.md).
