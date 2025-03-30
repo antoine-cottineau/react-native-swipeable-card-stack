@@ -20,3 +20,5 @@ https://github.com/user-attachments/assets/83471ee5-0345-4072-9fd0-6e1526cbfc6d
 
 - [Documentation Website](https://antoine-cottineau.github.io/react-native-swipeable-card-stack/) - API reference and usage
 - [Example Project](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/tree/v2/example) - Working implementation example
+
+> **Note**: If you're using v1 of this library, please refer to the [v1 documentation](./v1/readme).
