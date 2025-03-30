@@ -2,7 +2,7 @@
 
 A powerful and highly customizable React Native library that lets you implement Tinder-like swipeable card stacks with ease. Built with [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/) and [React Native Gesture Handler](https://docs.swmansion.com/react-native-gesture-handler/), this library provides smooth animations and precise gesture controls for an exceptional user experience.
 
-[Demo gif](./demo.gif)
+https://github.com/user-attachments/assets/83471ee5-0345-4072-9fd0-6e1526cbfc6d
 
 ## Key Features
 
