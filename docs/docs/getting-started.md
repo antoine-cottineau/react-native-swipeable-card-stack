@@ -62,4 +62,4 @@ const CardStack = () => {
 
 Check out the [API Reference](./api) for detailed information about available props and customization options.
 
-For a complete implementation example, see our [example project](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/tree/v2/example).
+For a complete implementation example, see our [example project](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/tree/main/example).
