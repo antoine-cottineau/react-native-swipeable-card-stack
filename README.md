@@ -15,3 +15,8 @@ https://github.com/user-attachments/assets/83471ee5-0345-4072-9fd0-6e1526cbfc6d
 - 🎬 **Flexible Animation Configs** - Choose between spring and timing animations with full customization
 - 🔄 **Configurable Stack** - Control the number of visible cards in the stack
 - 📦 **Expo Go Compatible** - Works out of the box with Expo Go, no additional configuration needed
+
+## Documentation
+
+- [Documentation Website](https://antoine-cottineau.github.io/react-native-swipeable-card-stack/) - API reference and usage
+- [Example Project](https://github.com/antoine-cottineau/react-native-swipeable-card-stack/tree/v2/example) - Working implementation example
