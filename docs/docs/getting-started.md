@@ -60,4 +60,4 @@ const CardStack = () => {
 };
 ```
 
-Check out the [API Reference](./api-reference) for detailed information about available props and customization options.
+Check out the [API Reference](./api) for detailed information about available props and customization options.
