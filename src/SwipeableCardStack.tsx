@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, type ReactElement } from 'react';
 import {
   StyleSheet,
   View,
@@ -209,7 +209,7 @@ const UnmemoizedSwipeableCardStack = <T,>({
  */
 export const SwipeableCardStack = memo(UnmemoizedSwipeableCardStack) as <T>(
   props: SwipeableCardStackProps<T>
-) => JSX.Element;
+) => ReactElement;
 
 const styles = StyleSheet.create({
   container: {

@@ -11,7 +11,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, type ReactElement } from 'react';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { getAnimationConfigsDefaults } from './getAnimationConfigsDefaults';
 import { useAnimateSwipeStateChanges } from './useAnimateSwipeStateChanges';
@@ -204,7 +204,7 @@ const UnmemoizedSwipeableCardContainer = <T,>({
 
 export const SwipeableCardContainer = memo(
   UnmemoizedSwipeableCardContainer
-) as <T>(props: SwipeableCardContainerProps<T>) => JSX.Element;
+) as <T>(props: SwipeableCardContainerProps<T>) => ReactElement;
 
 const styles = StyleSheet.create({
   container: {
